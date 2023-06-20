@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -11,6 +11,8 @@
 #include <QDateTime>
 #include <QLocale>
 #include <QQuaternion>
+
+#include <QDebug>
 
 #include <Eigen/Eigen>
 
@@ -266,6 +268,9 @@ Vehicle::Vehicle(LinkInterface*             link,
     // Start csv logger
     connect(&_csvLogTimer, &QTimer::timeout, this, &Vehicle::_writeCsvLine);
     _csvLogTimer.start(1000);
+
+    qDebug()<<"Vehicle.cc----vehicleType:" << vehicleType;  //2
+
 }
 
 // Disconnected Vehicle for offline editing

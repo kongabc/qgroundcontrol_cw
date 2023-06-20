@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -38,6 +38,29 @@ Item {
 
     property double _thermalHeightFactor: 0.85 //-- TODO
 
+//    Rectangle{
+//        id:             noVideo
+//        anchors.fill:   parent
+//        visible:        !(QGroundControl.videoManager.decoding)
+//        color:"black"
+//        Rectangle {
+//            anchors.centerIn:   parent
+//            width:              noVideoLabel.contentWidth + ScreenTools.defaultFontPixelHeight
+//            height:             noVideoLabel.contentHeight + ScreenTools.defaultFontPixelHeight
+//            radius:             ScreenTools.defaultFontPixelWidth / 2
+//            color:              "black"
+//            opacity:            0.5
+//        }
+
+//        QGCLabel {
+//            id:                 noVideoLabel
+//            text:               QGroundControl.settingsManager.videoSettings.streamEnabled.rawValue ? qsTr("WAITING FOR VIDEO") : qsTr("VIDEO DISABLED")
+//            font.family:        ScreenTools.demiboldFontFamily
+//            color:              "white"
+//            font.pointSize:     useSmallFont ? ScreenTools.smallFontPointSize : ScreenTools.largeFontPointSize
+//            anchors.centerIn:   parent
+//        }
+//    }
         Image {
             id:             noVideo
             anchors.fill:   parent
