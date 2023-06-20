@@ -1563,3 +1563,18 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
+else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+
+INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
+else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a

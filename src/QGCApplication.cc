@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -134,6 +134,14 @@
 #endif
 
 #include "QGCMapEngine.h"
+
+#include "qgccwgimballib/include/qgccwgimballib.h"
+// Qml Singleton factories
+static QObject* QGCCwGimbalSingletonFactory(QQmlEngine*, QJSEngine*)
+{
+    QGCCwGimbalLib *qgcCwGimbalController = new QGCCwGimbalLib(nullptr);
+    return qgcCwGimbalController;
+}
 
 class FinishVideoInitialization : public QRunnable
 {
@@ -452,6 +460,7 @@ void QGCApplication::_initCommon()
     QSettings settings;
 
     // Register our Qml objects
+    qmlRegisterSingletonType<QGCCwGimbalLib> ("QGCCwQml.QGCCwGimbalController",    1, 0, "QGCCwGimbalController",  QGCCwGimbalSingletonFactory);
 
     qmlRegisterType<QGCPalette>     ("QGroundControl.Palette", 1, 0, "QGCPalette");
     qmlRegisterType<QGCMapPalette>  ("QGroundControl.Palette", 1, 0, "QGCMapPalette");

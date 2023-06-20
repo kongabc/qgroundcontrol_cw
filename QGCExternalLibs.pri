@@ -101,6 +101,7 @@ exists($$MAVLINKPATH/common) {
 INCLUDEPATH += libs/eigen
 DEFINES += NOMINMAX
 
+INCLUDEPATH += libs\libevents\libevents\libs\cpp\parse\nlohmann_json\include
 #
 # [REQUIRED] Events submodule
 HEADERS+= \

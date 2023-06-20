@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -101,6 +101,9 @@ Rectangle {
 
     function toggleShooting() {
         console.log("toggleShooting", _anyVideoStreamAvailable)
+        console.log("Photo:" + _switchToPhotoModeAllowed)   //true   false
+        console.log("Video:" + _switchToVideoModeAllowed)  //false  true
+
         if (_mavlinkCamera && _mavlinkCamera.capturesVideo || _mavlinkCamera.capturesPhotos ) {
             if(_mavlinkCameraInVideoMode) {
                 _mavlinkCamera.toggleVideo()

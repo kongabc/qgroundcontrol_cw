@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -8,6 +8,10 @@
  ****************************************************************************/
 
 import QtQuick                      2.11
+
+//new add
+import QtQuick.Window 2.12
+
 import QtQuick.Controls             2.4
 import QtLocation                   5.3
 import QtPositioning                5.3
@@ -23,6 +27,11 @@ import QGroundControl.FlightMap     1.0
 import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
+
+//import QtQuick.Controls 2.2
+//import QtGraphicalEffects 1.0
+//import QGCCwQml.QGCCwGimbalController 1.0
+//import QGCCwGimbal.Controls 1.0
 
 FlightMap {
     id:                         _root
@@ -58,6 +67,12 @@ FlightMap {
     property bool   _disableVehicleTracking:    false
     property bool   _keepVehicleCentered:       pipMode ? true : false
     property bool   _saveZoomLevelSetting:      true
+
+
+//    property int _dataShowLabelSize: ScreenTools.smallFontPointSize
+//    property int _dataShowValueSize: ScreenTools.mediumFontPointSize
+//    property int _radiusValueSize: ScreenTools.defaultFontPixelWidth / 2
+
 
     function updateAirspace(reset) {
         if(_airspaceEnabled) {
@@ -408,6 +423,100 @@ FlightMap {
         }
     }
 
+//    MapQuickItem{
+//        id:targetP
+//        zoomLevel: 0
+//        coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude)
+//        anchorPoint: Qt.point(sourceItem.width/2,sourceItem.height/2)
+//        z: QGroundControl.zOrderTopMost
+//        sourceItem: Image {
+//            id: targetName
+//            source: "qrc:/qml/QGCCwGimbal/Controls/target.png"
+//        }
+//    }
+
+//    MapQuickItem{
+//         id: dataShow
+//         coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude) // QtPositioning.coordinate(32.0527105,118.8145246)
+//         anchorPoint.x:   targetP.width/2-50
+//         anchorPoint.y:   targetP.height/2
+//         z: QGroundControl.zOrderTopMost
+//         sourceItem: Rectangle{
+//             id:shadowShow
+//             radius: _radiusValueSize
+//             height : dataShow2Column.height
+//             width : dataShow2Column.width + ScreenTools.defaultFontPixelWidth*0.6
+//             color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.4)
+
+//             Column {
+//                 id: dataShow2Column
+//                 padding: ScreenTools.defaultFontPixelWidth * 0.5
+//                 leftPadding: _dataShowLabelSize
+//                 rightPadding: ScreenTools.defaultFontPixelWidth *1.2
+//                 spacing:  ScreenTools.defaultFontPixelWidth * 0.5
+
+//                 Row {
+//                     Text {
+//                         anchors.bottom: parent.bottom
+//                         font.pointSize: _dataShowLabelSize
+//                         text: "RNG(m)"
+//                         font.family:    ScreenTools.normalFontFamily
+//                          color: qgcPal.text
+//                     }
+
+//                     Text {
+//                         width: ScreenTools.defaultFontPixelWidth*5.4
+//                         anchors.bottom: parent.bottom
+//                         anchors.bottomMargin: -_radiusValueSize
+//                         font.pointSize: _dataShowValueSize
+//                         text: QGCCwGimbalController.lazerDis
+//                         font.family:    ScreenTools.normalFontFamily
+//                          color: qgcPal.text
+//                     }
+
+//                     Text {
+//                         anchors.bottom: parent.bottom
+//                         font.pointSize: _dataShowLabelSize
+//                         text: "    ASL(m)"
+//                         font.family:    ScreenTools.normalFontFamily
+//                          color: qgcPal.text
+//                     }
+
+//                     Text {
+//                         anchors.bottom: parent.bottom
+//                         anchors.bottomMargin: -_radiusValueSize
+//                         font.pointSize: _dataShowValueSize
+//                         text: QGCCwGimbalController.altitude
+//                         font.family:    ScreenTools.normalFontFamily
+//                         color: qgcPal.text
+//                     }
+
+//                 }
+//                 Row {
+//                     Text {
+//                         width: ScreenTools.defaultFontPixelWidth*13
+//                         anchors.bottom: parent.bottom
+//                         font.pointSize: _dataShowValueSize
+//                         text: QGCCwGimbalController.longitude
+//                         font.family:    ScreenTools.normalFontFamily
+//                         color: qgcPal.text
+//                     }
+
+//                     Text {
+//                         width: ScreenTools.defaultFontPixelWidth*13
+//                         anchors.bottom: parent.bottom
+//                         font.pointSize: _dataShowValueSize
+//                         text: " , " + QGCCwGimbalController.latitude
+//                         font.family:    ScreenTools.normalFontFamily
+//                          color: qgcPal.text
+//                     }
+//                 }
+//             }
+//         }
+
+//    }
+
+
     // Orbit editing visuals
     QGCMapCircleVisuals {
         id:             orbitMapCircle
@@ -636,5 +745,6 @@ FlightMap {
 
         property real centerInset: visible ? parent.height - y : 0
     }
+
 
 }
