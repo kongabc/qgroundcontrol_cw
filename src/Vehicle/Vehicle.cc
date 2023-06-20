@@ -93,12 +93,14 @@ const char* Vehicle::_altitudeTuningSetpointFactName = "altitudeTuningSetpoint";
 const char* Vehicle::_flightDistanceFactName =      "flightDistance";
 const char* Vehicle::_flightTimeFactName =          "flightTime";
 const char* Vehicle::_distanceToHomeFactName =      "distanceToHome";
+const char* Vehicle::_timeToHomeFactName =          "timeToHome";
 const char* Vehicle::_missionItemIndexFactName =    "missionItemIndex";
 const char* Vehicle::_headingToNextWPFactName =     "headingToNextWP";
 const char* Vehicle::_headingToHomeFactName =       "headingToHome";
 const char* Vehicle::_distanceToGCSFactName =       "distanceToGCS";
 const char* Vehicle::_hobbsFactName =               "hobbs";
 const char* Vehicle::_throttlePctFactName =         "throttlePct";
+const char* Vehicle::_imuTempFactName =             "imuTemp";
 
 const char* Vehicle::_gpsFactGroupName =                "gps";
 const char* Vehicle::_gps2FactGroupName =               "gps2";
@@ -155,12 +157,14 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _flightDistanceFact           (0, _flightDistanceFactName,    FactMetaData::valueTypeDouble)
     , _flightTimeFact               (0, _flightTimeFactName,        FactMetaData::valueTypeElapsedTimeInSeconds)
     , _distanceToHomeFact           (0, _distanceToHomeFactName,    FactMetaData::valueTypeDouble)
+    , _timeToHomeFact               (0, _timeToHomeFactName,        FactMetaData::valueTypeDouble)
     , _missionItemIndexFact         (0, _missionItemIndexFactName,  FactMetaData::valueTypeUint16)
     , _headingToNextWPFact          (0, _headingToNextWPFactName,   FactMetaData::valueTypeDouble)
     , _headingToHomeFact            (0, _headingToHomeFactName,     FactMetaData::valueTypeDouble)
     , _distanceToGCSFact            (0, _distanceToGCSFactName,     FactMetaData::valueTypeDouble)
     , _hobbsFact                    (0, _hobbsFactName,             FactMetaData::valueTypeString)
     , _throttlePctFact              (0, _throttlePctFactName,       FactMetaData::valueTypeUint16)
+    , _imuTempFact                  (0, _imuTempFactName,           FactMetaData::valueTypeInt16)
     , _gpsFactGroup                 (this)
     , _gps2FactGroup                (this)
     , _windFactGroup                (this)
@@ -320,6 +324,7 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _distanceToGCSFact                (0, _distanceToGCSFactName,     FactMetaData::valueTypeDouble)
     , _hobbsFact                        (0, _hobbsFactName,             FactMetaData::valueTypeString)
     , _throttlePctFact                  (0, _throttlePctFactName,       FactMetaData::valueTypeUint16)
+    , _imuTempFact                      (0, _imuTempFactName,           FactMetaData::valueTypeInt16)
     , _gpsFactGroup                     (this)
     , _gps2FactGroup                    (this)
     , _windFactGroup                    (this)
@@ -441,11 +446,13 @@ void Vehicle::_commonInit()
     _addFact(&_flightDistanceFact,      _flightDistanceFactName);
     _addFact(&_flightTimeFact,          _flightTimeFactName);
     _addFact(&_distanceToHomeFact,      _distanceToHomeFactName);
+    _addFact(&_timeToHomeFact,          _timeToHomeFactName);
     _addFact(&_missionItemIndexFact,    _missionItemIndexFactName);
     _addFact(&_headingToNextWPFact,     _headingToNextWPFactName);
     _addFact(&_headingToHomeFact,       _headingToHomeFactName);
     _addFact(&_distanceToGCSFact,       _distanceToGCSFactName);
     _addFact(&_throttlePctFact,         _throttlePctFactName);
+    _addFact(&_imuTempFact,             _imuTempFactName);
 
     _hobbsFact.setRawValue(QVariant(QString("0000:00:00")));
     _addFact(&_hobbsFact,               _hobbsFactName);
@@ -699,7 +706,7 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
         _handleSysStatus(message);
         break;
     case MAVLINK_MSG_ID_RAW_IMU:
-        emit mavlinkRawImu(message);
+        _handleRawImuTemp(message);
         break;
     case MAVLINK_MSG_ID_SCALED_IMU:
         emit mavlinkScaledImu1(message);
@@ -733,9 +740,6 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
         break;
     case MAVLINK_MSG_ID_VFR_HUD:
         _handleVfrHud(message);
-        break;
-    case MAVLINK_MSG_ID_RANGEFINDER:
-        _handleRangefinder(message);
         break;
     case MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT:
         _handleNavControllerOutput(message);
@@ -798,6 +802,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_CAMERA_FEEDBACK:
         _handleCameraFeedback(message);
         break;
+    case MAVLINK_MSG_ID_RANGEFINDER:
+        _handleRangefinder(message);
+        break;
 #endif
     }
 
@@ -818,6 +825,14 @@ void Vehicle::_handleCameraFeedback(const mavlink_message_t& message)
     QGeoCoordinate imageCoordinate((double)feedback.lat / qPow(10.0, 7.0), (double)feedback.lng / qPow(10.0, 7.0), feedback.alt_msl);
     qCDebug(VehicleLog) << "_handleCameraFeedback coord:index" << imageCoordinate << feedback.img_idx;
     _cameraTriggerPoints.append(new QGCQGeoCoordinate(imageCoordinate, this));
+}
+
+void Vehicle::_handleRangefinder(mavlink_message_t& message)
+{
+
+    mavlink_rangefinder_t rangefinder;
+    mavlink_msg_rangefinder_decode(&message, &rangefinder);
+    _rangeFinderDistFact.setRawValue(qIsNaN(rangefinder.distance) ? 0 : rangefinder.distance);
 }
 #endif
 
@@ -949,7 +964,6 @@ void Vehicle::_chunkedStatusTextCompleted(uint8_t compId)
 
 void Vehicle::_handleStatusText(mavlink_message_t& message)
 {
-    QByteArray  b;
     QString     messageText;
 
     mavlink_statustext_t statustext;
@@ -957,9 +971,9 @@ void Vehicle::_handleStatusText(mavlink_message_t& message)
 
     uint8_t compId = message.compid;
 
-    b.resize(MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN+1);
-    strncpy(b.data(), statustext.text, MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN);
-    b[b.length()-1] = '\0';
+    char b[MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN+1];
+    strncpy(b, statustext.text, MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN);
+    b[sizeof(b)-1] = '\0';
     messageText = QString(b);
     bool includesNullTerminator = messageText.length() < MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN;
 
@@ -1017,15 +1031,10 @@ void Vehicle::_handleVfrHud(mavlink_message_t& message)
         _altitudeTuningOffset = vfrHud.alt;
     }
     _altitudeTuningFact.setRawValue(vfrHud.alt - _altitudeTuningOffset);
+    if (!qIsNaN(vfrHud.groundspeed) && !qIsNaN(_distanceToHomeFact.cookedValue().toDouble())) {
+      _timeToHomeFact.setRawValue(_distanceToHomeFact.cookedValue().toDouble() / vfrHud.groundspeed);
+    }
 }
-
-void Vehicle::_handleRangefinder(mavlink_message_t& message)
-{
-    mavlink_rangefinder_t rangefinder;
-    mavlink_msg_rangefinder_decode(&message, &rangefinder);
-    _rangeFinderDistFact.setRawValue(qIsNaN(rangefinder.distance) ? 0 : rangefinder.distance);
-}
-
 
 void Vehicle::_handleNavControllerOutput(mavlink_message_t& message)
 {
@@ -3806,6 +3815,17 @@ void Vehicle::_handleADSBVehicle(const mavlink_message_t& message)
 
         _toolbox->adsbVehicleManager()->adsbVehicleUpdate(vehicleInfo);
     }
+}
+
+void Vehicle::_handleRawImuTemp(mavlink_message_t& message)
+{
+    // This is used by compass calibration
+    emit mavlinkRawImu(message);
+    
+    mavlink_raw_imu_t imuRaw;
+    mavlink_msg_raw_imu_decode(&message, &imuRaw);
+
+    _imuTempFact.setRawValue(imuRaw.temperature == 0 ? 0 : imuRaw.temperature * 0.01);
 }
 
 void Vehicle::_updateDistanceHeadingToHome()
