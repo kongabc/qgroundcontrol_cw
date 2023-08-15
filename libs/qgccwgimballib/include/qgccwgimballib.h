@@ -29,7 +29,7 @@ public:
    Q_PROPERTY(bool  pipinPipSwitchAvailable READ pipinPipSwitchAvailable NOTIFY functionChanged)
 
    Q_PROPERTY(quint32  btnState READ btnStateValue NOTIFY btnStateChanged)
-
+   Q_PROPERTY(quint8  flags READ flagsValue NOTIFY valueChanged)
    Q_PROPERTY(QString  pitch READ pitchValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  yaw READ yawValueStr NOTIFY valueChanged)
 
@@ -38,7 +38,6 @@ public:
    Q_PROPERTY(QString  longitude READ longitudeValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  latitude READ latitudeValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  altitude READ altitudeValueStr NOTIFY valueChanged)
-
    Q_PROPERTY(bool  isTrack READ isTrackValue NOTIFY isTrackChanged)
 
    bool isTrackValue() const;
@@ -55,6 +54,9 @@ public:
 
    quint32 btnStateValue() const;
 
+   quint8 flagsValue() const;
+
+
    QString pitchValueStr() const;
    QString yawValueStr() const;
 
@@ -63,6 +65,10 @@ public:
    QString longitudeValueStr() const;
    QString latitudeValueStr() const;
    QString altitudeValueStr() const;
+
+   Q_INVOKABLE void takePhoto(void);
+   Q_INVOKABLE void takeRecording(void);
+   Q_INVOKABLE void videoZoom(int zoomNum);
 
    Q_INVOKABLE void modeSwitch(quint8 modeSelect); //0x01-云台空间定向模式，0x02-俯拍模式，0x03-追踪模式(废弃，使 用框选追踪功能)，0x04-凝视模式，0x00-指向跟随模式(俯仰稳定)，其他值 默认指向跟随模式。
    Q_INVOKABLE void ircutSwitch(void);
@@ -75,6 +81,8 @@ public:
    Q_INVOKABLE void videoPointTranslation(quint16 x,quint16 y);
 
    Q_INVOKABLE void trackSwitch(bool isTrack);
+
+   Q_INVOKABLE void joyControl(quint8 signal_valid, qint16 phi_signal, qint16 the_signal,qint16 psi_signal);
 
 signals:
    void remoteValidChanged(void);
