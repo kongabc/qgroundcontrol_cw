@@ -23,8 +23,13 @@ import QGroundControl.Controllers       1.0
 import QGroundControl.FactSystem        1.0
 import QGroundControl.FactControls      1.0
 
+//new add
+import QGCCwQml.QGCCwGimbalController 1.0
+
 Rectangle {
-    height:     mainLayout.height + (_margins * 2)
+//    height:     mainLayout.height + (_margins * 2)
+    id:photoVis
+    height:     mainLayout.height + _margins   //new add
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
     visible:    (_mavlinkCamera || _videoStreamAvailable || _simpleCameraAvailable) && multiVehiclePanelSelector.showSingleVehiclePanel
@@ -90,6 +95,7 @@ Rectangle {
 
     function setCameraMode(photoMode) {
         _videoStreamInPhotoMode = photoMode
+
         if (_mavlinkCamera) {
             if (_mavlinkCameraInPhotoMode) {
                 _mavlinkCamera.setVideoMode()
@@ -100,9 +106,13 @@ Rectangle {
     }
 
     function toggleShooting() {
-        console.log("toggleShooting", _anyVideoStreamAvailable)
-        console.log("Photo:" + _switchToPhotoModeAllowed)   //true   false
-        console.log("Video:" + _switchToVideoModeAllowed)  //false  true
+      //new add
+        if(_switchToPhotoModeAllowed){
+           QGCCwGimbalController.takeRecording()
+        }else if(_switchToVideoModeAllowed){
+             QGCCwGimbalController.takePhoto()
+        }
+
 
         if (_mavlinkCamera && _mavlinkCamera.capturesVideo || _mavlinkCamera.capturesPhotos ) {
             if(_mavlinkCameraInVideoMode) {
@@ -131,6 +141,7 @@ Rectangle {
                 }
             }
         }
+
     }
 
     Timer {
@@ -142,7 +153,7 @@ Rectangle {
     QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
 
     QGCColoredImage {
-        anchors.margins:    _margins
+        anchors.margins:    _margins/2.3   //new add 2
         anchors.top:        parent.top
         anchors.right:      parent.right
         source:             "/res/gear-black.svg"
@@ -172,6 +183,7 @@ Rectangle {
         // using the unified properties/functions.
         Rectangle {
             Layout.alignment:   Qt.AlignHCenter
+            Layout.leftMargin: -_margins   //new add 2
             width:              ScreenTools.defaultFontPixelWidth * 10
             height:             width / 2
             color:              qgcPal.windowShadeLight
@@ -234,7 +246,7 @@ Rectangle {
         RowLayout {
             Layout.alignment:   Qt.AlignHCenter
             spacing:            0
-            visible:            _showModeIndicator && !_mavlinkCamera && _simpleCameraAvailable && _videoStreamInPhotoMode
+            visible:           false         //new add 2 // _showModeIndicator && !_mavlinkCamera && _simpleCameraAvailable && _videoStreamInPhotoMode
 
             QGCRadioButton {
                 id:             videoGrabRadio
@@ -259,7 +271,6 @@ Rectangle {
             radius:             width * 0.5
             border.color:       qgcPal.buttonText
             border.width:       3
-
             Rectangle {
                 anchors.centerIn:   parent
                 width:              parent.width * (_isShootingInCurrentMode ? 0.5 : 0.75)
@@ -272,8 +283,15 @@ Rectangle {
                 anchors.fill:   parent
                 enabled:        _canShootInCurrentMode
                 onClicked:      toggleShooting()
+
+                //new add
+                cursorShape: "PointingHandCursor"
+                hoverEnabled: true
+                onEntered:{parent.border.width = 4}
+                onExited:{parent.border.width = 3}
             }
         }
+
 
         //-- Status Information
         ColumnLayout {

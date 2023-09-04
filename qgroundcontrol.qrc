@@ -301,6 +301,7 @@
         <file alias="QGCCwGimbal/Controls/Unfold.png">src/QGCCwGimbal/Unfold.png</file>
         <file alias="QGroundControl/Controls/MockLinkOptionsDlg.qml">src/comm/MockLinkOptionsDlg.qml</file>
 		<file alias="QGCCwGimbal/Controls/target.png">src/QGCCwGimbal/target.png</file>
+		<file alias="QGCCwGimbal/Controls/CameraCenter.png">src/QGCCwGimbal/CameraCenter.png</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>

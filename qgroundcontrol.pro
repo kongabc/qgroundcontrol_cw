@@ -1565,16 +1565,74 @@ LinuxBuild {
 }
 
 
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/ -lGimbalControllerLib
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/ -lGimbalControllerLib
+#else:unix: LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/ -lGimbalControllerLib
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
-else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+#INCLUDEPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release
+#DEPENDPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release
 
-INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
-DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/libGimbalControllerLib.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/libGimbalControllerLib.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/GimbalControllerLib.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/GimbalControllerLib.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/libGimbalControllerLib.a
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
-else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/ -lGimbalControllerLib
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/ -lGimbalControllerLib
+#else:unix: LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/ -lGimbalControllerLib
+
+#INCLUDEPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release
+#DEPENDPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/libGimbalControllerLib.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/libGimbalControllerLib.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/GimbalControllerLib.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/GimbalControllerLib.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/libGimbalControllerLib.a
+
+
+#lib android
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
+#else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+
+#INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+#DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+
+#testLib android
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/ -lGimbalControllerLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/ -lGimbalControllerLib
+else:unix: LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/ -lGimbalControllerLib
+
+INCLUDEPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release
+DEPENDPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/libGimbalControllerLib.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/libGimbalControllerLib.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/release/GimbalControllerLib.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/debug/GimbalControllerLib.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Android_Qt_5_15_2_Clang_Multi_Abi-Release/libGimbalControllerLib.a
+
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/ -lGimbalControllerLib
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/ -lGimbalControllerLib
+#else:unix: LIBS += -L$$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/ -lGimbalControllerLib
+
+#INCLUDEPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release
+#DEPENDPATH += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/libGimbalControllerLib.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/libGimbalControllerLib.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/release/GimbalControllerLib.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/debug/GimbalControllerLib.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/../../testProject/build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Release/libGimbalControllerLib.a
+

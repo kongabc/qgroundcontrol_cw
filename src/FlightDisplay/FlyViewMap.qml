@@ -28,10 +28,11 @@ import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
 
-//import QtQuick.Controls 2.2
-//import QtGraphicalEffects 1.0
-//import QGCCwQml.QGCCwGimbalController 1.0
-//import QGCCwGimbal.Controls 1.0
+//new add
+import QtQuick.Controls 2.2
+import QtGraphicalEffects 1.0
+import QGCCwQml.QGCCwGimbalController 1.0
+
 
 FlightMap {
     id:                         _root
@@ -68,10 +69,10 @@ FlightMap {
     property bool   _keepVehicleCentered:       pipMode ? true : false
     property bool   _saveZoomLevelSetting:      true
 
-
-//    property int _dataShowLabelSize: ScreenTools.smallFontPointSize
-//    property int _dataShowValueSize: ScreenTools.mediumFontPointSize
-//    property int _radiusValueSize: ScreenTools.defaultFontPixelWidth / 2
+    //new add
+    property int _dataShowLabelSize: ScreenTools.smallFontPointSize
+    property int _dataShowValueSize: ScreenTools.mediumFontPointSize
+    property int _radiusValueSize: ScreenTools.defaultFontPixelWidth / 2
 
 
     function updateAirspace(reset) {
@@ -267,17 +268,49 @@ FlightMap {
         }
     }
 
-    // Add the vehicles to the map
-    MapItemView {
-        model: QGroundControl.multiVehicleManager.vehicles
-        delegate: VehicleMapItem {
-            vehicle:        object
-            coordinate:     object.coordinate
-            map:            _root
-            size:           pipMode ? ScreenTools.defaultFontPixelHeight : ScreenTools.defaultFontPixelHeight * 3
-            z:              QGroundControl.zOrderVehicles
-        }
-    }
+    //new add camera direction
+     MapItemView {
+         id:cameraDir
+         model: QGroundControl.multiVehicleManager.vehicles
+         anchors.top: vehicleModel.top
+         anchors.topMargin: pipMode ? -ScreenTools.defaultFontPixelWidth*4.6 : -ScreenTools.defaultFontPixelWidth*10
+         anchors.leftMargin: pipMode ? -ScreenTools.defaultFontPixelWidth*2.2 : -ScreenTools.defaultFontPixelWidth*5.1
+         anchors.left: vehicleModel.left
+         delegate: MapQuickItem {
+            sourceItem: Item{
+                Image {
+                    id:                 vehicleIcon
+                    source:             "/qmlimages/CameraRan.svg"
+                    opacity: 0.6
+                    mipmap:             true
+                    sourceSize.width:   pipMode ? ScreenTools.defaultFontPixelHeight*2 : ScreenTools.defaultFontPixelHeight * 4.6
+                    fillMode:           Image.PreserveAspectFit
+                    transform: Rotation {
+                        origin.x:      vehicleIcon.width  / 2
+                        origin.y:      vehicleIcon.height // / 2
+                        angle:        isNaN(QGCCwGimbalController.yaw) ? 0 : QGCCwGimbalController.yaw
+                    }
+                }
+            }
+            coordinate: object.coordinate
+            visible: coordinate.isValid
+            z: QGroundControl.zOrderVehicles
+         }
+     }
+     // Add the vehicles to the map
+     MapItemView {
+         id: vehicleModel   //new add
+         model: QGroundControl.multiVehicleManager.vehicles
+         delegate: VehicleMapItem {
+             vehicle:        object
+             coordinate:     object.coordinate
+             map:            _root
+             size:           pipMode ? ScreenTools.defaultFontPixelHeight : ScreenTools.defaultFontPixelHeight * 3
+             z:              QGroundControl.zOrderVehicles
+         }
+
+     }
+
     // Add distance sensor view
     MapItemView{
         model: QGroundControl.multiVehicleManager.vehicles
@@ -422,31 +455,38 @@ FlightMap {
             hide()
         }
     }
+    //new add target
+    QGCPalette { id: qgcPal }
+    MapQuickItem{
+        id:targetP
+        visible: !isNaN(QGCCwGimbalController.flags)
+        zoomLevel: 0
+        coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude)
+        anchorPoint: Qt.point(sourceItem.width/2,sourceItem.height/2)
+        z: QGroundControl.zOrderTopMost
+        sourceItem: Image {
+            id: targetName
+            source: "qrc:/qml/QGCCwGimbal/Controls/target.png"
+            sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+        }
+    }
 
-//    MapQuickItem{
-//        id:targetP
-//        zoomLevel: 0
-//        coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude)
-//        anchorPoint: Qt.point(sourceItem.width/2,sourceItem.height/2)
-//        z: QGroundControl.zOrderTopMost
-//        sourceItem: Image {
-//            id: targetName
-//            source: "qrc:/qml/QGCCwGimbal/Controls/target.png"
-//        }
-//    }
+
+
 
 //    MapQuickItem{
 //         id: dataShow
+//         visible: targetP.visible
 //         coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude) // QtPositioning.coordinate(32.0527105,118.8145246)
-//         anchorPoint.x:   targetP.width/2-50
-//         anchorPoint.y:   targetP.height/2
+//         anchorPoint.x:  -ScreenTools.defaultFontPixelHeight*1.6
+//         anchorPoint.y:   targetP.height
 //         z: QGroundControl.zOrderTopMost
 //         sourceItem: Rectangle{
 //             id:shadowShow
 //             radius: _radiusValueSize
 //             height : dataShow2Column.height
 //             width : dataShow2Column.width + ScreenTools.defaultFontPixelWidth*0.6
-//             color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.4)
+//             color:ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.4)
 
 //             Column {
 //                 id: dataShow2Column
@@ -461,7 +501,7 @@ FlightMap {
 //                         font.pointSize: _dataShowLabelSize
 //                         text: "RNG(m)"
 //                         font.family:    ScreenTools.normalFontFamily
-//                          color: qgcPal.text
+//                         color: qgcPal.text
 //                     }
 
 //                     Text {
@@ -471,7 +511,7 @@ FlightMap {
 //                         font.pointSize: _dataShowValueSize
 //                         text: QGCCwGimbalController.lazerDis
 //                         font.family:    ScreenTools.normalFontFamily
-//                          color: qgcPal.text
+//                         color: qgcPal.text
 //                     }
 
 //                     Text {
@@ -655,6 +695,7 @@ FlightMap {
                 border.color: qgcPal.text
             }
 
+
             ColumnLayout {
                 id: mainLayout
                 spacing: ScreenTools.defaultFontPixelWidth / 2
@@ -701,6 +742,7 @@ FlightMap {
         }
 
         onClicked: {
+
             if (!globals.guidedControllerFlyView.guidedUIVisible && (globals.guidedControllerFlyView.showGotoLocation || globals.guidedControllerFlyView.showOrbit || globals.guidedControllerFlyView.showROI)) {
                 orbitMapCircle.hide()
                 gotoLocationItem.hide()

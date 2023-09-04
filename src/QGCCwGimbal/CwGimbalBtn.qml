@@ -8,16 +8,11 @@ Item {
 
     property int _horizontalPadding: 0
     property int _verticalPadding: 0
-
-//    property int _implicitBtnCtrlWidth: ScreenTools.defaultFontPixelWidth*3.6
-//    property int _implicitBtnCtrlHeight:ScreenTools.defaultFontPixelWidth*3.6
-
     property bool showHighlight: false
-
     property string iconSource
     property bool iconMarkShow: false
     property color overlayColor:"#fff"
-    property real _idealWidth: ((ScreenTools.isMobile ? ScreenTools.minTouchPixels : ScreenTools.defaultFontPixelWidth * 8) + toolStripColumn.anchors.margins * 2)/1.3
+    property real _idealWidth: ((ScreenTools.isMobile ? ScreenTools.minTouchPixels : ScreenTools.defaultFontPixelWidth * 8))/1.3
     property real   maxHeight
 
     signal btnClicked()
@@ -27,16 +22,11 @@ Item {
 
     Rectangle {
         id: backRect
-
-//        implicitWidth: _implicitBtnCtrlWidth
-//        implicitHeight: _implicitBtnCtrlHeight
-
         width:     _idealWidth
         height:     width
 
         radius:ScreenTools.defaultFontPixelWidth / 2
         color: showHighlight ? "#FFF291" :  ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4): Qt.rgba(0,0,0,0.4)
-// color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.4)
 
         Image {
             id: icon

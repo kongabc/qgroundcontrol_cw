@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -90,9 +90,10 @@ Button {
 
     background: Rectangle {
         id:             buttonBkRect
+        //new add 2
         color:          (control.checked || control.pressed) ?
                             qgcPal.buttonHighlight :
-                            (control.hovered ? qgcPal.toolStripHoverColor : qgcPal.toolbarBackground)
+                            (control.hovered ? qgcPal.toolStripHoverColor : ( ScreenTools.isMobile ? Qt.rgba(1,1,1,0.2) : "#000")) //qgcPal.toolbarBackground)
         anchors.fill:   parent
     }
 }

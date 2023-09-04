@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -37,7 +37,7 @@ ColumnLayout {
     QGCLabel {
         id:                 label
         Layout.alignment:   Qt.AlignVCenter
-        font.pointSize:     _fontSize
+        font.pointSize:     ScreenTools.isMobile ? _fontSize * 0.7 : _fontSize     //new add 2
         text:               valueText()
 
         function valueText() {
