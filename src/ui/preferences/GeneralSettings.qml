@@ -24,6 +24,11 @@ import QGroundControl.Palette               1.0
 import QGroundControl.Controllers           1.0
 import QGroundControl.SettingsManager       1.0
 
+//new add 4
+import QtQuick.Controls         2.15
+import QtQml 2.15
+import QGCCwQml.QGCCwGimbalController 1.0
+
 Rectangle {
     id:                 _root
     color:              qgcPal.window
@@ -171,6 +176,15 @@ Rectangle {
                                 fact:       _lockNoseUpCompass
 
                                 property Fact _lockNoseUpCompass: QGroundControl.settingsManager.flyViewSettings.lockNoseUpCompass
+                            }
+
+                            //new add 4
+                            QGCCheckBox {
+                               text:       qsTr("相机中心点")
+                               checked:QGCCwGimbalController.isChecked
+                               onClicked: {
+                                   QGCCwGimbalController.isCheckedCenter(checked);
+                               }
                             }
 
                             FactCheckBox {
@@ -346,9 +360,108 @@ Rectangle {
                                     fact:       _videoSettings.enableStorageLimit
                                     visible:    _showSaveVideoSettings && fact.visible
                                 }
+
+
                             }
                         }
                     }
+
+                    //new add 4
+                    Item { width: 1; height: _margins; visible: tcpOrUdp.visible }
+                    QGCLabel {
+                        id:         tcpOrUdp
+                        text:       qsTr("UDP/TCP")
+                    }
+                    Rectangle{
+                        Layout.preferredHeight: commCol.height + (_margins * 2)
+                        Layout.preferredWidth:  flyViewCol.width + (_margins * 2)
+                        color:                  qgcPal.windowShade
+                        Layout.fillWidth:       true
+
+                        GridLayout {
+                            id:                         commCol
+                            anchors.margins:            _margins
+                            anchors.top:                parent.top
+                            anchors.horizontalCenter:   parent.horizontalCenter
+                            rows:2
+                            columns: 3
+                            columnSpacing:_margins
+                            rowSpacing:_margins
+
+                            QGCRadioButton {
+                                Layout.row:1
+                                Layout.column:1
+                                text:               qsTr("UDP")
+                                checked:!QGCCwGimbalController.isCheckedTcp
+                                onClicked:     {
+                                    QGCCwGimbalController.isCheckedTcpVal(false);
+                                    QGCCwGimbalController.udpOrTcp = false;
+                                    QGCCwGimbalController._udpConnected();
+                                }
+                            }
+
+                            QGCRadioButton {
+                                Layout.row:2
+                                Layout.column:1
+                                id:tcpBtn
+                                checked:QGCCwGimbalController.isCheckedTcp
+                                text:  qsTr("TCP")
+                                onClicked:  {
+                                    if(inpText.acceptableInput){
+                                        QGCCwGimbalController.isCheckedTcpVal(true);
+                                        QGCCwGimbalController.udpOrTcp = true;
+                                        QGCCwGimbalController.tcpConnect(inpText.text);
+                                        inpText.color = "#000"
+
+                                    }else{
+                                        inpText.color = "#ff0000"
+                                    }
+                                }
+                            }
+
+                            TextField{
+                                Layout.column:2
+                                Layout.row:2
+                                id:inpText
+                                padding: ScreenTools.defaultFontPixelWidth/2
+                                Layout.preferredWidth:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 14 : ScreenTools.defaultFontPixelWidth * 16
+                                Layout.preferredHeight:ScreenTools.defaultFontPixelWidth *3.6
+                                text: QGCCwGimbalController.tcpIp
+                                selectByMouse: true
+                                color: acceptableInput  ? "#000" : "#ff0000"
+                                font {
+                                    family: "Microsoft Yahei"
+                                    pointSize:ScreenTools.isMobile ? ScreenTools.defaultFontPointSize :ScreenTools.defaultFontPointSize * 1.1 //ScreenTools.defaultFontPixelWidth*1.2
+                                }
+                                validator:RegExpValidator{
+                                    regExp: /^(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/
+                                }
+
+                                onEditingFinished: {
+                                    inpText.focus = false;
+                                    if(acceptableInput){
+                                        QGCCwGimbalController.udpOrTcp = true;
+                                        QGCCwGimbalController.isCheckedTcpVal(true);
+                                        QGCCwGimbalController.tcpConnect(inpText.text);
+                                        inpText.color = "#000"
+                                    }else{
+                                        inpText.color = "#ff0000"
+                                    }
+                                }
+                               onTextChanged: {
+                                 if(acceptableInput){
+                                    inpText.color = "#000"
+                                 }else{
+                                    inpText.color = "#ff0000"
+                                 }
+                               }
+
+                            }
+                        }
+
+                    }
+
+
 
                     Item { width: 1; height: _margins; visible: planViewSectionLabel.visible }
                     QGCLabel {

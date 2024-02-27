@@ -17,6 +17,8 @@ import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
 import QGroundControl.Controls      1.0
 
+//new add 3
+import QGCCwQml.QGCCwGimbalController 1.0
 /// Marker for displaying a vehicle location on the map
 MapQuickItem {
     property var    vehicle                                                         /// Vehicle object, undefined for ADSB vehicle
@@ -73,7 +75,27 @@ MapQuickItem {
                 origin.y:       vehicleIcon.height / 2
                 angle:          isNaN(heading) ? 0 : heading
             }
+            z: QGroundControl.zOrderVehicles
         }
+        //new add 3
+//        Image {
+//            id:                 cameraIcon
+//            source:             "/qmlimages/CameraRan.svg"
+//            opacity: 0.6
+//            mipmap:             true
+//            sourceSize.width:   pipMode ? ScreenTools.defaultFontPixelHeight*2 : ScreenTools.defaultFontPixelHeight * 4.6
+//            fillMode:           Image.PreserveAspectFit
+//            anchors.top: vehicleIcon.top
+//            anchors.topMargin:pipMode ? -ScreenTools.defaultFontPixelHeight*1.5 : -(ScreenTools.defaultFontPixelHeight*3)
+//            anchors.left: vehicleIcon.left
+//            anchors.leftMargin: pipMode ? -ScreenTools.defaultFontPixelHeight*0.5 :-(ScreenTools.defaultFontPixelHeight*0.84)
+//            transform: Rotation {
+//                origin.x:      cameraIcon.width/2
+//                origin.y:      cameraIcon.height
+//                angle:        isNaN(QGCCwGimbalController.yaw) ? 0 : QGCCwGimbalController.yaw
+//            }
+//        }
+
 
         QGCMapLabel {
             id:                         vehicleLabel

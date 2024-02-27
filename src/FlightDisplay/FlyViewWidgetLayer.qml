@@ -24,16 +24,22 @@ import QGroundControl.Airmap        1.0
 import QGroundControl.Controllers   1.0
 import QGroundControl.Controls      1.0
 import QGroundControl.FactSystem    1.0
+//new add 3
+//import QGroundControl.FactControls          1.0
+
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
 import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
 
+import QtQuick.Controls         2.15
+import QtQml 2.15
+import QGCCwQml.QGCCwGimbalController 1.0
+
 // This is the ui overlay layer for the widgets/tools for Fly View
 Item {
     id: _root
-
     property var    parentToolInsets
     property var    totalToolInsets:        _totalToolInsets
     property var    mapControl
@@ -48,6 +54,8 @@ Item {
     property real   _toolsMargin:           ScreenTools.defaultFontPixelWidth * 0.75
     property rect   _centerViewport:        Qt.rect(0, 0, width, height)
     property real   _rightPanelWidth:       ScreenTools.defaultFontPixelWidth * 30
+
+    property int lastState:0
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -115,7 +123,7 @@ Item {
         spacing:                    _toolsMargin
         visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanel
         availableHeight:            parent.height - y - _toolsMargin
-
+        anchors.rightMargin: ScreenTools.isMobile ? -_rightPanelWidth/4 : ScreenTools.defaultFontPixelWidth
         property real rightInset: visible ? parent.width - x : 0
     }
 
@@ -123,7 +131,9 @@ Item {
         id:                     photoVideoControl
         anchors.margins:        _toolsMargin
         anchors.right:          parent.right
-        width:                  _rightPanelWidth
+//        width:                  _rightPanelWidth
+        z: QGroundControl.zOrderTopMost
+        width:_rightPanelWidth/2.3
         state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
         states: [
             State {
@@ -145,6 +155,126 @@ Item {
         ]
 
         property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
+    }
+
+    Rectangle{
+        id:zoomRect
+        width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*3.8 : ScreenTools.defaultFontPixelWidth*2.6
+        height:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2
+        anchors.bottom: photoVideoControl.bottom
+        anchors.left:photoVideoControl.left
+        anchors.leftMargin: -ScreenTools.defaultFontPixelWidth*4.2 // new add 2
+        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
+        radius: ScreenTools.defaultFontPixelWidth / 2
+        visible: photoVideoControl.visible
+        z:QGroundControl.zOrderTopMost
+        Item{
+            id:headerColumn
+            height:ScreenTools.defaultFontPixelWidth*1.5
+            width: zoomRect.width
+            anchors.top: parent.top
+            anchors.topMargin: ScreenTools.isMobile ? 4:2
+            Label {
+                anchors.centerIn: parent
+                color: "#fff"
+                font.bold: true
+                font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth : ScreenTools.defaultFontPixelWidth*1.8
+                text:"+"
+            }
+        }
+        Item{
+            id:bottomColumn
+            height: ScreenTools.defaultFontPixelWidth*1.5
+            width: zoomRect.width
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: ScreenTools.isMobile ? 2:1
+            Label {
+                color: "#fff"
+                anchors.centerIn: parent
+                font.bold: true
+                font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*1.4 : ScreenTools.defaultFontPixelWidth*1.8
+                text:"-"
+            }
+        }
+
+        Rectangle{
+            id:circleRect
+            width:zoomRect.width
+            height: width
+            radius:width/2
+            color: "#fff"
+            y: (zoomRect.height-circleRect.height)/2
+
+            MouseArea{
+                anchors.fill: parent
+                cursorShape: "PointingHandCursor"
+                hoverEnabled: true
+                onEntered:
+                {
+                    circleRect.color = "#FFF291"
+                }
+                onExited:
+                {
+                    circleRect.color = "#FFF"
+                }
+            }
+        }
+        MouseArea{
+            id:dragArea
+            anchors.fill: parent
+            anchors.leftMargin: -ScreenTools.defaultFontPixelWidth*1.2
+            onPressed: {
+                if(mouse.y < zoomRect.height/2){
+                    if(lastState !== 1){
+                       lastState=1
+                       QGCCwGimbalController.videoZoom(1);
+                    }
+                }else if( mouse.y > zoomRect.height/2){
+                    if(lastState !== -1){
+                       lastState=-1
+                       QGCCwGimbalController.videoZoom(-1);
+                    }
+                }
+
+                if(mouse.y<circleRect.height/2){
+                    circleRect.y = 0
+                }else if(mouse.y>zoomRect.height-circleRect.height/2){
+                    circleRect.y = zoomRect.height-circleRect.height
+                }else{
+                    circleRect.y = mouse.y - circleRect.height/2
+                }
+
+            }
+
+            onPositionChanged:{
+                if( mouse.y < zoomRect.height/2){
+                    if(lastState !== 1){
+                        lastState=1
+                        QGCCwGimbalController.videoZoom(1);
+                    }
+
+                } else if( mouse.y > zoomRect.height/2){
+                    if(lastState !== -1){
+                        lastState=-1
+                        QGCCwGimbalController.videoZoom(-1);
+                    }
+                }
+
+                if(mouse.y<circleRect.height/2){
+                    circleRect.y = 0
+                }else if(mouse.y>zoomRect.height-circleRect.height/2){
+                    circleRect.y = zoomRect.height-circleRect.height
+                }else{
+                    circleRect.y = mouse.y - circleRect.height/2
+                }
+            }
+            onReleased: {
+                circleRect.color = "#FFF"
+                circleRect.y = (zoomRect.height-circleRect.height)/2
+                lastState=0
+                QGCCwGimbalController.videoZoom(0);
+            }
+        }
     }
 
     TelemetryValuesBar {
@@ -246,7 +376,93 @@ Item {
         onDisplayPreFlightChecklist: mainWindow.showPopupDialogFromComponent(preFlightChecklistPopup)
 
         property real leftInset: x + width
+
+        //new add 3
+        property bool isVisibleInput : false
+
+        onIsVisibleInputChanged: {
+            ipInput.visible = isVisibleInput
+        }
+
     }
+    //new add 3
+    Rectangle{
+        id:ipInput
+        visible: false
+        width: tcpIpGrid.width+ScreenTools.defaultFontPixelWidth*2
+        height: tcpIpGrid.height + ScreenTools.defaultFontPixelWidth*2
+        anchors.left: toolStrip.right
+        anchors.top: toolStrip.top
+        anchors.topMargin: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 17 : ScreenTools.defaultFontPixelWidth * 25
+        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 1.2
+
+        color: Qt.rgba(0,0,0,0.4)
+        radius:ScreenTools.defaultFontPixelWidth/2
+
+        GridLayout{
+            id:tcpIpGrid
+            columns: 4
+            Layout.columnSpan:20
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.leftMargin: ScreenTools.defaultFontPixelWidth
+            anchors.topMargin: ScreenTools.defaultFontPixelWidth
+
+            QGCLabel{
+                text:qsTr("TCP IP:")
+                color:"#fff"
+
+            }
+            TextField{
+
+                id:inpText
+                padding: ScreenTools.defaultFontPixelWidth/2
+                Layout.preferredWidth:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 12 : ScreenTools.defaultFontPixelWidth * 14
+                Layout.preferredHeight:ScreenTools.defaultFontPixelWidth *3.4
+                renderType: Text.NativeRendering
+
+                text: QGCCwGimbalController.tcpIp
+                selectByMouse: true
+//                color: acceptableInput  ? "#00ff00" : "#ff0000"
+                font {
+                    family: "Microsoft Yahei"
+                    pointSize:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth/1.6 : ScreenTools.defaultFontPixelWidth*1.4
+                }
+                autoScroll: true
+
+                validator:RegExpValidator{
+                    regExp: /^(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/
+                }
+            }
+            Rectangle{
+                id:commitBtn
+                width: ScreenTools.defaultFontPixelWidth *5.2
+                height: ScreenTools.defaultFontPixelWidth *3.4
+                radius:ScreenTools.defaultFontPixelWidth / 2
+
+                Text {
+                    id: btnName
+                    text: qsTr("确定")
+                    anchors.centerIn: parent
+                    font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth/1.8 : ScreenTools.defaultFontPixelWidth*1.4
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: "PointingHandCursor"
+                    hoverEnabled: true
+
+                    onClicked: {
+                       if(inpText.acceptableInput){ //校验通过
+                           inpText.focus = false;
+                            QGCCwGimbalController.tcpConnect(inpText.text);
+                            toolStrip.isVisibleInput=false;
+                       }
+                    }
+                }
+            }
+        }
+    }
+
 
     FlyViewAirspaceIndicator {
         anchors.top:                parent.top

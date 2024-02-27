@@ -8,6 +8,9 @@
  ****************************************************************************/
 
 import QtQuick                      2.11
+
+import QtQuick.Window 2.12
+
 import QtQuick.Controls             2.4
 import QtLocation                   5.3
 import QtPositioning                5.3
@@ -22,6 +25,11 @@ import QGroundControl.FlightMap     1.0
 import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
+
+//import QtQuick.Controls 2.2
+import QtGraphicalEffects 1.0
+import QGCCwQml.QGCCwGimbalController 1.0
+
 
 FlightMap {
     id:                         _root
@@ -67,6 +75,10 @@ FlightMap {
             }
         }
     }
+    property int _dataShowLabelSize: ScreenTools.smallFontPointSize
+    property int _dataShowValueSize: ScreenTools.mediumFontPointSize
+    property int _radiusValueSize: ScreenTools.defaultFontPixelWidth / 2
+
 
     function _adjustMapZoomForPipMode() {
         _saveZoomLevelSetting = false
@@ -251,8 +263,39 @@ FlightMap {
         }
     }
 
+    MapItemView {
+        id:cameraDir
+        model: QGroundControl.multiVehicleManager.vehicles
+        anchors.top: vehicleModel.top
+        anchors.topMargin: pipMode ? -ScreenTools.defaultFontPixelWidth*4.6 : -ScreenTools.defaultFontPixelWidth*10
+        anchors.leftMargin: pipMode ? -ScreenTools.defaultFontPixelWidth*2.2 : -ScreenTools.defaultFontPixelWidth*5.1
+        anchors.left: vehicleModel.left
+        delegate: MapQuickItem {
+           sourceItem: Item{
+               Image {
+                   id:                 vehicleIcon
+                   source:             "/qmlimages/CameraRan.svg"
+                   opacity: 0.6
+                   mipmap:             true
+                   sourceSize.width:   pipMode ? ScreenTools.defaultFontPixelHeight*2 : ScreenTools.defaultFontPixelHeight * 4.6
+                   fillMode:           Image.PreserveAspectFit
+                   transform: Rotation {
+                       origin.x:      vehicleIcon.width  / 2
+                       origin.y:      vehicleIcon.height // / 2
+                       angle:        isNaN(QGCCwGimbalController.yaw) ? 0 : QGCCwGimbalController.yaw
+                   }
+               }
+           }
+           coordinate: object.coordinate
+           visible: coordinate.isValid
+           z: QGroundControl.zOrderVehicles
+        }
+    }
+
+
     // Add the vehicles to the map
     MapItemView {
+        id: vehicleModel
         model: QGroundControl.multiVehicleManager.vehicles
         delegate: VehicleMapItem {
             vehicle:        object
@@ -406,6 +449,22 @@ FlightMap {
             hide()
         }
     }
+
+    QGCPalette { id: qgcPal }
+    MapQuickItem{
+        id:targetP
+        visible: (QGCCwGimbalController.flags & 0x01)
+        zoomLevel: 0
+        coordinate: QtPositioning.coordinate(QGCCwGimbalController.latitude,QGCCwGimbalController.longitude)
+        anchorPoint: Qt.point(sourceItem.width/2,sourceItem.height/2)
+        z: QGroundControl.zOrderTopMost
+        sourceItem: Image {
+            id: targetName
+            source: "qrc:/qml/QGCCwGimbal/Controls/target.png"
+            sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+        }
+    }
+
 
     // Orbit editing visuals
     QGCMapCircleVisuals {

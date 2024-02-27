@@ -7545,6 +7545,16 @@ Click Ok to start the auto-tuning process.
       <translation>%1 版本</translation>
     </message>
   </context>
+
+<!--new add 3  <context>
+    <name>CustomSettings</name>
+    <message>
+      <location filename="../src/ui/preferences/CustomSettings.qml" line="48"/>
+      <source>Video Center</source>
+      <translation>视频中心点</translation>
+    </message>
+  </context>-->
+
   <context>
     <name>GeoFenceController</name>
     <message>

@@ -1545,3 +1545,35 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+
+#include <QtGlobal>
+#if defined(Q_OS_ANDROID)
+
+
+#pc
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
+else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+
+INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
+else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/release/ -lGimbalControllerLib
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/debug/ -lGimbalControllerLib
+#else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+
+#INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+#DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/libGimbalControllerLib.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/libGimbalControllerLib.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/GimbalControllerLib.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/GimbalControllerLib.lib
+#else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
