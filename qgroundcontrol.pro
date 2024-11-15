@@ -254,7 +254,9 @@ QT += \
     widgets \
     xml \
     texttospeech \
-    core-private
+    core-private \
+    core
+
 
 # Multimedia only used if QVC is enabled
 !contains (DEFINES, QGC_DISABLE_UVC) {
@@ -755,6 +757,7 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 }
 
 AndroidBuild {
+
 HEADERS += \
     src/Joystick/JoystickAndroid.h \
 }
@@ -1546,34 +1549,52 @@ LinuxBuild {
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
 
-#include <QtGlobal>
-#if defined(Q_OS_ANDROID)
+
+WindowsBuild{
+
+    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
+    else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+
+    INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+    DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+    win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+    else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
+    else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
+    else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
+    else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
 
 
-#pc
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLibd
-else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+}else:AndroidBuild{
 
-INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
-DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/release/ -lGimbalControllerLib
+    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/debug/ -lGimbalControllerLib
+    else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLibd.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
-else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+    INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
+    DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+
+    win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/libGimbalControllerLib.a
+    else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/libGimbalControllerLib.a
+    else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/GimbalControllerLib.lib
+    else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/GimbalControllerLib.lib
+    else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
 
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/release/ -lGimbalControllerLib
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/debug/ -lGimbalControllerLib
-#else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
+}
 
-#INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
-#DEPENDPATH += $$PWD/libs/qgccwgimballib/include
+ANDROID_EXTRA_LIBS = D:/testProject/git-qgc/qgc_dev/qgroundcontrol_cw/libs/OpenSSL/android_openssl/arm64/libcrypto.so D:/testProject/git-qgc/qgc_dev/qgroundcontrol_cw/libs/OpenSSL/android_openssl/arm64/libssl.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libavcodec.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libavdevice.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libavfilter.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libavformat.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libavutil.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libswresample.so $$PWD/src/VideoReceiver/gstreamer-1.0-android-universal-1.18.5/arm64/lib/libswscale.so
 
-#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/libGimbalControllerLib.a
-#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/libGimbalControllerLib.a
-#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/GimbalControllerLib.lib
-#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/GimbalControllerLib.lib
-#else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/release/ -lGimbalControllerLibd
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug/ -lGimbalControllerLibd
+
+#INCLUDEPATH += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug
+#DEPENDPATH += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug
+
+#win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/release/libGimbalControllerLibd.a
+#else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug/libGimbalControllerLibd.a
+#else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/release/GimbalControllerLibd.lib
+#else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../build-QGCCwGimbalLib-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug/GimbalControllerLibd.lib

@@ -302,9 +302,20 @@
         <file alias="QGCCwGimbal/Controls/Unfold.png">src/QGCCwGimbal/Unfold.png</file>
         <file alias="QGCCwGimbal/Controls/target.png">src/QGCCwGimbal/target.png</file>
         <file alias="QGCCwGimbal/Controls/CameraCenter.png">src/QGCCwGimbal/CameraCenter.png</file>
+        <file alias="QGCCwGimbal/Controls/ToCenter.png">src/QGCCwGimbal/ToCenter.png</file>
+        <file alias="QGCCwGimbal/Controls/TempIcon.png">src/QGCCwGimbal/TempIcon.png</file>
+        <file alias="QGCCwGimbal/Controls/IsothermLine.png">src/QGCCwGimbal/IsothermLine.png</file>
+        <file alias="QGCCwGimbal/Controls/AreaTemp.png">src/QGCCwGimbal/AreaTemp.png</file>
+        <file alias="QGCCwGimbal/Controls/TempWarn.png">src/QGCCwGimbal/TempWarn.png</file>
+        <file alias="QGCCwGimbal/Controls/SpotTemp.png">src/QGCCwGimbal/SpotTemp.png</file>
+        <file alias="QGroundControl/FlightDisplay/SpotTemp2.png">src/QGCCwGimbal/SpotTemp2.png</file>
+        <file alias="QGCCwGimbal/Controls/CalibrationWarn.png">src/QGCCwGimbal/CalibrationWarn.png</file>
+        <file alias="QGCCwGimbal/Controls/Loading.gif">src/QGCCwGimbal/Loading.gif</file>
+        <file alias="QGCCwGimbal/Controls/SuccessIcon.png">src/QGCCwGimbal/SuccessIcon.png</file>
+        <file alias="QGCCwGimbal/Controls/FailIcon.png">src/QGCCwGimbal/FailIcon.png</file>
         <file alias="QGroundControl/Controls/MockLinkOptionsDlg.qml">src/comm/MockLinkOptionsDlg.qml</file>
-<!--        <file>CustomSettings.qml</file>-->
     </qresource>
+
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>
         <file alias="OfflineVehicleFirstRunPrompt.qml">src/FirstRunPromptDialogs/OfflineVehicleFirstRunPrompt.qml</file>

@@ -92,6 +92,12 @@ DECLARE_SETTINGGROUP(Video, "Video")
     _setDefaults();
 }
 
+VideoSettings::~VideoSettings()
+{
+//    selectVideoSource("Video Stream Disabled");
+//    videoSource()->setRawValue("Video Stream Disabled");
+}
+
 void VideoSettings::_setDefaults()
 {
     if (_noVideo) {
@@ -154,6 +160,7 @@ DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, forceVideoDecoder)
 
 DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, udpPort)
 {
+
     if (!_udpPortFact) {
         _udpPortFact = _createSettingsFact(udpPortName);
         connect(_udpPortFact, &Fact::valueChanged, this, &VideoSettings::_configChanged);
@@ -191,6 +198,7 @@ bool VideoSettings::streamConfigured(void)
     }
     //-- Check if it's disabled
     QString vSource = videoSource()->rawValue().toString();
+
     if(vSource == videoSourceNoVideo || vSource == videoDisabled) {
         return false;
     }
@@ -204,6 +212,7 @@ bool VideoSettings::streamConfigured(void)
         qCDebug(VideoManagerLog) << "Testing configuration for RTSP Stream:" << rtspUrl()->rawValue().toString();
         return !rtspUrl()->rawValue().toString().isEmpty();
     }
+
     //-- If TCP, check for URL
     if(vSource == videoSourceTCP) {
         qCDebug(VideoManagerLog) << "Testing configuration for TCP Stream:" << tcpUrl()->rawValue().toString();
@@ -217,7 +226,16 @@ bool VideoSettings::streamConfigured(void)
     return false;
 }
 
-void VideoSettings::_configChanged(QVariant)
+void VideoSettings::selectVideoSource(QVariant value)
 {
+    _nameToMetaDataMap[videoSourceName]->setRawDefaultValue(videoSourceNoVideo);
+    _configChanged(value);
+}
+
+void VideoSettings::_configChanged(QVariant value)
+{
+
+//    qDebug() << "---VideoSettings.cc-----" <<(videoSource()->rawValue().toString());
+    videoSource()->setRawValue(value);
     emit streamConfiguredChanged(streamConfigured());
 }

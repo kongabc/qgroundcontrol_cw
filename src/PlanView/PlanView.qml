@@ -1011,6 +1011,8 @@ Item {
                     Layout.fillWidth:   true
 
                     onClicked: {
+                        console.log(111111)
+                        console.log(modelData)
                         insertComplexItemAfterCurrent(modelData)
                         dropPanel.hide()
                     }

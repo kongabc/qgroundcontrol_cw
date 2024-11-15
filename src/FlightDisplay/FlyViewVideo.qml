@@ -15,6 +15,7 @@ import QGroundControl.Controllers   1.0
 import QGroundControl.ScreenTools   1.0
 
 import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
 import QGCCwQml.QGCCwGimbalController 1.0
 
 
@@ -53,14 +54,8 @@ Item {
         }
     }
     Component.onCompleted:{
-        console.log(QGCCwGimbalController.isChecked)
-
-//        _root.videoCenterShow.connect(onHandleChecked)
+//        console.log("QGCCwGimbalController.showCenter---",QGCCwGimbalController.showCenter);
     }
-//    function onHandleChecked(checked){
-//        console.log("*********")
-//        console.log(checked)
-//    }
 
     Image {
         id: cameraCenter
@@ -68,7 +63,7 @@ Item {
         sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
         anchors.centerIn: parent
         z:QGroundControl.zOrderTopMost
-        visible:QGCCwGimbalController.isChecked && QGroundControl.videoManager.hasVideo &&  QGroundControl.videoManager.decoding
+        visible:QGCCwGimbalController.showCenter && QGroundControl.videoManager.hasVideo &&  QGroundControl.videoManager.decoding
 
     }
 
@@ -83,6 +78,7 @@ Item {
     //-- Video Streaming
     FlightDisplayViewVideo {
         id:             videoStreaming
+        objectName: "childVideoStreaming"
         anchors.fill:   parent
         useSmallFont:   _root.pipState.state !== _root.pipState.fullState
         visible:        QGroundControl.videoManager.isGStreamer
@@ -152,42 +148,51 @@ Item {
             if(timerSecondClick.running){
                 return
             }
-             const rootW = _root.width;
-             const rootH = _root.height;
+            const rootW = _root.width;
+            const rootH = _root.height;
 
-             const lis = videoStreaming.children;
-             const videoW = lis[1].getWidth();
-             const videoH = lis[1].getHeight();
+            const lis = videoStreaming.children;
+            const videoW = lis[1].getWidth();
+            const videoH = lis[1].getHeight();
 
-             var dw = (rootW-videoW)/2
-             if(mouse.button === Qt.LeftButton){
-                 if(QGCCwGimbalController.isTrack && QGCCwGimbalController.trackAvailable){
+            var dw = (rootW-videoW)/2
 
-                     if((mouseX > dw) && (mouseX < rootW-dw)) {
-                         var x = (mouseX-dw)*100/videoW
-                         var y = mouseY*100 /videoH
-                         var x1 = x-5
-                         var y1 = y-5
-                         var x2 = x+5
-                         var y2 = y+5
-                         if(x1<0) { x1=0 }
-                         if(y1<0) { y1=0 }
-                         if(x2>100) { x2=100 }
-                         if(y2>100) { y2=100 }
-                         QGCCwGimbalController.videoTrack(x1,y1,x2,y2,0x02);
-                     }
+            if(mouse.button === Qt.LeftButton){
+                if((QGCCwGimbalController.trackBtnState) && QGCCwGimbalController.trackAvailable){
+                    QGCCwGimbalController.trackObject();
+                    if((mouseX > dw) && (mouseX < rootW-dw)) {
+                        let x = (mouseX-dw)*100/videoW
+                        let y = mouseY*100 /videoH
+                        var x1 = x-5
+                        var y1 = y-5
+                        var x2 = x+5
+                        var y2 = y+5
+                        if(x1<0) { x1=0 }
+                        if(y1<0) { y1=0 }
+                        if(x2>100) { x2=100 }
+                        if(y2>100) { y2=100 }
 
-                 }else{
-                     if((mouseX > dw) && (mouseX < rootW-dw)) {
-                         var mx = (mouseX-dw)*10000/videoW
-                         var my = mouseY*10000 /videoH
-                         QGCCwGimbalController.videoPointTranslation(mx,my);
-                     }
-                 }
+                        QGCCwGimbalController.videoTrack(x1,y1,x2,y2,0x02);
+                    }
 
-             }else if(mouse.button  === Qt.RightButton){
-                 QGCCwGimbalController.videoTrack("","","","",0x00);
-             }
+                }else if(QGCCwGimbalController.isPointTemp){
+                    if((mouseX > dw) && (mouseX < rootW-dw)) {
+                        let mx1 = (mouseX-dw)*10000/videoW
+                        let my1 = mouseY*10000 /videoH
+                        QGCCwGimbalController.spotTempSwitch(mx1,my1,0x01);
+                    }
+                } else{
+                    if((mouseX > dw) && (mouseX < rootW-dw)) {
+                        let mx = (mouseX-dw)*10000/videoW
+                        let my = mouseY*10000 /videoH
+                        QGCCwGimbalController.videoPointTranslation(mx,my);
+                    }
+                }
+
+
+            }else if(mouse.button  === Qt.RightButton){
+                QGCCwGimbalController.videoTrack("","","","",0x00);
+            }
         }
         onPressed: {
             startX=0
@@ -230,6 +235,7 @@ Item {
 
         onDoubleClicked:    QGroundControl.videoManager.fullScreen = !QGroundControl.videoManager.fullScreen
     }
+
 
     ProximityRadarVideoView{
         anchors.fill:   parent

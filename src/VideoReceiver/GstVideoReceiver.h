@@ -27,6 +27,32 @@
 
 #include <gst/gst.h>
 
+////new add 2024
+//#ifndef INT64_C
+//#define INT64_C(c) (c ## LL)
+//#define UINT64_C(c) (c ## ULL)
+//#endif
+
+//#ifdef __cplusplus
+//#define __STDC_CONSTANT_MACROS
+//#ifdef _STDINT_H
+//#undef _STDINT_H
+//#endif
+//# include <stdint.h>
+//#endif
+//extern "C"{
+
+//#define FF_API_REGISTER_ALL
+
+//#include "libavformat/avformat.h"
+//#include "libavcodec/avcodec.h"
+//#include "libavutil/avutil.h"
+//#include "libavfilter/avfilter.h"
+
+//}
+//new add 2024
+//class VideoStreamClass;
+
 Q_DECLARE_LOGGING_CATEGORY(VideoReceiverLog)
 
 class Worker : public QThread
@@ -120,12 +146,16 @@ protected:
     bool _needDispatch(void);
     void _dispatchSignal(std::function<void()> emitter);
 
+    void ffmpegStreaming(void);
+
+
     static gboolean _onBusMessage(GstBus* bus, GstMessage* message, gpointer user_data);
     static void _onNewPad(GstElement* element, GstPad* pad, gpointer data);
     static void _wrapWithGhostPad(GstElement* element, GstPad* pad, gpointer data);
     static void _linkPad(GstElement* element, GstPad* pad, gpointer data);
     static gboolean _padProbe(GstElement* element, GstPad* pad, gpointer user_data);
     static gboolean _filterParserCaps(GstElement* bin, GstPad* pad, GstElement* element, GstQuery* query, gpointer data);
+
     static GstPadProbeReturn _teeProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);
     static GstPadProbeReturn _videoSinkProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);
     static GstPadProbeReturn _eosProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);

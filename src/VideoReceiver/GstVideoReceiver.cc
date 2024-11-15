@@ -21,6 +21,8 @@
 #include <QDateTime>
 #include <QSysInfo>
 
+#include <QProcess>
+
 QGC_LOGGING_CATEGORY(VideoReceiverLog, "VideoReceiverLog")
 
 //-----------------------------------------------------------------------------
@@ -32,6 +34,16 @@ QGC_LOGGING_CATEGORY(VideoReceiverLog, "VideoReceiverLog")
 //              |
 //              +-->queue-->_recorderValve[-->_fileSink]
 //
+
+//class VideoStreamClass
+//{
+//public:
+//    //    VideoStreamClass();
+//    //    ~VideoStreamClass();
+
+//    QString _allVideoStream = "";
+
+//};
 
 GstVideoReceiver::GstVideoReceiver(QObject* parent)
     : VideoReceiver(parent)
@@ -59,7 +71,24 @@ GstVideoReceiver::GstVideoReceiver(QObject* parent)
     _slotHandler.start();
     connect(&_watchdogTimer, &QTimer::timeout, this, &GstVideoReceiver::_watchdog);
     _watchdogTimer.start(1000);
+
+//    qDebug()<<("rtsp------");
+//    streamPtr = new VideoStreamClass();
 }
+
+
+//QString GstVideoReceiver::allVideoStreamValue() const
+//{
+//    return streamPtr->_allVideoStream;
+//}
+
+//QString GstVideoReceiver::setAllVideoStreamValue(QString value) const
+//{
+//    streamPtr->_allVideoStream = value;
+
+//    return streamPtr->_allVideoStream;
+//}
+
 
 GstVideoReceiver::~GstVideoReceiver(void)
 {
@@ -757,6 +786,10 @@ GstVideoReceiver::_makeSource(const QString& uri)
     GstElement* bin     = nullptr;
     GstElement* srcbin  = nullptr;
 
+//    GstElement* rtph264= nullptr;
+//    GstElement* avdec_h264= nullptr;
+//    GstElement* autovideosink= nullptr;
+
     do {
         QUrl url(uri);
 
@@ -814,9 +847,31 @@ GstVideoReceiver::_makeSource(const QString& uri)
             break;
         }
 
+        if ((parser = gst_element_factory_make("parsebin", "parser")) == nullptr) {
+            qCCritical(VideoReceiverLog) << "gst_element_factory_make('parsebin') failed";
+            break;
+        }
+
+        //new add
+//        if ((rtph264 = gst_element_factory_make("rtph264depay", "rtph264")) == nullptr) {
+//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('rtph264depay') failed";
+//            break;
+//        }
+//        if ((avdec_h264 = gst_element_factory_make("avdec_h264", "avdec_h264")) == nullptr) {
+//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('avdec_h264') failed";
+//            break;
+//        }
+//        if ((autovideosink = gst_element_factory_make("autovideosink", "autovideosink")) == nullptr) {
+//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('autovideosink') failed";
+//            break;
+//        }
+//        g_signal_connect(rtph264, "pad-added", G_CALLBACK(_newPadCB), _tee);
+//        g_signal_connect(avdec_h264, "pad-added", G_CALLBACK(_newPadCB), _tee);
+//        g_signal_connect(autovideosink, "pad-added", G_CALLBACK(_newPadCB), _tee);
+
         g_signal_connect(parser, "autoplug-query", G_CALLBACK(_filterParserCaps), nullptr);
 
-        gst_bin_add_many(GST_BIN(bin), source, parser, nullptr);
+        gst_bin_add_many(GST_BIN(bin), source, parser,nullptr);  //,rtph264,avdec_h264, autovideosink
 
         // FIXME: AV: Android does not determine MPEG2-TS via parsebin - have to explicitly state which demux to use
         // FIXME: AV: tsdemux handling is a bit ugly - let's try to find elegant solution for that later
@@ -862,12 +917,12 @@ GstVideoReceiver::_makeSource(const QString& uri)
             }
         } else {
             g_signal_connect(source, "pad-added", G_CALLBACK(_linkPad), parser);
+
         }
 
         g_signal_connect(parser, "pad-added", G_CALLBACK(_wrapWithGhostPad), nullptr);
 
         source = tsdemux = buffer = parser = nullptr;
-
         srcbin = bin;
         bin = nullptr;
     } while(0);
@@ -897,6 +952,7 @@ GstVideoReceiver::_makeSource(const QString& uri)
         source = nullptr;
     }
 
+
     return srcbin;
 }
 
@@ -908,10 +964,19 @@ GstVideoReceiver::_makeDecoder(GstCaps* caps, GstElement* videoSink)
     GstElement* decoder = nullptr;
 
     do {
+
         if ((decoder = gst_element_factory_make("decodebin3", nullptr)) == nullptr) {
             qCCritical(VideoReceiverLog) << "gst_element_factory_make('decodebin3') failed";
             break;
         }
+
+        //new add
+//        if ((decoder = gst_element_factory_make("decodebin", nullptr)) == nullptr) {
+//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('decodebin') failed";
+//            break;
+//            g_signal_connect(decoder, "autoplug-query", G_CALLBACK(_autoplugQuery), videoSink);
+//        }
+
     } while(0);
 
     return decoder;
@@ -1074,6 +1139,7 @@ GstVideoReceiver::_addDecoder(GstElement* src)
     srcpad = nullptr;
 
     if ((_decoder = _makeDecoder()) == nullptr) {
+//    if ((_decoder = _makeDecoder(caps, _videoSink)) == nullptr) { //new add
         qCCritical(VideoReceiverLog) << "_makeDecoder() failed";
         gst_caps_unref(caps);
         caps = nullptr;
@@ -1338,6 +1404,10 @@ GstVideoReceiver::_dispatchSignal(std::function<void()> emitter)
     _signalDepth -= 1;
 }
 
+void GstVideoReceiver::ffmpegStreaming()
+{
+}
+
 gboolean
 GstVideoReceiver::_onBusMessage(GstBus* bus, GstMessage* msg, gpointer data)
 {
@@ -1460,16 +1530,73 @@ GstVideoReceiver::_linkPad(GstElement* element, GstPad* pad, gpointer data)
 {
     gchar* name;
 
-    if ((name = gst_pad_get_name(pad)) != nullptr) {
-        if(gst_element_link_pads(element, name, GST_ELEMENT(data), "sink") == false) {
-            qCCritical(VideoReceiverLog) << "gst_element_link_pads() failed";
-        }
+//    if ((name = gst_pad_get_name(pad)) != nullptr) {
+//        if(gst_element_link_pads(element, name, GST_ELEMENT(data), "sink") == false) {
+//            qCCritical(VideoReceiverLog) << "gst_element_link_pads() failed";
+//        }
 
+//        g_free(name);
+//        name = nullptr;
+//    } else {
+//        qCCritical(VideoReceiverLog) << "gst_pad_get_name() failed";
+//    }
+
+
+    //new add
+    GstElement* dst = GST_ELEMENT(data);
+    GstPad* sinkpad = nullptr;
+    GstCaps* padcaps = nullptr;
+    GstStructure *padstruct = nullptr;
+    const gchar *padtype = nullptr;
+    const gchar *mediatype = nullptr;
+    qCDebug(VideoReceiverLog) << "Source: New source pad. Trying to link";
+
+    if (dst == nullptr) {
+        qCCritical(VideoReceiverLog) << "_linkPad: dst = NULL?";
+        return;
+    }
+    if ((sinkpad = gst_element_get_static_pad(dst, "sink")) == nullptr) {
+        qCCritical(VideoReceiverLog) << "_linkPad: No sink pad found at destination element";
+        return;
+    }
+    if (gst_pad_is_linked(sinkpad)) {
+        qCCritical(VideoReceiverLog) << "_linkPad: Sinkpad at destination is already linked. Not linking.";
+        goto exit;
+    }
+    /* Check that the new pad has video*/
+    padcaps = gst_pad_get_current_caps (pad);
+    padstruct = gst_caps_get_structure (padcaps, 0);
+    padtype = gst_structure_get_name (padstruct);
+    if (g_str_has_prefix (padtype, "application/x-rtp")) { /* rtspsrc */
+        if ((mediatype = gst_structure_get_string(padstruct, "media")) == nullptr) {
+            qCDebug(VideoReceiverLog) << "_linkPad: Cannot find media type in caps of rtp source. Ignoring.";
+            goto exit;
+        }
+        if (!g_str_has_prefix (mediatype, "video")) {
+            qCDebug(VideoReceiverLog) << "_linkPad: rtp source pad does have media type video. Ignoring. Type found: " << mediatype;
+            goto exit;
+        }
+    } else if (!g_str_has_prefix (padtype, "video")) { /* MPEG/TS tsdemux */
+        qCDebug(VideoReceiverLog) << "Source pad type does not provide video. Ignoring. Type found: " << padtype;
+        goto exit;
+    }
+
+    if ((name = gst_pad_get_name(pad)) != nullptr) {
+        if(GST_PAD_LINK_FAILED(gst_pad_link(pad, sinkpad))) {
+            qCCritical(VideoReceiverLog) << "gst_pad_link() failed";
+        }
         g_free(name);
         name = nullptr;
     } else {
         qCCritical(VideoReceiverLog) << "gst_pad_get_name() failed";
     }
+
+exit:
+    if (padcaps != nullptr)
+        gst_caps_unref(padcaps);
+    gst_object_unref(sinkpad);
+
+
 }
 
 gboolean
@@ -1501,6 +1628,7 @@ GstVideoReceiver::_padProbe(GstElement* element, GstPad* pad, gpointer user_data
 
     return TRUE;
 }
+
 
 GstPadProbeReturn
 GstVideoReceiver::_teeProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data)
@@ -1603,3 +1731,132 @@ GstVideoReceiver::_keyframeWatch(GstPad* pad, GstPadProbeInfo* info, gpointer us
 
     return GST_PAD_PROBE_REMOVE;
 }
+
+
+//void FFmpegThread::run()
+//{
+//    qDebug()<<"-----FFmpegThread-----";
+//    while(1) {
+//        streaming();
+//        sleep(5);
+//    }
+//}
+
+//void FFmpegThread::streaming()
+//{
+//    QString inputUrl = "rtsp://admin:admin123@192.168.144.108:554/cam/realmonitor?channel=1&subtype=0";
+////    QString inputUrl = "rtsp://192.168.144.108/1";
+
+//    QString outputUrl = "udp://127.0.0.1:5600";
+
+//    AVFormatContext *input_ctx = NULL;
+//    AVFormatContext *output_ctx = NULL;
+//    AVPacket packet;
+//    int ret;
+//    unsigned int stream_index;
+
+//    // 初始化网络组件并注册所有可用的协议
+//    avformat_network_init();
+
+//    ret = avformat_open_input(&input_ctx,inputUrl.toStdString().c_str(), NULL, NULL);  // &options
+//    if (ret < 0) {
+//        qDebug()<<"Could not open input file";
+////        qDebug()<<"----error-------"<<av_err2str(ret);
+//        goto end;
+//    }
+
+//    if (avformat_find_stream_info(input_ctx, NULL) < 0) {
+//        qDebug()<<"无法找到流信息";
+//        goto end;
+//    }
+
+//    if(input_ctx){
+
+//        AVStream *streame_type = input_ctx->streams[0];
+//        if (streame_type->codecpar->codec_id == AV_CODEC_ID_H264) {
+//            qDebug()<< "------------H.264";
+//        } else if (streame_type->codecpar->codec_id == AV_CODEC_ID_HEVC) {
+//            qDebug()<< "------------H.265";
+//        } else {
+//            qDebug()<< "------------unknow";
+//        }
+//    }
+
+//    avformat_alloc_output_context2(&output_ctx, NULL, "rtp",outputUrl.toStdString().c_str());
+//    if (!output_ctx) {
+//        qDebug() << "无法创建输出上下文\n";
+//        goto end;
+//    }
+
+//    if (!(output_ctx->oformat->flags & AVFMT_NOFILE)) {
+//        if (avio_open(&output_ctx->pb,outputUrl.toStdString().c_str(), AVIO_FLAG_WRITE) < 0) {
+//            qDebug() << "Could not open output URL\n";
+//            goto end;
+//        }
+//    }
+
+//    for (stream_index = 0; stream_index < input_ctx->nb_streams; stream_index++) {
+//        AVStream *in_stream = input_ctx->streams[stream_index];
+//        AVStream *out_stream = avformat_new_stream(output_ctx, NULL);
+//        if (!out_stream) {
+//            qDebug() << "无法创建输出流\n";
+//            goto end;
+//        }
+
+//        // 复制流参数
+//        if(in_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO){
+//            ret = avcodec_parameters_copy(out_stream->codecpar, in_stream->codecpar);
+//            if (ret < 0) {
+//                qDebug()<<"无法复制编解码器参数\n";
+//                goto end;
+//            }
+//            out_stream->codecpar->codec_tag = 0;
+//            break;
+//        }
+//    }
+
+//    if (avformat_write_header(output_ctx, NULL) < 0) {
+//        qDebug() << "无法写入输出文件头\n";
+//        goto end;
+//    }
+
+//    while (1) {
+//        ret = av_read_frame(input_ctx, &packet);
+//        if (ret < 0){
+//            qDebug() << "读取帧失败:\n";
+//            break;
+//        }
+
+//        // 检查数据包
+//        if (!packet.data || !packet.size) {
+//            qDebug()<<"Invalid packet data/size\n";
+//            continue;
+//        }
+//        AVStream *in_stream = input_ctx->streams[packet.stream_index];
+//        if (in_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {   //只处理视频流
+//            ret = av_interleaved_write_frame(output_ctx, &packet);
+//            if (ret < 0) {
+//                // 检查数据包
+//                if (!packet.data || !packet.size) {
+//                    qDebug()<<"-----Invalid packet data/size\n";
+//                }
+//                qDebug() << "Error muxing packet\n";
+////                qDebug()<<"----error-------"<<av_err2str(ret);
+//            }
+//        }
+//        av_packet_unref(&packet);
+//    }
+
+//    av_write_trailer(output_ctx);
+
+//end:if (input_ctx) {
+//        avformat_close_input(&input_ctx);
+//    }
+
+//    if (output_ctx) {
+//        if ((output_ctx)->pb) {
+//            avio_closep(&(output_ctx)->pb);
+//        }
+//        avformat_free_context(output_ctx);
+//    }
+//}

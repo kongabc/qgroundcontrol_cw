@@ -15,6 +15,8 @@ Item {
     property real _idealWidth: ((ScreenTools.isMobile ? ScreenTools.minTouchPixels : ScreenTools.defaultFontPixelWidth * 8))/1.3
     property real   maxHeight
 
+    signal btnPressed()
+    signal btnReleased()
     signal btnClicked()
 
     implicitWidth: backRect.width
@@ -24,13 +26,10 @@ Item {
         id: backRect
         width:     _idealWidth
         height:     width
-
         radius:ScreenTools.defaultFontPixelWidth / 2
         color: showHighlight ? "#FFF291" :  ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4): Qt.rgba(0,0,0,0.4)
-
         Image {
             id: icon
-
             smooth: true
             mipmap: true
             antialiasing: true
@@ -54,7 +53,6 @@ Item {
             width: parent.height * 0.15
 
             visible: control.iconMarkShow
-
             smooth: true
             mipmap: true
             antialiasing: true
@@ -72,10 +70,18 @@ Item {
 
         MouseArea {
             anchors.fill: parent
+            enabled: true
             cursorShape: "PointingHandCursor"
+            onPressed:{
+                btnPressed()
+            }
+            onReleased:{
+                btnReleased()
+            }
             onClicked: {
                 btnClicked()
             }
+
         }
     }
 }

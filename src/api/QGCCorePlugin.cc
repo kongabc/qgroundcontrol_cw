@@ -47,8 +47,8 @@ public:
             delete pCommLinks;
         if(pOfflineMaps)
             delete pOfflineMaps;
-        if(pCustom)      //new add 3
-            delete pCustom;
+//        if(pCustom)      //new add 3
+//            delete pCustom;
 #if defined(QGC_GST_TAISYNC_ENABLED)
         if(pTaisync)
             delete pTaisync;
@@ -80,7 +80,7 @@ public:
     QmlComponentInfo* pGeneral                  = nullptr;
     QmlComponentInfo* pCommLinks                = nullptr;
     QmlComponentInfo* pOfflineMaps              = nullptr;
-    QmlComponentInfo* pCustom                  = nullptr;
+//    QmlComponentInfo* pCustom                  = nullptr;
 #if defined(QGC_GST_TAISYNC_ENABLED)
     QmlComponentInfo* pTaisync                  = nullptr;
 #endif
@@ -138,12 +138,6 @@ QVariantList &QGCCorePlugin::settingsPages()
                                             QUrl::fromUserInput("qrc:/qml/GeneralSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/gear-white.svg"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pGeneral)));
-
-        //new add 3
-//        _p->pCustom = new QmlComponentInfo(tr("Custom"),
-//                                            QUrl::fromUserInput("qrc:/qml/CustomSettings.qml"),
-//                                            QUrl::fromUserInput("qrc:/res/gear-white.svg"));
-//        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pCustom)));
 
         _p->pCommLinks = new QmlComponentInfo(tr("Comm Links"),
                                               QUrl::fromUserInput("qrc:/qml/LinkSettings.qml"),
