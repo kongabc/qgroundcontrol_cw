@@ -13,6 +13,11 @@
 #endif
 #include "UDPLink.h"
 #include "TCPLink.h"
+
+#if defined(Q_OS_ANDROID)
+#include "P401DLink.h"
+#endif
+
 #include "LogReplayLink.h"
 #ifdef QGC_ENABLE_BLUETOOTH
 #include "BluetoothLink.h"
@@ -80,6 +85,11 @@ LinkConfiguration* LinkConfiguration::createSettings(int type, const QString& na
         case LinkConfiguration::TypeTcp:
             config = new TCPConfiguration(name);
             break;
+#if defined(Q_OS_ANDROID)
+        case LinkConfiguration::TypeP401D:
+            config = new P401DConfiguration(name);
+            break;
+#endif
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
         config = new BluetoothConfiguration(name);
@@ -116,6 +126,11 @@ LinkConfiguration* LinkConfiguration::duplicateSettings(LinkConfiguration* sourc
         case TypeTcp:
             dupe = new TCPConfiguration(qobject_cast<TCPConfiguration*>(source));
             break;
+#if defined(Q_OS_ANDROID)
+        case TypeP401D:
+            dupe = new P401DConfiguration(qobject_cast<P401DConfiguration*>(source));
+            break;
+#endif
 #ifdef QGC_ENABLE_BLUETOOTH
         case TypeBluetooth:
             dupe = new BluetoothConfiguration(qobject_cast<BluetoothConfiguration*>(source));

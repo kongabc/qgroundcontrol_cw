@@ -92,6 +92,12 @@ DECLARE_SETTINGGROUP(Video, "Video")
     _setDefaults();
 }
 
+VideoSettings::~VideoSettings()
+{
+//    selectVideoSource("Video Stream Disabled");
+//    videoSource()->setRawValue("Video Stream Disabled");
+}
+
 void VideoSettings::_setDefaults()
 {
     if (_noVideo) {
@@ -217,7 +223,24 @@ bool VideoSettings::streamConfigured(void)
     return false;
 }
 
-void VideoSettings::_configChanged(QVariant)
+void VideoSettings::selectVideoSource(QVariant value)
 {
+//    _nameToMetaDataMap[videoSourceName]->setRawDefaultValue(videoSourceNoVideo);
+
+//    _videoSourceFact->setRawValue(videoSourceNoVideo);
+    if(value == "UDP h.264 Video Stream"){
+        videoSource()->setRawValue(videoSourceUDPH264);
+
+    }else{
+       videoSource()->setRawValue(videoSourceRTSP);
+    }
+    _configChanged(value);
+}
+
+void VideoSettings::_configChanged(QVariant value)
+{
+
+//    qDebug() << "---VideoSettings.cc-----" <<(videoSource()->rawValue().toString());
+//    videoSource()->setRawValue(value);
     emit streamConfiguredChanged(streamConfigured());
 }

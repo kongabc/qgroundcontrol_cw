@@ -40,7 +40,7 @@ Button {
         anchors.verticalCenter: button.verticalCenter
         QGCColoredImage {
             id:                     _icon
-            height:                 ScreenTools.defaultFontPixelHeight * 2
+            height:                 ScreenTools.defaultFontPixelHeight * 1.6 // 2
             width:                  height
             sourceSize.height:      parent.height
             fillMode:               Image.PreserveAspectFit

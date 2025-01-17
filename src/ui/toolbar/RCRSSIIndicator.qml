@@ -28,6 +28,8 @@ Item {
 
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
     property bool   _rcRSSIAvailable:   _activeVehicle ? _activeVehicle.rcRSSI > 0 && _activeVehicle.rcRSSI <= 100 : false
+    property int    _p401dRSSI:         0
+    property bool   _useP401DRSSI:      false
 
     Component {
         id: rcRSSIInfo
@@ -38,6 +40,21 @@ Item {
             radius: ScreenTools.defaultFontPixelHeight * 0.5
             color:  qgcPal.window
             border.color:   qgcPal.text
+
+            Connections {
+                target: QGroundControl.linkManager
+                onGetP401DRSSIChanged: {
+                    _p401dRSSI = rssi
+                    _useP401DRSSI = true
+                }
+            }
+
+            Connections {
+                target: QGroundControl.linkManager
+                onIsP401DDisconnected: {
+                    _useP401DRSSI = false
+                }
+            }
 
             Column {
                 id:                 rcrssiCol
@@ -63,6 +80,15 @@ Item {
 
                     QGCLabel { text: qsTr("RSSI:") }
                     QGCLabel { text: _activeVehicle ? (_activeVehicle.rcRSSI + "%") : 0 }
+                    // P401D链路信号强度相关
+                    QGCLabel {
+                        text: qsTr("RC SignalStrength:")
+                        visible: _useP401DRSSI // 根据条件显示或隐藏
+                    }
+                    QGCLabel {
+                        text: _activeVehicle ? (_p401dRSSI + "%") : 0
+                        visible: _useP401DRSSI // 根据条件显示或隐藏
+                    }
                 }
             }
         }

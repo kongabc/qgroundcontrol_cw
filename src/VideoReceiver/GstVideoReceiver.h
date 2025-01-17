@@ -120,6 +120,9 @@ protected:
     bool _needDispatch(void);
     void _dispatchSignal(std::function<void()> emitter);
 
+    void ffmpegStreaming(void);
+
+
     static gboolean _onBusMessage(GstBus* bus, GstMessage* message, gpointer user_data);
     static void _onNewPad(GstElement* element, GstPad* pad, gpointer data);
     static void _wrapWithGhostPad(GstElement* element, GstPad* pad, gpointer data);

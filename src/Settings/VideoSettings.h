@@ -18,6 +18,7 @@ class VideoSettings : public SettingsGroup
 
 public:
     VideoSettings(QObject* parent = nullptr);
+    ~VideoSettings(); //new add 2024   init video settings
     DEFINE_SETTING_NAME_GROUP()
 
     DEFINE_SETTINGFACT(videoSource)
@@ -73,6 +74,9 @@ public:
     static const char* videoSource3DRSolo;
     static const char* videoSourceParrotDiscovery;
     static const char* videoSourceYuneecMantisG;
+
+    //new add 2024
+    Q_INVOKABLE void selectVideoSource(QVariant value);
 
 signals:
     void streamConfiguredChanged    (bool configured);

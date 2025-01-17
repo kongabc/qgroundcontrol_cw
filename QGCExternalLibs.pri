@@ -101,6 +101,7 @@ exists($$MAVLINKPATH/common) {
 INCLUDEPATH += libs/eigen
 DEFINES += NOMINMAX
 
+INCLUDEPATH += libs\libevents\libevents\libs\cpp\parse\nlohmann_json\include
 #
 # [REQUIRED] Events submodule
 HEADERS+= \
@@ -229,6 +230,10 @@ AndroidBuild {
     message($$ANDROID_EXTRA_LIBS)
 }
 
+# Include Android P401D libs
+AndroidBuild {
+    include($$SOURCE_DIR/libs/P401D/P401D.pri)
+}
 # Pairing
 contains(DEFINES, QGC_ENABLE_PAIRING) {
     MacBuild {

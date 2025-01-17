@@ -81,7 +81,7 @@ public:
     QStringList                     serialBaudRates     (void);
     QStringList                     serialPortStrings   (void);
     QStringList                     serialPorts         (void);
-
+    void                            getP401DRSSI        (int rssi);
     void loadLinkConfigurationList();
     void saveLinkConfigurationList();
 
@@ -136,6 +136,8 @@ public:
 signals:
     void commPortStringsChanged();
     void commPortsChanged();
+    void getP401DRSSIChanged(int rssi);
+    void isP401DDisconnected();
 
 private slots:
     void _linkDisconnected  (void);

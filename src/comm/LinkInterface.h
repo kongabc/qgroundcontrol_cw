@@ -77,7 +77,7 @@ signals:
     void disconnected       (void);
     void communicationError (const QString& title, const QString& error);
     void _invokeWriteBytes  (QByteArray);
-
+    void p401dRSSIChanged   (int rssi);
 protected:
     // Links are only created by LinkManager so constructor is not public
     LinkInterface(SharedLinkConfigurationPtr& config, bool isPX4Flow = false);

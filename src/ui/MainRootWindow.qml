@@ -323,14 +323,22 @@ ApplicationWindow {
     background: Item {
         id:             rootBackground
         anchors.fill:   parent
+
+        // 设置背景颜色
+//          Rectangle {
+//              anchors.fill: parent
+//              color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.3) : Qt.rgba(0,0,0,0.3)
+//              opacity: 0.2
+//          }
+
     }
 
     //-------------------------------------------------------------------------
     /// Toolbar
     header: MainToolBar {
         id:         toolbar
-        height:     ScreenTools.toolbarHeight
-        visible:    !QGroundControl.videoManager.fullScreen
+        height:     ScreenTools.toolbarHeight*0.8
+        visible:  !QGroundControl.videoManager.fullScreen
     }
 
     footer: LogReplayStatusBar {
@@ -412,7 +420,8 @@ ApplicationWindow {
 
                     ColumnLayout {
                         width:      innerLayout.width
-                        spacing:    0
+                        spacing:   4
+                        Layout.alignment: Qt.AlignCenter
 
                         QGCLabel {
                             id:                     versionLabel

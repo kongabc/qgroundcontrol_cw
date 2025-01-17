@@ -84,6 +84,66 @@ VideoManager::~VideoManager()
     }
 }
 
+QString VideoManager::allVideoStreamValue() const
+{
+    QString _filename = "./qgcStreameConfig.ini";
+    bool isExists = fileCreate.exists(_filename);
+    if(isExists){
+       ffmpegThread->_allVideoStream = qSetFile->value("inpVal").toString();
+    }
+
+    qSetFile->sync();
+
+    return ffmpegThread->_allVideoStream;
+}
+
+bool VideoManager::is264Value()
+{
+    return ffmpegThread->_is264;
+}
+
+bool VideoManager::videoModeValue() const
+{
+    QString _filename = "./qgcStreameConfig.ini";
+    bool isExists = fileCreate.exists(_filename);
+    if(isExists){
+       ffmpegThread->_videoMode = qSetFile->value("_videoMode").toBool();
+    }
+    qSetFile->sync();
+    return ffmpegThread->_videoMode;
+}
+
+void VideoManager::setVideoModeValue(bool videoMode)
+{
+
+    if(ffmpegThread->_videoMode != videoMode){
+
+       qSetFile->setValue("_videoMode",videoMode);
+       ffmpegThread->_videoMode = qSetFile->value("_videoMode").toBool();
+       if(videoMode){
+
+            stopVideo();
+//            startVideo();
+            _restartVideo(0);
+//            _restartAllVideos();
+       }
+       emit videoModeChanged();
+    }
+}
+
+
+int VideoManager::selectIndexValue()
+{
+    return _seleIndex;
+}
+
+void VideoManager::selectIndexFun(int selectIndex)
+{
+    _seleIndex = selectIndex;
+    emit selectIndexChanged(_seleIndex);
+
+}
+
 //-----------------------------------------------------------------------------
 void
 VideoManager::setToolbox(QGCToolbox *toolbox)
@@ -115,6 +175,33 @@ VideoManager::setToolbox(QGCToolbox *toolbox)
     emit isGStreamerChanged();
     qCDebug(VideoManagerLog) << "New Video Source:" << videoSource;
 #if defined(QGC_GST_STREAMING)
+
+    //new add 2024
+//    qDebug() << "--------------ffmpeg---------------" ;
+//    qDebug() << "version:" << av_version_info();
+
+    ffmpegThread = new FFmpegThread();
+    ffmpegThread->start();
+    connect(ffmpegThread,&FFmpegThread::ffIs264ValueChanged, this, &VideoManager::_is264Slots);
+//    connect(ffmpegThread,&FFmpegThread::ffVideoStreamChanged, this, &VideoManager::onAllVideoStreamChanged);
+
+    QString _filename = "./qgcStreameConfig.ini";
+    bool isExists = fileCreate.exists(_filename);
+    qSetFile = new QSettings(_filename,QSettings::IniFormat);
+    if(isExists){
+        QStringList keys = qSetFile->allKeys();
+        ffmpegThread->_allVideoStream = qSetFile->value("inpVal").toString();
+        ffmpegThread->_videoMode = qSetFile->value("_videoMode").toBool();
+
+    }else {
+        qSetFile->setValue("inpVal","");
+        qSetFile->setValue("_videoMode",ffmpegThread->_videoMode);
+//        qSetFile->sync();
+    }
+
+    qSetFile->sync();  //
+
+
     _videoReceiver[0] = toolbox->corePlugin()->createVideoReceiver(this);
     _videoReceiver[1] = toolbox->corePlugin()->createVideoReceiver(this);
 
@@ -206,6 +293,21 @@ VideoManager::setToolbox(QGCToolbox *toolbox)
     }
 
 #endif
+}
+
+void  VideoManager::setAllVideoStreamValue(QString value)
+{
+    if(ffmpegThread->_allVideoStream != value){
+
+        //写入文件
+        qSetFile->setValue("inpVal",value);
+
+//        qDebug()<<"set --changeValue------" << ffmpegThread->_allVideoStream ;
+
+        ffmpegThread->restartThread = true;
+        ffmpegThread->_allVideoStream = qSetFile->value("inpVal").toString();
+        emit allVideoStreamChanged();
+    }
 }
 
 void VideoManager::_cleanupOldVideos()
@@ -856,9 +958,186 @@ VideoManager::_communicationLostChanged(bool connectionLost)
     }
 }
 
+void VideoManager::_is264Slots(bool is264)
+{
+    if(is264 != ffmpegThread->_is264){
+        is264 = ffmpegThread->_is264;
+        emit is264ValueChanged(is264);
+    }
+
+}
+//void VideoManager:: onAllVideoStreamChanged(){
+//    qDebug()<< "-onAllVideoStreamChanged--------" <<ffmpegThread->_allVideoStream;
+
+//    ffmpegThread->restartThread = true;
+//    ffmpegThread->releaseResources();
+//}
 //----------------------------------------------------------------------------------------
 void
 VideoManager::_aspectRatioChanged()
 {
     emit aspectRatioChanged();
+}
+
+//new add 2024
+void FFmpegThread::run()
+{
+
+    while(1) {
+        if(!_videoMode){
+            ffStreaming();
+            sleep(2);
+        }
+
+    }
+}
+
+void FFmpegThread::ffStreaming()
+{
+    QString outputUrl = "udp://127.0.0.1:5600";
+
+//    AVFormatContext *input_ctx = NULL;
+//    AVFormatContext *output_ctx = NULL;
+    AVPacket packet;
+    int ret;
+    unsigned int stream_index;
+
+    // 初始化网络组件并注册所有可用的协议
+    avformat_network_init();
+
+//    qDebug() << "ffStreaming_allVideoStream4--------" << _allVideoStream;
+
+    AVDictionary *options = NULL;
+
+#if defined(Q_OS_WIN)
+//    av_dict_set(&options, "fflags", "nobuffer", 0);
+//    av_dict_set(&options, "probesize", "50000000", 0); // 设置probesize为50000000字节
+//    av_dict_set(&options, "max_analyze_duration", "5000000", 0); // 设置最大分析时长为5000000微秒
+//    av_dict_set(&options, "threads", "4", 0); // 增加解码器线程数
+//    av_dict_set(&options, "hwaccel", "cuda", 0); // 示例使用CUDA硬件加速
+    av_dict_set(&options, "timeout", "5000000", 0); // PC端需设置超时5秒，小改动流ip地址效果明显
+#endif
+
+    ret = avformat_open_input(&input_ctx,_allVideoStream.toStdString().c_str(), NULL,&options);  // &options
+
+    av_dict_free(&options); // 释放字典
+
+    if (ret < 0) {
+//        qDebug()<<"Could not open input file";
+        //        qDebug()<<"----error-------"<<av_err2str(ret);
+        goto end;
+    }
+
+    if (avformat_find_stream_info(input_ctx, NULL) < 0) {
+        qDebug()<<"无法找到流信息";
+        goto end;
+    }
+
+    if(input_ctx){
+        AVStream *streame_type = input_ctx->streams[0];
+        if (streame_type->codecpar->codec_id == AV_CODEC_ID_HEVC) {
+            qDebug()<< "------------H.265";
+            _is264 = false;
+        } else {    //streame_type->codecpar->codec_id == AV_CODEC_ID_H264
+            qDebug()<< "------------H.264";
+            _is264 = true;
+        }
+//       setIs264Value(_is264);
+        emit ffIs264ValueChanged(_is264);
+    }
+
+    avformat_alloc_output_context2(&output_ctx, NULL, "rtp",outputUrl.toStdString().c_str());
+    if (!output_ctx) {
+        qDebug() << "无法创建输出上下文\n";
+        goto end;
+    }
+
+    if (!(output_ctx->oformat->flags & AVFMT_NOFILE)) {
+        if (avio_open(&output_ctx->pb,outputUrl.toStdString().c_str(), AVIO_FLAG_WRITE) < 0) {
+            qDebug() << "Could not open output URL\n";
+            goto end;
+        }
+    }
+
+    for (stream_index = 0; stream_index < input_ctx->nb_streams; stream_index++) {
+        AVStream *in_stream = input_ctx->streams[stream_index];
+        AVStream *out_stream = avformat_new_stream(output_ctx, NULL);
+        if (!out_stream) {
+            qDebug() << "无法创建输出流\n";
+            goto end;
+        }
+
+        // 复制流参数
+        if(in_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO){
+            ret = avcodec_parameters_copy(out_stream->codecpar, in_stream->codecpar);
+            if (ret < 0) {
+                qDebug()<<"无法复制编解码器参数\n";
+                goto end;
+            }
+            out_stream->codecpar->codec_tag = 0;
+            break;
+        }
+    }
+
+    if (avformat_write_header(output_ctx, NULL) < 0) {
+        qDebug() << "无法写入输出文件头\n";
+        goto end;
+    }
+
+    while (1) {
+        ret = av_read_frame(input_ctx, &packet);
+        if (ret < 0){
+            qDebug() << "读取帧失败:\n";
+            break;
+        }
+
+        // 检查数据包
+        if (!packet.data || !packet.size) {
+            qDebug()<<"Invalid packet data/size\n";
+            continue;
+        }
+        AVStream *in_stream = input_ctx->streams[packet.stream_index];
+        if (in_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {   //只处理视频流
+            ret = av_interleaved_write_frame(output_ctx, &packet);
+            if (ret < 0) {
+                // 检查数据包
+                if (!packet.data || !packet.size) {
+                    qDebug()<<"-----Invalid packet data/size\n";
+                }
+                qDebug() << "Error muxing packet\n";
+                //                qDebug()<<"----error-------"<<av_err2str(ret);
+            }
+        }
+        av_packet_unref(&packet);
+
+        if(restartThread){
+            restartThread = false;
+            break;
+        }
+    }
+
+    av_write_trailer(output_ctx);
+
+end:
+    releaseResources();
+}
+
+void FFmpegThread::releaseResources()
+{
+    if (input_ctx) {
+        avformat_close_input(&input_ctx);
+        input_ctx = nullptr;
+    }
+
+    if (output_ctx) {
+        if ((output_ctx)->pb) {
+            avio_closep(&(output_ctx)->pb);
+        }
+        avformat_free_context(output_ctx);
+        output_ctx = nullptr;
+    }
+    if(restartThread){
+       restartThread = false;
+    }
+
 }

@@ -22,7 +22,8 @@ ColumnLayout {
     id:         root
     spacing:    ScreenTools.defaultFontPixelHeight / 4
 
-    property real   _innerRadius:           (width - (_topBottomMargin * 3)) / 4
+//    property real   _innerRadius:           (width - (_topBottomMargin * 3)) / 4
+    property real   _innerRadius: ScreenTools.isMobile ? (width - (_topBottomMargin * 3)) /6 :(width - (_topBottomMargin * 3)) /4
     property real   _outerRadius:           _innerRadius + _topBottomMargin
     property real   _spacing:               ScreenTools.defaultFontPixelHeight * 0.33
     property real   _topBottomMargin:       (width * 0.05) / 2
@@ -32,9 +33,14 @@ ColumnLayout {
     Rectangle {
         id:                 visualInstrument
         height:             _outerRadius * 2
-        Layout.fillWidth:   true
+//        Layout.fillWidth:   true
         radius:             _outerRadius
-        color:              qgcPal.window
+//        color:              qgcPal.window
+
+        Layout.fillWidth:   false
+        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.3) : Qt.rgba(0,0,0,0.3)
+        Layout.preferredWidth:attitude.width*2+_topBottomMargin*3
+
 
         DeadMouseArea { anchors.fill: parent }
 

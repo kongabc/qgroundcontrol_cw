@@ -217,6 +217,28 @@ Rectangle {
                                             var name = nameField.text
                                             // Create new link configuration
                                             editingConfig = QGroundControl.linkManager.createConfiguration(index, name)
+                                            if( ScreenTools.isMobile ){
+                                                if (model[index] === "串口")
+                                                {
+                                                    nameField.text = "串口"
+                                                }else if(model[index] === "UDP")
+                                                {
+                                                    nameField.text = "UDP"
+                                                }else if(model[index] === "TCP")
+                                                {
+                                                    nameField.text = "TCP"
+                                                }else if(model[index] === "SKYDROID G12/20")
+                                                {
+                                                    nameField.text = "SKYDROID G12/20"
+                                                }else if(model[index] === "Bluetooth")
+                                                {
+                                                    nameField.text = "Bluetooth"
+                                                }else if(model[index] === "模拟链接")
+                                                {
+                                                    nameField.text = "模拟链接"
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
