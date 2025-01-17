@@ -73,7 +73,8 @@ Item {
         id:             borderRect
         anchors.fill:   parent
         radius:         width / 2
-        color:          qgcPal.window
+//        color:          qgcPal.window
+        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) :  Qt.rgba(0,0,0,0.4)
         border.color:   qgcPal.text
         border.width:   1
     }

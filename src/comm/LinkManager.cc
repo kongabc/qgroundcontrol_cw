@@ -22,6 +22,9 @@
 #include "QGCApplication.h"
 #include "UDPLink.h"
 #include "TCPLink.h"
+#if defined(Q_OS_ANDROID)
+#include "P401DLink.h"
+#endif
 #include "SettingsManager.h"
 #include "LogReplayLink.h"
 #ifdef QGC_ENABLE_BLUETOOTH
@@ -125,6 +128,11 @@ bool LinkManager::createConnectedLink(SharedLinkConfigurationPtr& config, bool i
     case LinkConfiguration::TypeTcp:
         link = std::make_shared<TCPLink>(config);
         break;
+#if defined(Q_OS_ANDROID)
+    case LinkConfiguration::TypeP401D:
+        link = std::make_shared<P401DLink>(config);
+        break;
+#endif
 #ifdef QGC_ENABLE_BLUETOOTH
     case LinkConfiguration::TypeBluetooth:
         link = std::make_shared<BluetoothLink>(config);
@@ -155,6 +163,11 @@ bool LinkManager::createConnectedLink(SharedLinkConfigurationPtr& config, bool i
         connect(link.get(), &LinkInterface::bytesReceived,       _mavlinkProtocol,    &MAVLinkProtocol::receiveBytes);
         connect(link.get(), &LinkInterface::bytesSent,           _mavlinkProtocol,    &MAVLinkProtocol::logSentBytes);
         connect(link.get(), &LinkInterface::disconnected,        this,                &LinkManager::_linkDisconnected);
+
+        if (config->type() == LinkConfiguration::TypeP401D)
+        {
+            connect(link.get(), &LinkInterface::p401dRSSIChanged, this, &LinkManager::getP401DRSSI);
+        }
 
         _mavlinkProtocol->resetMetadataForLink(link.get());
         _mavlinkProtocol->setVersion(_mavlinkProtocol->getCurrentVersion());
@@ -203,6 +216,9 @@ void LinkManager::_linkDisconnected(void)
     disconnect(link, &LinkInterface::bytesReceived,       _mavlinkProtocol,    &MAVLinkProtocol::receiveBytes);
     disconnect(link, &LinkInterface::bytesSent,           _mavlinkProtocol,    &MAVLinkProtocol::logSentBytes);
     disconnect(link, &LinkInterface::disconnected,        this,                &LinkManager::_linkDisconnected);
+
+    disconnect(link, &LinkInterface::p401dRSSIChanged,    this,                &LinkManager::getP401DRSSI);
+    emit isP401DDisconnected();
 
     link->_freeMavlinkChannel();
     for (int i=0; i<_rgLinks.count(); i++) {
@@ -308,6 +324,11 @@ void LinkManager::loadLinkConfigurationList()
                             case LinkConfiguration::TypeTcp:
                                 link = new TCPConfiguration(name);
                                 break;
+#if defined(Q_OS_ANDROID)
+                            case LinkConfiguration::TypeP401D:
+                                link = new P401DConfiguration(name);
+                                break;
+#endif
 #ifdef QGC_ENABLE_BLUETOOTH
                             case LinkConfiguration::TypeBluetooth:
                                 link = new BluetoothConfiguration(name);
@@ -684,6 +705,9 @@ QStringList LinkManager::linkTypeStrings(void) const
 #endif
         list += tr("UDP");
         list += tr("TCP");
+#if defined(Q_OS_ANDROID)
+        list += "SKYDROID G12/20";
+#endif
 #ifdef QGC_ENABLE_BLUETOOTH
         list += "Bluetooth";
 #endif
@@ -741,6 +765,11 @@ QStringList LinkManager::serialBaudRates(void)
 #else
     return SerialConfiguration::supportedBaudRates();
 #endif
+}
+
+void LinkManager::getP401DRSSI(int rssi)
+{
+    emit getP401DRSSIChanged(rssi);
 }
 
 bool LinkManager::endConfigurationEditing(LinkConfiguration* config, LinkConfiguration* editedConfig)

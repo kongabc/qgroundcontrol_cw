@@ -37,7 +37,8 @@ ColumnLayout {
     QGCLabel {
         id:                 label
         Layout.alignment:   Qt.AlignVCenter
-        font.pointSize:     _fontSize
+//        font.pointSize:     _fontSize
+        font.pointSize:     ScreenTools.isMobile ? _fontSize * 0.7 : _fontSize
         text:               valueText()
 
         function valueText() {

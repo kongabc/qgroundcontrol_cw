@@ -46,6 +46,8 @@ LinuxBuild {
 
         LIBS        += -L$$GST_ROOT/lib -lgstreamer-1.0 -lgstgl-1.0 -lgstvideo-1.0 -lgstbase-1.0
         LIBS        += -lglib-2.0 -lintl -lgobject-2.0
+#        new add 202407
+        LIBS        += -lavcodec -lavformat -lavutil -lavfilter
 
         INCLUDEPATH += \
             $$GST_ROOT/include \
@@ -67,14 +69,14 @@ LinuxBuild {
 } else:AndroidBuild {
     #- gstreamer assumed to be installed in $$PWD/../../gstreamer-1.0-android-universal-1.18.5/***
     contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
-        GST_ROOT = $$PWD/../../gstreamer-1.0-android-universal-1.18.5/armv7
+        GST_ROOT = $$PWD/gstreamer-1.0-android-universal-1.18.5/armv7
     } else:contains(ANDROID_TARGET_ARCH, arm64-v8a) {
-        GST_ROOT = $$PWD/../../gstreamer-1.0-android-universal-1.18.5/arm64
+        GST_ROOT = $$PWD/gstreamer-1.0-android-universal-1.18.5/arm64
     } else:contains(ANDROID_TARGET_ARCH, x86_64) {
-        GST_ROOT = $$PWD/../../gstreamer-1.0-android-universal-1.18.5/x86_64
+        GST_ROOT = $$PWD/gstreamer-1.0-android-universal-1.18.5/x86_64
     } else {
         message(Unknown ANDROID_TARGET_ARCH $$ANDROID_TARGET_ARCH)
-        GST_ROOT = $$PWD/../../gstreamer-1.0-android-universal-1.18.5/x86
+        GST_ROOT = $$PWD/gstreamer-1.0-android-universal-1.18.5/x86
     }
     exists($$GST_ROOT) {
         QMAKE_CXXFLAGS  += -pthread
@@ -114,6 +116,7 @@ LinuxBuild {
             -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0 -lorc-0.4 -liconv -lffi -lintl \
 
         INCLUDEPATH += \
+            $$GST_ROOT/include \   #new add 202407
             $$GST_ROOT/include/gstreamer-1.0 \
             $$GST_ROOT/lib/gstreamer-1.0/include \
             $$GST_ROOT/include/glib-2.0 \

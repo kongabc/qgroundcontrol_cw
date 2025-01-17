@@ -73,6 +73,7 @@ MapQuickItem {
                 origin.y:       vehicleIcon.height / 2
                 angle:          isNaN(heading) ? 0 : heading
             }
+            z: QGroundControl.zOrderVehicles
         }
 
         QGCMapLabel {

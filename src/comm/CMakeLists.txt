@@ -38,6 +38,8 @@ add_library(comm
 	UdpIODevice.h
 	UDPLink.cc
 	UDPLink.h
+	P401DLink.cc
+	P401DLink.h
 
 	${EXTRA_SRC}
 )

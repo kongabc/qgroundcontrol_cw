@@ -90,9 +90,12 @@ Button {
 
     background: Rectangle {
         id:             buttonBkRect
-        color:          (control.checked || control.pressed) ?
-                            qgcPal.buttonHighlight :
-                            (control.hovered ? qgcPal.toolStripHoverColor : qgcPal.toolbarBackground)
+//        color:          (control.checked || control.pressed) ?
+//                            qgcPal.buttonHighlight :
+//                            (control.hovered ? qgcPal.toolStripHoverColor : qgcPal.toolbarBackground)
+        color: (control.checked || control.pressed) ?  qgcPal.buttonHighlight :
+             (control.hovered ? qgcPal.toolStripHoverColor : ( ScreenTools.isMobile ? Qt.rgba(1,1,1,0.2) : "#000"))
+
         anchors.fill:   parent
     }
 }

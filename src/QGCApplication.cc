@@ -132,6 +132,15 @@
 
 #include "QGCMapEngine.h"
 
+#include "qgccwgimballib/include/qgccwgimballib.h"
+// Qml Singleton factories
+static QObject* QGCCwGimbalSingletonFactory(QQmlEngine*, QJSEngine*)
+{
+    QGCCwGimbalLib *qgcCwGimbalController = new QGCCwGimbalLib(nullptr);
+    return qgcCwGimbalController;
+}
+
+
 class FinishVideoInitialization : public QRunnable
 {
 public:
@@ -449,6 +458,8 @@ void QGCApplication::_initCommon()
     QSettings settings;
 
     // Register our Qml objects
+
+    qmlRegisterSingletonType<QGCCwGimbalLib> ("QGCCwQml.QGCCwGimbalController",    1, 0, "QGCCwGimbalController",  QGCCwGimbalSingletonFactory);
 
     qmlRegisterType<QGCPalette>     ("QGroundControl.Palette", 1, 0, "QGCPalette");
     qmlRegisterType<QGCMapPalette>  ("QGroundControl.Palette", 1, 0, "QGCMapPalette");
@@ -852,7 +863,7 @@ void QGCApplication::_qgcCurrentStableVersionDownloadComplete(QString /*remoteFi
                 if (_majorVersion < majorVersion ||
                         (_majorVersion == majorVersion && _minorVersion < minorVersion) ||
                         (_majorVersion == majorVersion && _minorVersion == minorVersion && _buildVersion < buildVersion)) {
-                    showAppMessage(tr("There is a newer version of %1 available. You can download it from %2.").arg(applicationName()).arg(toolbox()->corePlugin()->stableDownloadLocation()), tr("New Version Available"));
+//                    showAppMessage(tr("There is a newer version of %1 available. You can download it from %2.").arg(applicationName()).arg(toolbox()->corePlugin()->stableDownloadLocation()), tr("New Version Available"));
                 }
             }
         }
