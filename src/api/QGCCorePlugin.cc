@@ -43,6 +43,8 @@ public:
     {
         if(pGeneral)
             delete pGeneral;
+        if(pCamera)
+            delete pCamera;
         if(pCommLinks)
             delete pCommLinks;
         if(pOfflineMaps)
@@ -76,6 +78,7 @@ public:
     }
 
     QmlComponentInfo* pGeneral                  = nullptr;
+    QmlComponentInfo* pCamera                  = nullptr;
     QmlComponentInfo* pCommLinks                = nullptr;
     QmlComponentInfo* pOfflineMaps              = nullptr;
 #if defined(QGC_GST_TAISYNC_ENABLED)
@@ -135,6 +138,10 @@ QVariantList &QGCCorePlugin::settingsPages()
                                             QUrl::fromUserInput("qrc:/qml/GeneralSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/gear-white.svg"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pGeneral)));
+        _p->pCamera = new QmlComponentInfo(tr("Camera Settings"),
+                                            QUrl::fromUserInput("qrc:/qml/CameraSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/gear-white.svg"));
+        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pCamera)));
         _p->pCommLinks = new QmlComponentInfo(tr("Comm Links"),
                                               QUrl::fromUserInput("qrc:/qml/LinkSettings.qml"),
                                               QUrl::fromUserInput("qrc:/res/waves.svg"));

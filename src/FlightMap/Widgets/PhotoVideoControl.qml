@@ -30,7 +30,7 @@ Rectangle {
     height:     mainLayout.height + _margins
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
-    visible:    (_mavlinkCamera || _videoStreamAvailable || _simpleCameraAvailable) && multiVehiclePanelSelector.showSingleVehiclePanel
+    visible:   false// (_mavlinkCamera || _videoStreamAvailable || _simpleCameraAvailable) && multiVehiclePanelSelector.showSingleVehiclePanel
 
     property real   _margins:                                   ScreenTools.defaultFontPixelHeight / 2
     property var    _activeVehicle:                             QGroundControl.multiVehicleManager.activeVehicle
@@ -91,6 +91,23 @@ Rectangle {
     property bool   _canShootInCurrentMode:                     _mavlinkCamera ? _mavlinkCameraCanShoot : _videoStreamCanShoot || _simpleCameraAvailable
     property bool   _isShootingInCurrentMode:                   _mavlinkCamera ? _mavlinkCameraIsShooting : _videoStreamIsShootingInCurrentMode || _simpleCameraIsShootingInCurrentMode
 
+//   Connections {
+//       target: QGCCwGimbalController
+//       onReceiveStreamChanged: {
+////           _videoSettings.rtspUrl.value = QGCCwGimbalController.cameraStream; // 直接赋值给 Fact
+//           console.log("1111111111:",QGCCwGimbalController.cameraStream)
+//           console.log("11111111直接连接信号成功!"); // 测试直接连接
+////           QGroundControl.videoManager.allVideoStream =  QGCCwGimbalController.cameraStream;
+//       }
+//   }
+    Component.onCompleted: {
+        QGCCwGimbalController.receiveStreamChanged.connect(function() {
+            // console.log("11111111直接连接信号成功!",QGCCwGimbalController.cameraStream);
+            _videoStreamSettings.rtspUrl.value = QGCCwGimbalController.cameraStream; // 直接赋值给 Fact
+            QGroundControl.videoManager.allVideoStream =  QGCCwGimbalController.cameraStream;
+        });
+    }
+
     function setCameraMode(photoMode) {
         _videoStreamInPhotoMode = photoMode
         if (_mavlinkCamera) {
@@ -103,11 +120,12 @@ Rectangle {
     }
 
     function toggleShooting() {
-        if(_switchToPhotoModeAllowed){
-          QGCCwGimbalController.takeRecording()
-        }else if(_switchToVideoModeAllowed){
-          QGCCwGimbalController.takePhoto()
-        }
+        return;
+//        if(_switchToPhotoModeAllowed){
+//          QGCCwGimbalController.takeRecording()
+//        }else if(_switchToVideoModeAllowed){
+//          QGCCwGimbalController.takePhoto()
+//        }
 
         if (_mavlinkCamera && _mavlinkCamera.capturesVideo || _mavlinkCamera.capturesPhotos ) {
             if(_mavlinkCameraInVideoMode) {

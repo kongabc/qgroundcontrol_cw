@@ -17,6 +17,8 @@ import QGroundControl.Palette       1.0
 import QGroundControl.Controls      1.0
 import QGroundControl.ScreenTools   1.0
 
+import QGCCwQml.QGCCwGimbalController 1.0
+
 Rectangle {
     id:     settingsView
     color:  qgcPal.window
@@ -71,6 +73,12 @@ Rectangle {
                             __rightPanel.source = modelData.url
                         }
                         checked = true
+
+                        if(modelData.url == "qrc:/qml/CameraSettings.qml"){
+                            QGCCwGimbalController.isRunTele2Timer = true;
+                        }else{
+                            QGCCwGimbalController.isRunTele2Timer = false
+                        }
                     }
 
                     Component.onCompleted: {

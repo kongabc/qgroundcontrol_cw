@@ -27,7 +27,7 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = QGroundControl
+TARGET   = XF_QGC
 TEMPLATE = app
 QGCROOT  = $$PWD
 
@@ -57,7 +57,7 @@ WindowsBuild {
 # Branding
 #
 
-QGC_APP_NAME        = "QGroundControl"
+QGC_APP_NAME        = "XF_QGC"
 QGC_ORG_NAME        = "QGroundControl.org"
 QGC_ORG_DOMAIN      = "org.qgroundcontrol"
 QGC_APP_DESCRIPTION = "Open source ground control app provided by QGroundControl dev team"
@@ -201,6 +201,7 @@ contains (DEFINES, QGC_DISABLE_QTNFC) {
     DEFINES += QGC_ENABLE_QTNFC
 }
 
+
 # USB Camera and UVC Video Sources
 contains (DEFINES, QGC_DISABLE_UVC) {
     message("Skipping support for UVC devices (manual override from command line)")
@@ -256,6 +257,8 @@ QT += \
     texttospeech \
     core-private \
     core
+#    \
+#    webview
 
 
 # Multimedia only used if QVC is enabled
@@ -1565,21 +1568,7 @@ WindowsBuild{
     else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLib.lib
     else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/GimbalControllerLibd.lib
 
-
 }else:AndroidBuild{
-
-#    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/release/ -lGimbalControllerLib
-#    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/qgccwgimballib/lib/debug/ -lGimbalControllerLib
-#    else:unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
-
-#    INCLUDEPATH += $$PWD/libs/qgccwgimballib/include
-#    DEPENDPATH += $$PWD/libs/qgccwgimballib/include
-
-#    win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/libGimbalControllerLib.a
-#    else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/libGimbalControllerLib.a
-#    else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/release/GimbalControllerLib.lib
-#    else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/debug/GimbalControllerLib.lib
-#    else:unix: PRE_TARGETDEPS += $$PWD/libs/qgccwgimballib/lib/libGimbalControllerLib.a
 
     unix: LIBS += -L$$PWD/libs/qgccwgimballib/lib/ -lGimbalControllerLib
 

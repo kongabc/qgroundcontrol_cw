@@ -614,8 +614,38 @@ FlightMap {
                 clickMenu.coord = clickCoord
                 clickMenu.popup()
             }
+
+//        let clickCo = _root.toCoordinate(Qt.point(mouse.x, mouse.y),false)
+//        console.log(clickCo.longitude.toFixed(7) + " ," + clickCo.latitude.toFixed(7))
+//        console.log(clickCo.altitude.toFixed(2) )
+//        mapPointVal.coordinate = QtPositioning.coordinate(clickCo.latitude.toFixed(7),clickCo.longitude.toFixed(7));
+
+//           terrainQuery.requestCoordinateHeights(QList<QGeoCoordinate>& coordinates);
+
         }
     }
+
+//    MapQuickItem {
+//        id: mapPointVal
+//        anchorPoint.x: rec.width / 2
+//        anchorPoint.y: rec.height / 2
+//        coordinate: QtPositioning.coordinate(32.0828033,118.8833216)
+//        z:  QGroundControl.zOrderMapItems
+//        visible: true   //  !QGroundControl.videoManager.fullScreen
+//        sourceItem: Rectangle {
+//            id:rec
+//            width: 16
+//            height: 16
+//            radius: 8
+//            color: "red"
+//        }
+////        sourceItem: Image {
+////            id: image
+////            width: 20
+////            height: 20
+////            source: "path/to/your/marker.png" // 使用自定义的标记图片
+////        }
+//    }
 
     // Airspace overlap support
     MapItemView {

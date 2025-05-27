@@ -20,12 +20,14 @@ import QGroundControl.ScreenTools   1.0
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
 
+import QGCCwQml.QGCCwGimbalController 1.0
+
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
 ApplicationWindow {
     id:             mainWindow
     minimumWidth:   ScreenTools.isMobile ? Screen.width  : Math.min(ScreenTools.defaultFontPixelWidth * 100, Screen.width)
-    minimumHeight:  ScreenTools.isMobile ? Screen.height : Math.min(ScreenTools.defaultFontPixelWidth * 50, Screen.height)
+    minimumHeight:  ScreenTools.isMobile ? Screen.height : Math.min(ScreenTools.defaultFontPixelWidth *50, Screen.height)
     visible:        true
 
     Component.onCompleted: {
@@ -39,6 +41,9 @@ ApplicationWindow {
 
         // Start the sequence of first run prompt(s)
         firstRunPromptManager.nextPrompt()
+
+
+//        console.log("-------------- " ,mainWindow.minimumHeight)
     }
 
     QtObject {
@@ -337,7 +342,7 @@ ApplicationWindow {
     /// Toolbar
     header: MainToolBar {
         id:         toolbar
-        height:     ScreenTools.toolbarHeight*0.8
+        height:     ScreenTools.toolbarHeight
         visible:  !QGroundControl.videoManager.fullScreen
     }
 
@@ -557,6 +562,9 @@ ApplicationWindow {
                 onClicked: {
                     toolDrawer.visible      = false
                     toolDrawer.toolSource   = ""
+
+                    QGCCwGimbalController.isRunTele2Timer = false
+//                    QGCCwGimbalController.calibrateStatusCode = -1
                 }
             }
         }

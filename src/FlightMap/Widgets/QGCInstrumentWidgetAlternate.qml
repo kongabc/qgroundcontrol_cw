@@ -8,6 +8,7 @@
  ****************************************************************************/
 
 import QtQuick 2.3
+//import QtQuick.Layouts  1.12
 
 import QGroundControl               1.0
 import QGroundControl.Controls      1.0
@@ -17,12 +18,14 @@ import QGroundControl.FlightMap     1.0
 import QGroundControl.Palette       1.0
 
 Rectangle {
+//    width:60
     height: _outerRadius * 4
     radius: _outerRadius
-    color:  QGroundControl.globalPalette.window
+    color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.3) : Qt.rgba(0,0,0,0.3) //QGroundControl.globalPalette.window
+    anchors.right: parent.right
 
     property real _outerMargin: (width * 0.05) / 2
-    property real _outerRadius: width / 2
+    property real _outerRadius: width / 4
     property real _innerRadius: _outerRadius - _outerMargin
 
     // Prevent all clicks from going through to lower layers

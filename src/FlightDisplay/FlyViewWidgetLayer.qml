@@ -158,16 +158,124 @@ Item {
         property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
     }
 
+//    Rectangle{
+//        id:photoVideoControlBox
+//        width: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth *6.2 : ScreenTools.defaultFontPixelWidth *5.2
+//        height: ScreenTools.defaultFontPixelWidth*12.6
+//        anchors.right: parent.right
+//        anchors.rightMargin:  ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 15 : ScreenTools.defaultFontPixelWidth * 20
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth * 2 : ScreenTools.defaultFontPixelWidth * 6
+//        z: QGroundControl.zOrderTopMost
+//        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
+
+//        Column {
+//            Rectangle{
+//                width: photoVideoControlBox.width
+//                height: photoVideoControlBox.height/3
+//                color: "transparent"
+//                Image {
+//                    id:vRecord
+//                    source: (QGCCwGimbalController.btnState & 0x00000100) ? "qrc:/qml/QGCCwGimbal/Controls/VideoRecordActive.png" : "qrc:/qml/QGCCwGimbal/Controls/VideoRecord.png"
+//                    sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+//                    anchors.centerIn: parent
+//                }
+//                MouseArea{
+//                    anchors.fill: parent
+//                    cursorShape: "PointingHandCursor"
+////                    onPressed: {
+////                        vRecord.source = "qrc:/qml/QGCCwGimbal/Controls/VideoRecordActive.png"
+////                        txtCont.color = "#ff0000"
+
+////                    }
+////                    onReleased: {
+////                        vRecord.source = "qrc:/qml/QGCCwGimbal/Controls/VideoRecord.png"
+////                        txtCont.color = qgcPal.text
+////                        if(!(QGCCwGimbalController.btnState & 0x00000100)){
+
+////                        }
+////                    }
+
+//                    onClicked: {
+
+//                        QGCCwGimbalController.takeRecording();
+////                        if( txtCont.color == "#ff0000"){
+////                            vRecord.source = "qrc:/qml/QGCCwGimbal/Controls/VideoRecord.png"
+////                            txtCont.color = qgcPal.text
+
+////                        }else{
+////                            vRecord.source = "qrc:/qml/QGCCwGimbal/Controls/VideoRecordActive.png"
+////                            txtCont.color = "#ff0000"
+////                        }
+//                    }
+//                }
+//            }
+
+//            Rectangle{
+//                width:  photoVideoControlBox.width
+//                height: photoVideoControlBox.height/3
+//                color: "transparent"
+//                Text {
+//                   id:txtCont
+//                   text: "REC"
+//                   font.pointSize: ScreenTools.defaultFontPointSize*1.4
+//                   anchors.fill: parent
+//                   horizontalAlignment: Text.AlignHCenter
+//                   verticalAlignment: Text.AlignVCenter
+//                   color: (QGCCwGimbalController.btnState & 0x00000100) ? "#ff0000" : qgcPal.text
+//                   visible: !txtCont2.visible
+//                }
+
+//                Text {
+//                   id:txtCont2
+//                   text: "PIC"
+//                   font.pointSize: ScreenTools.defaultFontPointSize*1.6
+//                   anchors.fill: parent
+//                   horizontalAlignment: Text.AlignHCenter
+//                   verticalAlignment: Text.AlignVCenter
+//                   color:"#ff0000"
+//                   visible: false
+//                }
+//            }
+//            Rectangle{
+//                width:  photoVideoControlBox.width
+//                height: photoVideoControlBox.height/3
+//                color: "transparent"
+//                Image {
+//                    id:tPhoto
+//                    source: "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
+//                    sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+//                    anchors.centerIn: parent
+//                }
+//                MouseArea{
+//                    anchors.fill: parent
+//                    cursorShape: "PointingHandCursor"
+//                    onPressed: {
+//                        tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhotoActive.png"
+//                        txtCont2.visible = true;
+//                    }
+//                    onReleased: {
+//                        QGCCwGimbalController.takePhoto();
+//                        tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
+//                        txtCont2.visible = false;
+//                    }
+//                }
+//            }
+
+//        }
+//    }
+
     Rectangle{
         id:zoomRect
-        width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*3.8 : ScreenTools.defaultFontPixelWidth*2.6
-        height:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2
-        anchors.bottom: photoVideoControl.bottom
-        anchors.left:photoVideoControl.left
-        anchors.leftMargin: -ScreenTools.defaultFontPixelWidth*4.2 // new add 2
+        width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*3.8 : ScreenTools.defaultFontPixelWidth*3
+        height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2  //ScreenTools.defaultFontPixelWidth*12.6 //
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.rightMargin:  ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 16 : ScreenTools.defaultFontPixelWidth * 22
+        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth * 1.6 : ScreenTools.defaultFontPixelWidth * 6
         color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
         radius: ScreenTools.defaultFontPixelWidth / 2
-        visible: photoVideoControl.visible
+//        visible: photoVideoControlBox.visible
         z:QGroundControl.zOrderTopMost
         Item{
             id:headerColumn

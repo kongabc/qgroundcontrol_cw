@@ -54,16 +54,16 @@ Rectangle {
     property real   _margins:                   ScreenTools.defaultFontPixelWidth
     property var    _planViewSettings:          QGroundControl.settingsManager.planViewSettings
     property var    _flyViewSettings:           QGroundControl.settingsManager.flyViewSettings
-    property var    _videoSettings:             QGroundControl.settingsManager.videoSettings
-    property string _videoSource:               _videoSettings.videoSource.rawValue
-    property bool   _isGst:                     QGroundControl.videoManager.isGStreamer
-    property bool   _isUDP264:                  _isGst && _videoSource === _videoSettings.udp264VideoSource
-    property bool   _isUDP265:                  _isGst && _videoSource === _videoSettings.udp265VideoSource
-    property bool   _isRTSP:                    _isGst && _videoSource === _videoSettings.rtspVideoSource
-    property bool   _isTCP:                     _isGst && _videoSource === _videoSettings.tcpVideoSource
-    property bool   _isMPEGTS:                  _isGst && _videoSource === _videoSettings.mpegtsVideoSource
-    property bool   _videoAutoStreamConfig:     QGroundControl.videoManager.autoStreamConfigured
-    property bool   _showSaveVideoSettings:     _isGst || _videoAutoStreamConfig
+//    property var    _videoSettings:             QGroundControl.settingsManager.videoSettings
+//    property string _videoSource:               _videoSettings.videoSource.rawValue
+//    property bool   _isGst:                     QGroundControl.videoManager.isGStreamer
+//    property bool   _isUDP264:                  _isGst && _videoSource === _videoSettings.udp264VideoSource
+//    property bool   _isUDP265:                  _isGst && _videoSource === _videoSettings.udp265VideoSource
+//    property bool   _isRTSP:                    _isGst && _videoSource === _videoSettings.rtspVideoSource
+//    property bool   _isTCP:                     _isGst && _videoSource === _videoSettings.tcpVideoSource
+//    property bool   _isMPEGTS:                  _isGst && _videoSource === _videoSettings.mpegtsVideoSource
+//    property bool   _videoAutoStreamConfig:     QGroundControl.videoManager.autoStreamConfigured
+//    property bool   _showSaveVideoSettings:     _isGst || _videoAutoStreamConfig
     property bool   _disableAllDataPersistence: QGroundControl.settingsManager.appSettings.disableAllPersistence.rawValue
 
     property string gpsDisabled: "Disabled"
@@ -72,117 +72,117 @@ Rectangle {
     property bool isWindows:ScreenTools.isWindows  //   ( Qt.platform.os === "windows")
     readonly property real _internalWidthRatio: 0.8
 
-    Rectangle{
-        id:bgBox
-        width: Screen.width
-        height: Screen.height
-        anchors.fill: parent
-        color:Qt.rgba(0,0,0,0.6)
-        z: (QGroundControl.zOrderTopMost+3)
-        visible: false
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {}
-        }
+//    Rectangle{
+//        id:bgBox
+//        width: Screen.width
+//        height: Screen.height
+//        anchors.fill: parent
+//        color:Qt.rgba(0,0,0,0.6)
+//        z: (QGroundControl.zOrderTopMost+3)
+//        visible: false
+//        MouseArea{
+//            anchors.fill: parent
+//            onClicked: {}
+//        }
 
-        Rectangle{
-            id:pupBox
-            anchors.centerIn: parent
-            width: parent.width/3
-            height: parent.width/4
-            color: "#fff"
-            radius: ScreenTools.defaultFontPixelWidth / 2
+//        Rectangle{
+//            id:pupBox
+//            anchors.centerIn: parent
+//            width: parent.width/3
+//            height: parent.width/4
+//            color: "#fff"
+//            radius: ScreenTools.defaultFontPixelWidth / 2
 
-            Rectangle{
-                width: ScreenTools.defaultFontPixelWidth*5.6
-                height: width
-                radius: ScreenTools.defaultFontPixelWidth / 2
-                anchors.right: parent.right
-                anchors.top: parent.top
-                Text {
-                    anchors.centerIn: parent
-                    font.pointSize:ScreenTools.defaultFontPointSize*3.2
-                    font.family:ScreenTools.normalFontFamily
-                    font.bold: false
-                    color: "#000"
-                    text: qsTr("×")
+//            Rectangle{
+//                width: ScreenTools.defaultFontPixelWidth*5.6
+//                height: width
+//                radius: ScreenTools.defaultFontPixelWidth / 2
+//                anchors.right: parent.right
+//                anchors.top: parent.top
+//                Text {
+//                    anchors.centerIn: parent
+//                    font.pointSize:ScreenTools.defaultFontPointSize*3.2
+//                    font.family:ScreenTools.normalFontFamily
+//                    font.bold: false
+//                    color: "#000"
+//                    text: qsTr("×")
 
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: {
-                        bgBox.visible=false
-                    }
+//                }
+//                MouseArea{
+//                    anchors.fill: parent
+//                    onClicked: {
+//                        bgBox.visible=false
+//                    }
 
-                }
-            }
-            Rectangle{
-                anchors.centerIn: parent
-                Rectangle{
-                    z:1
-                    anchors.bottom: textBox.top
-                    anchors.bottomMargin: _margins*4.2
-                    visible : (QGCCwGimbalController.calibrateStatusCode === 1 || QGCCwGimbalController.calibrateStatusCode === 0) ? true : false
-                    AnimatedImage{
-                        anchors.centerIn: parent
-                        source: "qrc:/qml/QGCCwGimbal/Controls/Loading.gif"
-                        width:ScreenTools.defaultFontPixelWidth*4.8
-                        height: width
-                        smooth: true
-                        mipmap: true
-                        antialiasing: true
-                    }
-                }
-                Rectangle{
-                    z:2
-                    anchors.bottom: textBox.top
-                    anchors.bottomMargin:  _margins*4.6
-                    visible : QGCCwGimbalController.calibrateStatusCode === 2 ? true : false
-                    Image{
-                        anchors.centerIn: parent
-                        Layout.alignment: Qt.AlignHCenter
-                        smooth: true
-                        mipmap: true
-                        antialiasing: true
-                        source: "qrc:/qml/QGCCwGimbal/Controls/SuccessIcon.png"
-                        height:ScreenTools.defaultFontPixelWidth*3.2
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.height: height
-                    }
-                }
-                Rectangle{
-                    z:3
-                    anchors.bottom: textBox.top
-                    anchors.bottomMargin: _margins*4.6
-                    visible : QGCCwGimbalController.calibrateStatusCode === 3 ? true : false
-                    Image{
-                        anchors.centerIn: parent
-                        Layout.alignment: Qt.AlignHCenter
-                        smooth: true
-                        mipmap: true
-                        antialiasing: true
-                        source: "qrc:/qml/QGCCwGimbal/Controls/FailIcon.png"
-                        height:ScreenTools.defaultFontPixelWidth*3.2
-                        fillMode: Image.PreserveAspectFit
-                        sourceSize.height: height
-                    }
-                }
+//                }
+//            }
+//            Rectangle{
+//                anchors.centerIn: parent
+//                Rectangle{
+//                    z:1
+//                    anchors.bottom: textBox.top
+//                    anchors.bottomMargin: _margins*4.2
+//                    visible : (QGCCwGimbalController.calibrateStatusCode === 1 || QGCCwGimbalController.calibrateStatusCode === 0) ? true : false
+//                    AnimatedImage{
+//                        anchors.centerIn: parent
+//                        source: "qrc:/qml/QGCCwGimbal/Controls/Loading.gif"
+//                        width:ScreenTools.defaultFontPixelWidth*4.8
+//                        height: width
+//                        smooth: true
+//                        mipmap: true
+//                        antialiasing: true
+//                    }
+//                }
+//                Rectangle{
+//                    z:2
+//                    anchors.bottom: textBox.top
+//                    anchors.bottomMargin:  _margins*4.6
+//                    visible : QGCCwGimbalController.calibrateStatusCode === 2 ? true : false
+//                    Image{
+//                        anchors.centerIn: parent
+//                        Layout.alignment: Qt.AlignHCenter
+//                        smooth: true
+//                        mipmap: true
+//                        antialiasing: true
+//                        source: "qrc:/qml/QGCCwGimbal/Controls/SuccessIcon.png"
+//                        height:ScreenTools.defaultFontPixelWidth*3.2
+//                        fillMode: Image.PreserveAspectFit
+//                        sourceSize.height: height
+//                    }
+//                }
+//                Rectangle{
+//                    z:3
+//                    anchors.bottom: textBox.top
+//                    anchors.bottomMargin: _margins*4.6
+//                    visible : QGCCwGimbalController.calibrateStatusCode === 3 ? true : false
+//                    Image{
+//                        anchors.centerIn: parent
+//                        Layout.alignment: Qt.AlignHCenter
+//                        smooth: true
+//                        mipmap: true
+//                        antialiasing: true
+//                        source: "qrc:/qml/QGCCwGimbal/Controls/FailIcon.png"
+//                        height:ScreenTools.defaultFontPixelWidth*3.2
+//                        fillMode: Image.PreserveAspectFit
+//                        sourceSize.height: height
+//                    }
+//                }
 
-                Rectangle{
-                    id:textBox
-                    Text {
-                        anchors.centerIn: parent
-                        font.pointSize:ScreenTools.defaultFontPointSize*1.2
-                        font.family:ScreenTools.normalFontFamily
-                        color:  "#000" //QGCCwGimbalController.calibrateStatusCode === 2 ? "#009fff" : (QGCCwGimbalController.calibrateStatusCode === 3 ? "red" : "#000")
-                        text: QGCCwGimbalController.calibrateStatusCode === 2 ? qsTr("校准成功") : (QGCCwGimbalController.calibrateStatusCode === 3 ? qsTr("校准失败") : qsTr("正在校准..."))
-                    }
-                }
+//                Rectangle{
+//                    id:textBox
+//                    Text {
+//                        anchors.centerIn: parent
+//                        font.pointSize:ScreenTools.defaultFontPointSize*1.2
+//                        font.family:ScreenTools.normalFontFamily
+//                        color:  "#000" //QGCCwGimbalController.calibrateStatusCode === 2 ? "#009fff" : (QGCCwGimbalController.calibrateStatusCode === 3 ? "red" : "#000")
+//                        text: QGCCwGimbalController.calibrateStatusCode === 2 ? qsTr("校准成功") : (QGCCwGimbalController.calibrateStatusCode === 3 ? qsTr("校准失败") : qsTr("正在校准..."))
+//                    }
+//                }
 
-            }
+//            }
 
-        }
-    }
+//        }
+//    }
 
     QGCFlickable {
         clip:               true
@@ -345,67 +345,64 @@ Rectangle {
                         }
 
                         //new----
-                        Item { width: 1; height: _margins }
-                        GridLayout {
-                            id:                         comm1
-                            Layout.alignment:   Qt.AlignHCenter
-                            rows:1
-                            columns:3
-                            columnSpacing:_margins
-                            rowSpacing:_margins
-
-                            QGCLabel {
-                                text:               qsTr("Video Settings")
-                            }
-
-                            QGCRadioButton {
-                                id:videoMode1
-                                text: qsTr("模式1")
-                                checked:QGroundControl.videoManager.videoMode
-                                onClicked: {
-//                                    console.log(videoSource.currentIndex + "," + videoSource.currentValue)
-//                                    console.log(QGroundControl.videoManager.videoMode)
-                                    if(QGroundControl.videoManager.videoMode){
-                                        return;
-                                    }
-
-                                    QGroundControl.videoManager.videoMode = checked;
-//                                    _videoSettings.videoSource.rawValue = _videoSettings.rtspVideoSource;
-                                    QGroundControl.videoManager.selectIndexFun(1);
-                                    QGroundControl.settingsManager.videoSettings.selectVideoSource("RTSP Video Stream");
-                                }
-                            }
-
-                            QGCRadioButton {
-                                id:videoMode2
-                                text:  qsTr("模式2")
-                                checked:!QGroundControl.videoManager.videoMode
-                                onClicked:  {
-                                    if(!QGroundControl.videoManager.videoMode){
-                                        return;
-                                    }
-
-                                    QGroundControl.videoManager.videoMode = !QGroundControl.videoManager.videoMode;
-                                    videoCombo.currentIndex = 0;
-//                                    _videoSource =  _videoSettings.udp264VideoSource;
-                                    QGroundControl.videoManager.selectIndexFun(2);
-//                                    QGroundControl.settingsManager.videoSettings.selectVideoSource("UDP h.264 Video Stream");
-                                     _videoSettings.videoSource.rawValue = _videoSettings.udp264VideoSource;
-                                }
-                            }
-
-                        }
-
-                        GridLayout {
-                            id:         videoGrid
-                            columns:    2
-                            visible:    _videoSettings.visible
+//                        Item { width: 1; height: _margins }
+//                        GridLayout {
+//                            visible: false
+//                            id:                         comm1
+//                            Layout.alignment:   Qt.AlignHCenter
+//                            rows:1
+//                            columns:3
+//                            columnSpacing:_margins
+//                            rowSpacing:_margins
 
 //                            QGCLabel {
 //                                text:               qsTr("Video Settings")
-//                                Layout.columnSpan:  2
-//                                Layout.alignment:   Qt.AlignHCenter
 //                            }
+
+//                            QGCRadioButton {
+//                                id:videoMode1
+//                                text: qsTr("模式1")
+//                                checked:QGroundControl.videoManager.videoMode
+//                                onClicked: {
+////                                    console.log(videoSource.currentIndex + "," + videoSource.currentValue)
+////                                    console.log(QGroundControl.videoManager.videoMode)
+//                                    if(QGroundControl.videoManager.videoMode){
+//                                        return;
+//                                    }
+
+//                                    QGroundControl.videoManager.videoMode = checked;
+////                                    _videoSettings.videoSource.rawValue = _videoSettings.rtspVideoSource;
+//                                    QGroundControl.videoManager.selectIndexFun(1);
+//                                    QGroundControl.settingsManager.videoSettings.selectVideoSource("RTSP Video Stream");
+//                                }
+//                            }
+
+//                            QGCRadioButton {
+//                                id:videoMode2
+//                                text:  qsTr("模式2")
+//                                checked:!QGroundControl.videoManager.videoMode
+//                                onClicked:  {
+//                                    if(!QGroundControl.videoManager.videoMode){
+//                                        return;
+//                                    }
+
+//                                    QGroundControl.videoManager.videoMode = !QGroundControl.videoManager.videoMode;
+//                                    videoCombo.currentIndex = 0;
+////                                    _videoSource =  _videoSettings.udp264VideoSource;
+//                                    QGroundControl.videoManager.selectIndexFun(2);
+////                                    QGroundControl.settingsManager.videoSettings.selectVideoSource("UDP h.264 Video Stream");
+//                                     _videoSettings.videoSource.rawValue = _videoSettings.udp264VideoSource;
+
+//                                }
+//                            }
+
+//                        }
+
+                        /* GridLayout{
+                            visible: false
+                            id:         videoGrid
+                            columns:    2
+                            visible:    _videoSettings.visible
 
                             //new add 202407
                             QGCLabel {
@@ -459,7 +456,9 @@ Rectangle {
                                     if (text.endsWith("\n")) {
                                         text = text.slice(text.length - 1);
                                     }
-                                    QGroundControl.videoManager.allVideoStream = text
+                                    QGroundControl.videoManager.allVideoStream = text;
+
+//                                    QGCCwGimbalController.cameraStream = text;
 
                                     if( QGroundControl.videoManager.is264){
                                         QGroundControl.settingsManager.videoSettings.selectVideoSource("UDP h.264 Video Stream");
@@ -536,6 +535,14 @@ Rectangle {
                                 Layout.preferredWidth:  _comboFieldWidth
                                 fact:                   _videoSettings.recordingFormat
                                 visible:                videoFileFormatLabel.visible
+
+//                                Component.onCompleted: {
+//                                    if(fact){  //Video.SettingsGroup.json文件
+//                                        console.log("Fact name111:", fact.name) // 输出参数名
+//                                        console.log("Fact enum222:", fact.enumStrings) // 输出枚举选项
+//                                    }
+
+//                                }
                             }
 
                             QGCLabel {
@@ -584,15 +591,17 @@ Rectangle {
                             }
 
 
-                        }
+                        }*/
                     }
                 }
                 //new add 2024
-                Item { width: 1; height: _margins; }
+//                Item { width: 1; height: _margins; }
                 QGCLabel {
+                    visible: false
                     text:      qsTr("相机设置") // qsTr("Custom Settings")
                 }
                 Rectangle{
+                    visible: false
                     Layout.preferredHeight: customBox.height + (_margins * 2)
                     Layout.preferredWidth:  flyViewCol.width + (_margins * 2)
                     color:                  qgcPal.windowShade
@@ -888,11 +897,13 @@ Rectangle {
 
                 }
                 //----------------------end---------------------------------
-                Item { width: 1; height: _margins; visible: tcpOrUdp.visible }
+//                Item { width: 1; height: _margins; visible: tcpOrUdp.visible }
                 QGCLabel {
+                    visible: false
                     text:       qsTr("校准")
                 }
                 Rectangle{
+                    visible: false
                     Layout.preferredHeight: columnBox.height + (_margins * 2)
                     Layout.preferredWidth:  flyViewCol.width + (_margins * 2)
                     color:                  qgcPal.windowShade
@@ -939,29 +950,6 @@ Rectangle {
                                     QGCCwGimbalController.calibrateFun();
                                 }
                             }
-                            //                                Button {
-                            //                                    id:calibrateBtn
-                            //                                    width: ScreenTools.defaultFontPixelWidth*6
-                            //                                    background: Rectangle {
-                            //                                        implicitWidth: ScreenTools.defaultFontPixelWidth*6
-                            //                                        implicitHeight: ScreenTools.defaultFontPixelWidth*2.8
-                            //                                        color: calibrateBtn.hovered ? "#FFF291" : "#fff"
-                            //                                        radius: ScreenTools.defaultFontPixelWidth / 2
-                            //                                        Text {
-                            //                                            text: qsTr("校准")
-                            //                                            font.family:ScreenTools.normalFontFamily
-                            //                                            anchors.leftMargin: ScreenTools.defaultFontPixelWidth*3.2
-                            //                                            anchors.rightMargin:ScreenTools.defaultFontPixelWidth*3.2
-                            //                                            anchors.centerIn: parent
-                            //                                        }
-
-                            //                                    }
-                            //                                    onClicked:{
-                            //                                        bgBox.visible = true
-                            //                                        console.log(111111)
-                            //                                        console.log(Screen.width)
-                            //                                    }
-                            //                                }
                         }
 
 
@@ -970,12 +958,14 @@ Rectangle {
 
 
                 //new add 4
-                Item { width: 1; height: _margins; visible: tcpOrUdp.visible }
+//                Item { width: 1; height: _margins; visible: tcpOrUdp.visible }
                 QGCLabel {
+                    visible: false
                     id:         tcpOrUdp
                     text:       qsTr("UDP/TCP")
                 }
                 Rectangle{
+                    visible: false
                     Layout.preferredHeight: commCol.height + (_margins * 2)
                     Layout.preferredWidth:  flyViewCol.width + (_margins * 2)
                     color:                  qgcPal.windowShade
@@ -1827,11 +1817,8 @@ Rectangle {
                 Item { width: 1; height: _margins }
 
 
-
-                
-
                 QGCLabel {
-                    text:               qsTr("V2.1")
+                    text:               qsTr("V2.4")
                     Layout.alignment:   Qt.AlignHCenter
                 }
 

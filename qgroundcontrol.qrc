@@ -46,6 +46,7 @@
         <file alias="FlightDisplayViewUVC.qml">src/FlightDisplay/FlightDisplayViewUVC.qml</file>
         <file alias="FWLandingPatternEditor.qml">src/PlanView/FWLandingPatternEditor.qml</file>
         <file alias="GeneralSettings.qml">src/ui/preferences/GeneralSettings.qml</file>
+        <file alias="CameraSettings.qml">src/ui/preferences/CameraSettings.qml</file>
         <file alias="GeoTagPage.qml">src/AnalyzeView/GeoTagPage.qml</file>
         <file alias="HelpSettings.qml">src/ui/preferences/HelpSettings.qml</file>
         <file alias="JoystickConfig.qml">src/VehicleSetup/JoystickConfig.qml</file>
@@ -183,7 +184,7 @@
         <file alias="QGroundControl/Controls/TerrainStatus.qml">src/PlanView/TerrainStatus.qml</file>
         <file alias="QGroundControl/Controls/TakeoffItemMapVisual.qml">src/PlanView/TakeoffItemMapVisual.qml</file>
         <file alias="QGroundControl/Controls/ToolStrip.qml">src/QmlControls/ToolStrip.qml</file>
-       	<file alias="QGroundControl/Controls/ToolStripHoverButton.qml">src/QmlControls/ToolStripHoverButton.qml</file>
+        <file alias="QGroundControl/Controls/ToolStripHoverButton.qml">src/QmlControls/ToolStripHoverButton.qml</file>
         <file alias="QGroundControl/Controls/TransectStyleComplexItemEditor.qml">src/PlanView/TransectStyleComplexItemEditor.qml</file>
         <file alias="QGroundControl/Controls/TransectStyleComplexItemStats.qml">src/PlanView/TransectStyleComplexItemStats.qml</file>
         <file alias="QGroundControl/Controls/TransectStyleComplexItemTabBar.qml">src/PlanView/TransectStyleComplexItemTabBar.qml</file>
@@ -286,14 +287,16 @@
         <file alias="VirtualJoystick.qml">src/FlightDisplay/VirtualJoystick.qml</file>
         <file alias="VTOLLandingPatternEditor.qml">src/PlanView/VTOLLandingPatternEditor.qml</file>
         <file alias="QGCCwGimbal/Controls/qmldir">src/QGCCwGimbal/qmldir</file>
-        <file alias="QGCCwGimbal/Controls/qmldir">src/QGCCwGimbal/qmldir</file>
         <file alias="QGCCwGimbal/Controls/CwGimbalBtn.qml">src/QGCCwGimbal/CwGimbalBtn.qml</file>
+        <file alias="QGCCwGimbal/Controls/TableModule.qml">src/QGCCwGimbal/TableModule.qml</file>
+        <file alias="QGCCwGimbal/Controls/SwitchModule.qml">src/QGCCwGimbal/SwitchModule.qml</file>
         <file alias="QGCCwGimbal/Controls/CameraFunciton.png">src/QGCCwGimbal/CameraFunciton.png</file>
         <file alias="QGCCwGimbal/Controls/Follow.png">src/QGCCwGimbal/Follow.png</file>
         <file alias="QGCCwGimbal/Controls/Gaze.png">src/QGCCwGimbal/Gaze.png</file>
         <file alias="QGCCwGimbal/Controls/IRCut.png">src/QGCCwGimbal/IRCut.png</file>
         <file alias="QGCCwGimbal/Controls/Lamp.png">src/QGCCwGimbal/Lamp.png</file>
         <file alias="QGCCwGimbal/Controls/Lock.png">src/QGCCwGimbal/Lock.png</file>
+        <file alias="QGCCwGimbal/Controls/FPV.png">src/QGCCwGimbal/FPV.png</file>
         <file alias="QGCCwGimbal/Controls/Mode.png">src/QGCCwGimbal/Mode.png</file>
         <file alias="QGCCwGimbal/Controls/Orthoview.png">src/QGCCwGimbal/Orthoview.png</file>
         <file alias="QGCCwGimbal/Controls/Palette.png">src/QGCCwGimbal/Palette.png</file>
@@ -303,6 +306,11 @@
         <file alias="QGCCwGimbal/Controls/Unfold.png">src/QGCCwGimbal/Unfold.png</file>
         <file alias="QGCCwGimbal/Controls/target.png">src/QGCCwGimbal/target.png</file>
         <file alias="QGCCwGimbal/Controls/CameraCenter.png">src/QGCCwGimbal/CameraCenter.png</file>
+        <file alias="QGCCwGimbal/Controls/VideoRecord.png">src/QGCCwGimbal/VideoRecord.png</file>
+        <file alias="QGCCwGimbal/Controls/TakePhoto.png">src/QGCCwGimbal/TakePhoto.png</file>
+        <file alias="QGCCwGimbal/Controls/VideoRecordActive.png">src/QGCCwGimbal/VideoRecordActive.png</file>
+        <file alias="QGCCwGimbal/Controls/TakePhotoActive.png">src/QGCCwGimbal/TakePhotoActive.png</file>
+        <file alias="QGCCwGimbal/Controls/MapPoint.png">src/QGCCwGimbal/MapPoint.png</file>
         <file alias="QGCCwGimbal/Controls/ToCenter.png">src/QGCCwGimbal/ToCenter.png</file>
         <file alias="QGCCwGimbal/Controls/TempIcon.png">src/QGCCwGimbal/TempIcon.png</file>
         <file alias="QGCCwGimbal/Controls/IsothermLine.png">src/QGCCwGimbal/IsothermLine.png</file>
@@ -315,7 +323,6 @@
         <file alias="QGCCwGimbal/Controls/SuccessIcon.png">src/QGCCwGimbal/SuccessIcon.png</file>
         <file alias="QGCCwGimbal/Controls/FailIcon.png">src/QGCCwGimbal/FailIcon.png</file>
         <file alias="QGroundControl/Controls/MockLinkOptionsDlg.qml">src/comm/MockLinkOptionsDlg.qml</file>
-<!--        <file>CustomSettings.qml</file>-->
 
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
