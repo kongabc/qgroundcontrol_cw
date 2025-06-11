@@ -57,6 +57,9 @@ Item {
     property real   _rightPanelWidth:       ScreenTools.defaultFontPixelWidth * 30
 
     property int lastState:0
+    property real deadZone: circleRect.height * 1.1 // 添加死区避免中间区域误触发
+
+     property bool isVisibleBtn :  true
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -268,15 +271,15 @@ Item {
     Rectangle{
         id:zoomRect
         width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*3.8 : ScreenTools.defaultFontPixelWidth*3
-        height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2  //ScreenTools.defaultFontPixelWidth*12.6 //
+        height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.rightMargin:  ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 16 : ScreenTools.defaultFontPixelWidth * 22
+        anchors.rightMargin: isVisibleBtn ? (ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 16 : ScreenTools.defaultFontPixelWidth * 22) : ( ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth : ScreenTools.defaultFontPixelWidth * 2)
         anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth * 1.6 : ScreenTools.defaultFontPixelWidth * 6
         color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
         radius: ScreenTools.defaultFontPixelWidth / 2
-//        visible: photoVideoControlBox.visible
         z:QGroundControl.zOrderTopMost
+
         Item{
             id:headerColumn
             height:ScreenTools.defaultFontPixelWidth*1.5
@@ -333,56 +336,75 @@ Item {
             anchors.fill: parent
             anchors.leftMargin: -ScreenTools.defaultFontPixelWidth*1.2
             onPressed: {
-                if(mouse.y < zoomRect.height/2){
-                    if(lastState !== 1){
-                       lastState=1
-                       QGCCwGimbalController.videoZoom(1);
-                    }
-                }else if( mouse.y > zoomRect.height/2){
-                    if(lastState !== -1){
-                       lastState=-1
-                       QGCCwGimbalController.videoZoom(-1);
-                    }
-                }
-
-                if(mouse.y<circleRect.height/2){
-                    circleRect.y = 0
-                }else if(mouse.y>zoomRect.height-circleRect.height/2){
-                    circleRect.y = zoomRect.height-circleRect.height
-                }else{
-                    circleRect.y = mouse.y - circleRect.height/2
-                }
+                handlePosition(mouse.y)
+                updateCirclePosition(mouse.y)
 
             }
 
             onPositionChanged:{
-                if( mouse.y < zoomRect.height/2){
-                    if(lastState !== 1){
-                        lastState=1
-                        QGCCwGimbalController.videoZoom(1);
-                    }
+                handlePosition(mouse.y)
+                updateCirclePosition(mouse.y)
 
-                } else if( mouse.y > zoomRect.height/2){
-                    if(lastState !== -1){
-                        lastState=-1
-                        QGCCwGimbalController.videoZoom(-1);
-                    }
-                }
-
-                if(mouse.y<circleRect.height/2){
-                    circleRect.y = 0
-                }else if(mouse.y>zoomRect.height-circleRect.height/2){
-                    circleRect.y = zoomRect.height-circleRect.height
-                }else{
-                    circleRect.y = mouse.y - circleRect.height/2
-                }
             }
             onReleased: {
                 circleRect.color = "#FFF"
                 circleRect.y = (zoomRect.height-circleRect.height)/2
-                lastState=0
-                QGCCwGimbalController.videoZoom(0);
+//                lastState=0
+//                QGCCwGimbalController.videoZoom(0);
+                if (lastState !== 0) {
+                  lastState = 0
+                  QGCCwGimbalController.videoZoom(0);
+                }
             }
+
+            // 处理位置逻辑的函数
+           function handlePosition(yPos) {
+
+                let newState = 0;
+                if (yPos < (zoomRect.height/2 - deadZone/2)) {
+                   newState = 1;  // 顶部区域：放大
+                } else if (yPos > (zoomRect.height/2 + deadZone/2)) {
+                   newState = -1; // 底部区域：缩小
+                } else {
+                   newState = 0;  // 死区：停止
+                }
+                // 状态变化处理
+                if (newState !== lastState) {
+                    // 状态切换时需要发送停止命令的情况：
+                    // 1. 从放大切换到缩小
+                    // 2. 从缩小切换到放大
+                    // 3. 从任何状态切换到死区
+                    if ((lastState === 1 && newState === -1) ||
+                            (lastState === -1 && newState === 1) ||
+                            (newState === 0 && lastState !== 0)) {
+
+                        QGCCwGimbalController.videoZoom(0);
+                    }
+
+                    // 发送新状态命令（如果是非零状态）
+                    if (newState !== 0) {
+                        QGCCwGimbalController.videoZoom(newState);
+                    }
+
+                    // 更新状态
+                    lastState = newState;
+                }
+
+
+
+           }
+           // 更新圆形位置
+           function updateCirclePosition(yPos) {
+               if (yPos < circleRect.height / 2) {
+                   circleRect.y = 0
+               } else if (yPos > zoomRect.height - circleRect.height / 2) {
+                   circleRect.y = zoomRect.height - circleRect.height
+               } else {
+                   circleRect.y = yPos - circleRect.height / 2
+               }
+           }
+
+
         }
     }
 

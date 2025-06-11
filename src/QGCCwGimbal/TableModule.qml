@@ -88,8 +88,16 @@ Rectangle{
         Text {
             Layout.preferredWidth: columnWidth3
             Layout.preferredHeight: rectHeight
-            text: _tableModule.channelVal
+            text: parseInt(_tableModule.channelVal/6.7) //_tableModule.channelVal
             font.pointSize: _defaultFont
+            font.family: {
+                   if (Qt.locale().name.startsWith("zh")) {
+                       return ScreenTools.isMobile ?
+                              "Noto Sans CJK SC" :
+                              "Microsoft YaHei"
+                   }
+                   return "Open Sans"
+            }
             color: qgcPal.text
             leftPadding: columnWidth3/5
             verticalAlignment: Text.AlignVCenter
@@ -110,12 +118,28 @@ Rectangle{
                     text: _tableModule.txtFir
                     font.pointSize: _defaultFont
                     color: qgcPal.text
+                    font.family: {
+                           if (Qt.locale().name.startsWith("zh")) {
+                               return ScreenTools.isMobile ?
+                                      "Noto Sans CJK SC" :
+                                      "Microsoft YaHei"
+                           }
+                           return "Open Sans"
+                    }
                 }
                 Text {
                     Layout.preferredWidth:parent.Layout.preferredWidth/3
                     Layout.row: 1; Layout.column: 1
                     text: _tableModule.txtSec
                     font.pointSize: _defaultFont
+                    font.family: {
+                           if (Qt.locale().name.startsWith("zh")) {
+                               return ScreenTools.isMobile ?
+                                      "Noto Sans CJK SC" :
+                                      "Microsoft YaHei"
+                           }
+                           return "Open Sans"
+                    }
                     color: qgcPal.text
                     Layout.leftMargin: -ScreenTools.defaultFontPixelWidth*1.4
                     horizontalAlignment:Text.AlignHCenter
@@ -125,6 +149,15 @@ Rectangle{
                     Layout.row: 1; Layout.column: 2
                     text: _tableModule.txtThi
                     font.pointSize: _defaultFont
+//                    font.family:    ScreenTools.fixedFontFamily
+                    font.family: {
+                           if (Qt.locale().name.startsWith("zh")) {
+                               return ScreenTools.isMobile ?
+                                      "Noto Sans CJK SC" :
+                                      "Microsoft YaHei"
+                           }
+                           return "Open Sans"
+                    }
                     color: qgcPal.text
                     Layout.leftMargin: -ScreenTools.defaultFontPixelWidth*1.6
                     horizontalAlignment:Text.AlignRight

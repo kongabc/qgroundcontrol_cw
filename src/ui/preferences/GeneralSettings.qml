@@ -1818,16 +1818,6 @@ Rectangle {
 
 
                 QGCLabel {
-                    text:               qsTr("V2.4")
-                    Layout.alignment:   Qt.AlignHCenter
-                }
-
-                QGCLabel {
-                    text:               qsTr("")
-                    Layout.alignment:   Qt.AlignHCenter
-                }
-
-                QGCLabel {
                     text:               qsTr("%1 Version").arg(QGroundControl.appName)
                     Layout.alignment:   Qt.AlignHCenter
                 }

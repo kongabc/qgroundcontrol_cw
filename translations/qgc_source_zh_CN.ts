@@ -7137,7 +7137,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/ui/preferences/GeneralSettings.qml" line="1328"/>
         <source>Check for Internet connection</source>
-        <translation>請檢查您的互聯網連接</translation>
+        <translation>请检查您的互联网连接</translation>
     </message>
     <message>
         <location filename="../src/ui/preferences/GeneralSettings.qml" line="1429"/>
@@ -13753,7 +13753,7 @@ sudo apt-get 移除调制解调器管理器</translation>
     <message>
         <location filename="../src/api/QGCCorePlugin.cc" line="141"/>
         <source>Camera Settings</source>
-        <translation>相机设置</translation>
+        <translation>吊舱设置</translation>
     </message>
     <message>
         <location filename="../src/api/QGCCorePlugin.cc" line="145"/>

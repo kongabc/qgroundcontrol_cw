@@ -104,6 +104,7 @@ Rectangle {
         QGCCwGimbalController.receiveStreamChanged.connect(function() {
             // console.log("11111111直接连接信号成功!",QGCCwGimbalController.cameraStream);
             _videoStreamSettings.rtspUrl.value = QGCCwGimbalController.cameraStream; // 直接赋值给 Fact
+            _videoStreamSettings.lowLatencyMode.value = true;
             QGroundControl.videoManager.allVideoStream =  QGCCwGimbalController.cameraStream;
         });
     }

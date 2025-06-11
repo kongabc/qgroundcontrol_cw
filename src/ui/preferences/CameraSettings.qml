@@ -24,7 +24,7 @@ import QGCCwQml.QGCCwGimbalController 1.0
 import QGCCwGimbal.Controls 1.0
 
 Rectangle {
-    id:   _root  //__cameraRoot
+    id:   _root
     color:          qgcPal.window
     anchors.fill:   parent
     anchors.margins:    ScreenTools.defaultFontPixelWidth
@@ -60,7 +60,6 @@ Rectangle {
     property color _selectedTextColor: qgcPal.buttonHighlightText
     property color _unselectedColor: qgcPal.windowShade
     property real  _widths:Math.round(_root.width*0.8)
-//    property var  columnWidths: [Math.round(_widths*0.15), Math.round(_widths*0.15), Math.round(_widths*0.1),Math.round(_widths*0.2),Math.round(_widths*0.4),Math.round(_widths*0.85)]
 
     property real _tabBoxWid:ScreenTools.isMobile ? _root.width : (_root.width*0.9)
     property real _rowWidths:ScreenTools.isMobile ? _tabBoxWid*0.95 : _tabBoxWid*0.7
@@ -97,12 +96,11 @@ Rectangle {
         anchors.margins:    ScreenTools.defaultFontPixelWidth
         contentHeight:      tabColumn.height
         contentWidth:       tabColumn.width
-//        flickableDirection: Flickable.VerticalFlick
+        flickableDirection: Flickable.VerticalFlick
         Rectangle{
             id: tabColumn
             width: _root.width
-//            height: tabBarBtn.height + swipeViewCont.height  +  _columnSpacing * 6 //ScreenTools.isMobile ? (_root.height + ScreenTools.defaultFontPixelHeight*24) : (_root.height+ ScreenTools.defaultFontPixelHeight*10)
-            height: tabBarBtn.height + Math.max(swipeViewCont.maxItemHeight, _root.height - tabBarBtn.height)  //+  _columnSpacing
+            height: tabBarBtn.height + Math.max(swipeViewCont.maxItemHeight, _root.height - tabBarBtn.height)
             color: "transparent"
 
             TabBar {
@@ -287,15 +285,18 @@ Rectangle {
                     }
 
                 }
-//                interactive :false // ScreenTools.isMobile ? false : true
+                interactive:ScreenTools.isMobile ? false : true
+
+
+                // 添加的滚轮处理区域
 
                 Item{
-                    width: SwipeView.view.width // 继承 SwipeView 宽度
-//                    height: SwipeView.view.height
+                    width: SwipeView.view.width
                     implicitHeight: childHeight1.implicitHeight +  _columnSpacing * 2
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: childHeight1.implicitHeight
+                    //pc use ListView ， Android use ScrollView
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: childHeight1.implicitHeight
                         Rectangle{
                             id:childHeight1
                             width: _tabBoxWid
@@ -312,19 +313,18 @@ Rectangle {
                                 RowLayout{
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("吊舱型号:")
+                                        text: qsTr("设备型号:")
                                     }
                                     Text{
                                         text: QGCCwGimbalController.devideType ? QGCCwGimbalController.devideType : "未知"
                                         font.pointSize:_defaultFont*1.2
                                         color: qgcPal.text
                                     }
-
                                 }
                                 RowLayout{
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("控制器版本:")
+                                        text: qsTr("GCU版本:")
                                     }
                                     Text{
                                         text: isNaN(QGCCwGimbalController.firmwareVer) ? "未知" : QGCCwGimbalController.firmwareVer/10
@@ -336,7 +336,7 @@ Rectangle {
                                     }
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("吊舱版本:")
+                                        text: qsTr("云台版本:")
                                     }
                                     Text{
                                         text: isNaN(QGCCwGimbalController.hardwareVer) ? "未知" : QGCCwGimbalController.hardwareVer/10
@@ -347,7 +347,14 @@ Rectangle {
                                 }
 
                                 //流地址
-                                Item { width: 1; height: _margins }
+                                Rectangle {
+                                    height: 1
+                                    color: qgcPal.text
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: -_margins
+                                    Layout.rightMargin: -_margins
+                                }
+
                                 GridLayout {
                                     id:                         comm1
                                     Layout.alignment:   Qt.AlignHCenter
@@ -575,7 +582,14 @@ Rectangle {
                                         }
                                     }
                                 }
-                                Item { width: 1; height: _margins }
+
+                                Rectangle {
+                                    height: 1
+                                    color: qgcPal.text
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: -_margins
+                                    Layout.rightMargin: -_margins
+                                }
                                 //温度报警
                                 RowLayout{
                                     Text{
@@ -841,7 +855,14 @@ Rectangle {
                                     }
 
                                 }
-                                Item { width: 1; height: _margins }
+
+                                Rectangle {
+                                    height: 1
+                                    color: qgcPal.text
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: -_margins
+                                    Layout.rightMargin: -_margins
+                                }
                                 QGCLabel {
                                     id:         tcpOrUdp
                                     text:       qsTr("UDP/TCP :")
@@ -927,19 +948,33 @@ Rectangle {
 
                                 }
 
+
+                                Item { width: 1; height: _margins/2}
+                                Rectangle {
+                                    height: 1
+                                    color: qgcPal.text
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: -_margins
+                                    Layout.rightMargin: -_margins
+                                }
+
+                                QGCLabel {
+                                    text:               qsTr("V2.4")
+                                    Layout.alignment:   Qt.AlignHCenter
+                                }
+
                             }
                         }
-//                    }
+                    }
 
                 }
                 //网络设置
                 Item {
-                    width: SwipeView.view.width // 继承 SwipeView 宽度
-//                    height: SwipeView.view.height
+                    width: SwipeView.view.width
                     implicitHeight: childHeight2.implicitHeight +  _columnSpacing * 2
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: childHeight2.implicitHeight
+                    ScrollView { //ListView {
+                        anchors.fill: parent
+                        contentHeight: childHeight2.implicitHeight
                         Rectangle{
                             id:childHeight2
                             width: _tabBoxWid
@@ -958,7 +993,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp1.baseline
-                                        text: QGCCwGimbalController.firmwareVer/10 >= 6 ?qsTr("IP地址") : qsTr("GCU IP地址")   //GCU版本号大于等于6，改为
+                                        text: QGCCwGimbalController.firmwareVer/10 >= 6 ?qsTr("IP地址") : qsTr("控制器IP地址")   //GCU版本号大于等于6，改为
                                     }
                                     QGCTextField {
                                         id:     ipInp1
@@ -1010,6 +1045,7 @@ Rectangle {
                                 }
                                 Row {   //何时显示远端Ip???
                                     spacing:    ScreenTools.defaultFontPixelWidth
+                                    visible: (QGCCwGimbalController.firmwareVer/10 >= 5) ? false : true // GCU版本号大于等于5,隐藏
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp4.baseline
@@ -1028,7 +1064,7 @@ Rectangle {
                                 }
                                 Row {
                                     spacing:    ScreenTools.defaultFontPixelWidth
-                                    visible: QGCCwGimbalController.firmwareVer/10 >= 6 ? false : (QGCCwGimbalController.firmwareVer/10 == 5.6 ? false : true)  // GCU版本号大于等于6,隐藏 ； 版本号5-6隐藏
+                                    visible: (QGCCwGimbalController.firmwareVer/10 >= 6) ? false : true  // GCU版本号大于等于6,隐藏
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp5.baseline
@@ -1055,6 +1091,14 @@ Rectangle {
                                 Column {
                                     QGCButton {
                                         text:               qsTr("恢复默认")
+                                        font.family: {
+                                               if (Qt.locale().name.startsWith("zh")) {
+                                                   return ScreenTools.isMobile ?
+                                                          "Noto Sans CJK SC" :
+                                                          "Microsoft YaHei"
+                                               }
+                                               return "Open Sans"
+                                        }
                                         onClicked:  {
 //                                            console.log("恢复默认")
                                             QGCCwGimbalController.resetParameters(1);
@@ -1083,13 +1127,12 @@ Rectangle {
                                 }
                             }
                         }
-//                    }
+                    }
                 }
                 //相机
                 Item {
                     id:cameraIt
                     width: SwipeView.view.width
-//                    height: SwipeView.view.height
                     implicitHeight: {
                            if(QGCCwGimbalController.showCameraSet === 1){
                                return cameraItHei1.implicitHeight +  _columnSpacing * 2
@@ -1100,12 +1143,12 @@ Rectangle {
                            }
                        }
                     //第一种相机显示页面
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: cameraItHei1.height
-//                        visible: QGCCwGimbalController.showCameraSet===1
+                    ScrollView {  //ListView { //
+                        anchors.fill: parent
+                        contentHeight: cameraItHei1.implicitHeight
+                        visible: QGCCwGimbalController.showCameraSet===1
                         Rectangle{
-                            visible: QGCCwGimbalController.showCameraSet===1
+//                            visible: QGCCwGimbalController.showCameraSet===1
                             id:cameraItHei1
                             width: _tabBoxWid
 //                            height: parent.height
@@ -1165,7 +1208,6 @@ Rectangle {
                                 spacing:ScreenTools.defaultFontPixelWidth*3
                                 QGCButton {
                                     function testEnabled() {
-//                                        return validateIPaddress(loginIpInp.text)
                                         if(!validateIPaddress(loginIpInp.text))  return false
                                         return true
                                     }
@@ -1177,14 +1219,14 @@ Rectangle {
                                 }
                             }
                         }
-//                    }
+                    }
                     //第二种相机显示页面
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: cameraItHei2.height
-//                        visible: QGCCwGimbalController.showCameraSet===2
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: cameraItHei2.implicitHeight
+                        visible: QGCCwGimbalController.showCameraSet===2
                         Rectangle{
-                             visible: QGCCwGimbalController.showCameraSet===2
+//                            visible: QGCCwGimbalController.showCameraSet===2
                             id:cameraItHei2
                             width:_tabBoxWid
 //                            height: parent.height
@@ -1210,6 +1252,7 @@ Rectangle {
                                         width:  _valueWidth
                                         inputMethodHints:       Qt.ImhFormattedNumbersOnly
                                         anchors.verticalCenter: parent.verticalCenter
+                                        onTextChanged: saveBtnEnable.enabled = saveBtnEnable.testEnabled()
                                         onEditingFinished: {
                                             QGCCwGimbalController.cameraRealIp = text;
                                         }
@@ -1228,6 +1271,7 @@ Rectangle {
                                         width:  _valueWidth
                                         inputMethodHints:       Qt.ImhFormattedNumbersOnly
                                         anchors.verticalCenter: parent.verticalCenter
+                                        onTextChanged: saveBtnEnable.enabled = saveBtnEnable.testEnabled()
                                         onEditingFinished: {
                                             QGCCwGimbalController.cameraGatewayIp = text;
                                         }
@@ -1246,6 +1290,7 @@ Rectangle {
                                         width:  _valueWidth
                                         inputMethodHints:       Qt.ImhFormattedNumbersOnly
                                         anchors.verticalCenter: parent.verticalCenter
+                                        onTextChanged: saveBtnEnable.enabled = saveBtnEnable.testEnabled()
                                         onEditingFinished: {
                                             QGCCwGimbalController.cameraNetMask = text;
                                         }
@@ -1443,15 +1488,22 @@ Rectangle {
                                     id:saveBtnEnable
                                     function testEnabled() {
                                         let val = parseInt(ratInp.text);
-                                        if(!validateIPaddress(camIpInp1.text))  return false
-                                        if(!validateIPaddress(camIpInp2.text))  return false
-                                        if(!validateIPaddress(camIpInp3.text))  return false
-                                        if((val<500 || val>6000)) return false
+                                        if(!validateIPaddress(camIpInp1.text)) { return false}
+                                        if(!validateIPaddress(camIpInp2.text))  {return false}
+                                        if(!validateIPaddress(camIpInp3.text)) { return false}
+                                        if(isAllOnesMask(camIpInp3.text)) return false
+                                        if((val<500 || val>6000)) {return false}
                                         return true
                                     }
                                     enabled:testEnabled()
                                     text:               qsTr("保存")
                                     onClicked:  {    //第二种相机
+//                                        console.log(testEnabled())
+//                                        console.log(validateIPaddress(camIpInp1.text))
+//                                        if(!testEnabled()){
+//                                            return
+//                                        }
+
                                         let config = {
                                             "Eth0": camIpInp1.text,
                                             "TrackFrameDelay": videoDrop.currentIndex === 0 ? "28" : (videoDrop.currentIndex === 1 ? "33" : "39"),
@@ -1502,18 +1554,18 @@ Rectangle {
 
 
                         }
-//                    }
+                    }
                     //第三种相机显示页面
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: cameraInfo3.height
-//                        visible: QGCCwGimbalController.showCameraSet===3
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: cameraInfo3.implicitHeight
+                        visible: QGCCwGimbalController.showCameraSet===3
                         Rectangle{
-                            visible: QGCCwGimbalController.showCameraSet===3
+//                            visible: QGCCwGimbalController.showCameraSet===3
                             id:cameraInfo3
                             width: _tabBoxWid
 //                            height: parent.height
-                            implicitHeight:dvrSetBox.implicitHeight +  _columnSpacing * (QGCCwGimbalController.cameraConfs.length + 2)
+                            implicitHeight: Math.max((dvrSetBox.implicitHeight +  _columnSpacing * (QGCCwGimbalController.cameraConfs.length + 2)),_root.height)
                             color: qgcPal.windowShade
                             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -1524,11 +1576,12 @@ Rectangle {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 anchors.top: parent.top
                                 anchors.topMargin: _columnSpacing
+
                                 Repeater{
                                     model:QGCCwGimbalController.cameraConfs
                                     delegate: Column {
                                         spacing: ScreenTools.isMobile ?  _columnSpacing/2 : _columnSpacing
-                                        visible: modelData.modifyis
+//                                        visible: modelData.modifyis
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         Rectangle{
                                             width: camIpBox.width + ScreenTools.defaultFontPixelWidth*8
@@ -1587,6 +1640,7 @@ Rectangle {
                                                                     return rangeComponent
                                                                 return undefined
                                                             }
+
                                                             property var paramData: modelData
 
                                                             Layout.fillWidth: true
@@ -1650,18 +1704,17 @@ Rectangle {
                                 }
                             }
                         }
-//                    }
+                    }
                 }
 
                 //S.BUS
                 Item {
                     width: SwipeView.view.width
-//                    height: SwipeView.view.height
                     implicitHeight: columnWid.implicitHeight + _columnSpacing * 2
 
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: columnWid.implicitHeight
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: columnWid.implicitHeight
                         Rectangle{
                             id:columnWid
                             width: _tabBoxWid
@@ -1683,7 +1736,7 @@ Rectangle {
                                     Layout.preferredWidth:_rowCol1 //_root.columnWidths[0]
                                     Layout.preferredHeight: _tableHeight
                                     color: _rowColor
-                                    Text { text: "功能"; font.pointSize:_defaultFont ;anchors.centerIn: parent;color: qgcPal.text }
+                                    Text { text: "功能"; font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily;anchors.centerIn: parent;color: qgcPal.text }
                                 }
                                 GridLayout{
                                     id:setChildWidth
@@ -1746,6 +1799,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("模式")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         //                                    font.pointSize:_dataShowValueSize
                                         color:qgcPal.text
                                     }
@@ -1853,6 +1907,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("跟踪")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -1895,6 +1950,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("俯仰")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -1937,6 +1993,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("偏航")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -1979,6 +2036,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("变倍")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -2026,6 +2084,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("拍照录像")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -2072,6 +2131,14 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("画面切换")
                                         font.pointSize:_defaultFont
+                                        font.family: {
+                                               if (Qt.locale().name.startsWith("zh")) {
+                                                   return ScreenTools.isMobile ?
+                                                          "Noto Sans CJK SC" :
+                                                          "Microsoft YaHei"
+                                               }
+                                               return "Open Sans"
+                                        }
                                         color:qgcPal.text
                                     }
                                 }
@@ -2114,6 +2181,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("夜视")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
                                     }
                                 }
@@ -2154,6 +2222,7 @@ Rectangle {
                                     Text{
                                         anchors.centerIn: parent;
                                         text:qsTr("补光")
+                                        font.family:    ScreenTools.normalFontFamily
                                         font.pointSize:_defaultFont
                                         color:qgcPal.text
                                     }
@@ -2195,6 +2264,7 @@ Rectangle {
                                     Text{
                                         anchors.centerIn: parent;
                                         text:qsTr("测距")
+                                        font.family:    ScreenTools.normalFontFamily
                                         font.pointSize:_defaultFont
                                         color:qgcPal.text
                                     }
@@ -2238,6 +2308,14 @@ Rectangle {
                                 Column {
                                     QGCButton {
                                         text:               qsTr("恢复默认")
+                                        font.family: {
+                                               if (Qt.locale().name.startsWith("zh")) {
+                                                   return ScreenTools.isMobile ?
+                                                          "Noto Sans CJK SC" :
+                                                          "Microsoft YaHei"
+                                               }
+                                               return "Open Sans"
+                                        }
                                         onClicked:  {
                                             QGCCwGimbalController.resetParameters(2);
                                             //                                        QGCCwGimbalController.calibrateStatusCode=5
@@ -2256,16 +2334,15 @@ Rectangle {
                                 }
                             }
                         }
-//                    }
+                    }
                 }
                 // 校准
                 Item {
                     width: SwipeView.view.width
-//                    height: SwipeView.view.height
-                     implicitHeight:childHeight7.implicitHeight + _columnSpacing * 2
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: childHeight7.implicitHeight
+                    implicitHeight:childHeight7.implicitHeight + _columnSpacing * 2
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: childHeight7.implicitHeight
                         Rectangle{
                             id:childHeight7
                             width: _tabBoxWid
@@ -2278,15 +2355,13 @@ Rectangle {
                                 anchors.top: parent.top
                                 anchors.topMargin:_columnSpacing
                                 width: columnBox.width + (_columnSpacing * 2)
-                                height:columnBox.height + (_columnSpacing * 2)
-                                //                               anchors.centerIn: parent // 内容容器居中
+                                height:columnBox.height + _columnSpacing
                                 color: qgcPal.windowShade
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 ColumnLayout{
                                     id:columnBox
-                                    //                                    anchors.centerIn: parent
                                     anchors.horizontalCenter: parent.horizontalCenter
-                                    spacing: _columnSpacing
+                                    spacing: ScreenTools.isMobile ? _columnSpacing/2 : _columnSpacing
                                     width: childrenRect.width // 自动宽度
                                     RowLayout{
                                         Layout.alignment: Qt.AlignHCenter
@@ -2306,11 +2381,8 @@ Rectangle {
                                     RowLayout{
                                         Layout.alignment: Qt.AlignHCenter
                                         Layout.preferredHeight: textItem.implicitHeight // 固定高度
-                                        //                                        Layout.fillHeight: false
-                                        //                                        Layout.preferredHeight: _columnSpacing*4
                                         Text {
                                             id:textItem
-                                            //                                            Layout.alignment: Qt.AlignHCenter
                                             font.pointSize:_defaultFont
                                             font.family:ScreenTools.normalFontFamily
                                             color: qgcPal.text
@@ -2320,16 +2392,20 @@ Rectangle {
                                     }
                                     RowLayout{
                                         id:visLoading
-                                        Layout.topMargin:ScreenTools.isMobile ? _columnSpacing : _columnSpacing*1.8
+                                        Layout.topMargin:ScreenTools.isMobile ? _columnSpacing/4 : _columnSpacing*1.8
                                         Layout.alignment: Qt.AlignHCenter
                                         Layout.preferredHeight: visible ? implicitHeight : 0 // 关键修改
                                         visible : (QGCCwGimbalController.calibrateStatusCode === 1 || QGCCwGimbalController.calibrateStatusCode === 0) ? true : false   //
                                         AnimatedImage{
                                             Layout.alignment: Qt.AlignHCenter
-                                            //                                            anchors.centerIn: parent
                                             source: "qrc:/qml/QGCCwGimbal/Controls/Loading.gif"
-                                            width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*5.6 : ScreenTools.defaultFontPixelWidth*4.8
-                                            height: width
+//                                            sourceSize.width: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 3.2 : ScreenTools.defaultFontPixelWidth * 3.2
+//                                            sourceSize.height: sourceSize.width
+
+//                                            width: ScreenTools.defaultFontPixelWidth * 3.2 //sourceSize.width
+//                                            height: width
+                                            // 关键设置：保持宽高比
+                                            fillMode: Image.PreserveAspectFit
                                             smooth: true
                                             mipmap: true
                                             antialiasing: true
@@ -2337,7 +2413,7 @@ Rectangle {
                                     }
 
                                     RowLayout{
-                                        Layout.topMargin: ScreenTools.isMobile ? _columnSpacing : _columnSpacing*1.8
+                                        Layout.topMargin: ScreenTools.isMobile ? _columnSpacing/4 : _columnSpacing*1.8
                                         Layout.alignment: Qt.AlignHCenter
                                         Layout.preferredHeight: visible ? implicitHeight : 0 // 关键修改
                                         visible : QGCCwGimbalController.calibrateStatusCode === 2 ? true : false
@@ -2354,7 +2430,7 @@ Rectangle {
                                         }
                                     }
                                     RowLayout{
-                                        Layout.topMargin: ScreenTools.isMobile ? _columnSpacing : _columnSpacing*1.8
+                                        Layout.topMargin: ScreenTools.isMobile ? _columnSpacing/4 : _columnSpacing*1.8
                                         Layout.alignment: Qt.AlignHCenter
                                         Layout.preferredHeight: visible ? implicitHeight : 0 // 关键修改
                                         visible : QGCCwGimbalController.calibrateStatusCode === 3 ? true : false
@@ -2387,7 +2463,7 @@ Rectangle {
 
                                     RowLayout{
                                         Layout.alignment: Qt.AlignHCenter
-                                        Layout.topMargin: _columnSpacing*3
+                                        Layout.topMargin: _columnSpacing
                                         Layout.preferredHeight: calibrateButton.height // 固定高度
                                         QGCButton {
                                             id:calibrateButton
@@ -2395,10 +2471,7 @@ Rectangle {
                                             text:               qsTr("校准")
                                             //                                            Layout.alignment:   Qt.AlignHCenter
                                             onClicked:  {
-                                                if(QGCCwGimbalController.remoteValid){
-                                                    //                                                    QGCCwGimbalController.calibrateStatusCode = 0;
-                                                    QGCCwGimbalController.calibrateFun();
-                                                }
+                                               QGCCwGimbalController.calibrateFun();
 
                                             }
                                         }
@@ -2409,16 +2482,15 @@ Rectangle {
                             }
 
                         }
-//                    }
+                    }
                 }
                 //载机数据
                 Item {
                     width: SwipeView.view.width
-//                    height: SwipeView.view.height
                     implicitHeight: childHeight8.implicitHeight + _columnSpacing * 2
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: childHeight8.implicitHeight
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: childHeight8.implicitHeight
                         Rectangle{
                             id:childHeight8
                             width:_tabBoxWid
@@ -2427,7 +2499,7 @@ Rectangle {
                             color: qgcPal.windowShade
                             anchors.horizontalCenter: parent.horizontalCenter // 水平居中
                             Column{
-                                spacing:    _columnSpacing/2
+                                spacing:  ScreenTools.isMobile ?  _columnSpacing/4 : _columnSpacing/2
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 anchors.top: parent.top
                                 anchors.topMargin: _columnSpacing
@@ -2602,7 +2674,7 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("云台滚转角")
+                                            text:qsTr("相机滚转角")
                                             font.pointSize:_defaultFont
                                             color:qgcPal.text
                                         }
@@ -2613,7 +2685,7 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("云台俯仰角")
+                                            text:qsTr("相机俯仰角")
                                             font.pointSize:_defaultFont
                                             color:qgcPal.text
                                         }
@@ -2624,7 +2696,7 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("云台指向角")
+                                            text:qsTr("相机指向角")
                                             font.pointSize:_defaultFont
                                             color:qgcPal.text
                                         }
@@ -2670,18 +2742,17 @@ Rectangle {
 
                         }
 
-//                    }
+                    }
                 }
 
                 //高级设置
                 Item {
                     visible: btn7.visible
                     width: SwipeView.view.width
-//                    height: SwipeView.view.height
                     implicitHeight:childHeight9.implicitHeight + _columnSpacing * 2
-//                    ScrollView {
-//                        anchors.fill: parent
-//                        contentHeight: childHeight9.implicitHeight
+                    ScrollView { //ListView { //
+                        anchors.fill: parent
+                        contentHeight: childHeight9.implicitHeight
                         Rectangle{
                             id:childHeight9
                             width: _tabBoxWid
@@ -2935,7 +3006,7 @@ Rectangle {
                             }
 
                         }
-//                    }
+                    }
                 }
 
 
@@ -2946,18 +3017,19 @@ Rectangle {
                     QGCComboBox{
                         Layout.preferredWidth:_comboFieldWidth
                         model: paramData.options
-                        currentIndex: model.indexOf(paramData.value)
+                        currentIndex:model.indexOf(paramData.value)
+
                         onActivated:{
+
+                            let val = model[currentIndex].replace("x", ",");
+
+
                             QGCCwGimbalController.updateCameraConfs(
                                paramData.configIndex,
                                paramData.paramName,
-                               model[currentIndex]
+                               val  //model[currentIndex] //
                             )
-//                            console.log(
-//                                           "ConfigIndex:", paramData.configIndex,
-//                                           "ParamName:", paramData.paramName,
-//                                           "NewValue:", model[currentIndex]
-//                                       )
+
                         }
                     }
 
