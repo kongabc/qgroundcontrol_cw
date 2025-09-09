@@ -131,9 +131,9 @@ SetupPage {
                         property Fact battMonitor:      controller.getParameterFact(-1, "BATT_MONITOR", false /* reportMissing */)
                         property Fact battVoltMult:     controller.getParameterFact(-1, "BATT_VOLT_MULT", false /* reportMissing */)
                         property Fact battVoltPin:      controller.getParameterFact(-1, "BATT_VOLT_PIN", false /* reportMissing */)
-                        property FactGroup  _batteryFactGroup:  controller.vehicle.getFactGroup("battery0")
-                        property Fact vehicleVoltage:   _batteryFactGroup.voltage
-                        property Fact vehicleCurrent:   _batteryFactGroup.current
+                        property FactGroup  _batteryFactGroup:  _batt1FullSettings.visible ? controller.vehicle.getFactGroup("battery0") : null
+                        property Fact vehicleVoltage:   _batteryFactGroup ? _batteryFactGroup.voltage : null
+                        property Fact vehicleCurrent:   _batteryFactGroup ? _batteryFactGroup.current : null
                     }
                 }
             }
@@ -218,9 +218,9 @@ SetupPage {
                         property Fact battMonitor:      controller.getParameterFact(-1, "BATT2_MONITOR", false /* reportMissing */)
                         property Fact battVoltMult:     controller.getParameterFact(-1, "BATT2_VOLT_MULT", false /* reportMissing */)
                         property Fact battVoltPin:      controller.getParameterFact(-1, "BATT2_VOLT_PIN", false /* reportMissing */)
-                        property FactGroup  _batteryFactGroup:  controller.vehicle.getFactGroup("battery1")
-                        property Fact vehicleVoltage:   _batteryFactGroup.voltage
-                        property Fact vehicleCurrent:   _batteryFactGroup.current
+                        property FactGroup  _batteryFactGroup:  batt2FullSettings.visible ? controller.vehicle.getFactGroup("battery1") : null
+                        property Fact vehicleVoltage:   _batteryFactGroup ? _batteryFactGroup.voltage : null
+                        property Fact vehicleCurrent:   _batteryFactGroup ? _batteryFactGroup.current : null
                     }
                 }
             }

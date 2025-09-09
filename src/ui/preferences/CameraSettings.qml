@@ -118,7 +118,13 @@ Rectangle {
                        if(tabBarBtn.currentIndex != 3){
                            QGCCwGimbalController.resetNoSaveData();
                         }
+                       if(tabBarBtn.currentIndex == 1){
+                           QGCCwGimbalController.reqCameraConf();
+                        }
 
+                       if(tabBarBtn.currentIndex == 2){
+                          QGCCwGimbalController.startRequest(QGCCwGimbalController.cameraIpAddr);
+                        }
                     }
                 }
                 TabButton {
@@ -294,7 +300,7 @@ Rectangle {
                     width: SwipeView.view.width
                     implicitHeight: childHeight1.implicitHeight +  _columnSpacing * 2
                     //pc use ListView ， Android use ScrollView
-                    ScrollView { //ListView { //
+                    ScrollView { //ScrollView { //
                         anchors.fill: parent
                         contentHeight: childHeight1.implicitHeight
                         Rectangle{
@@ -572,7 +578,124 @@ Rectangle {
 
 
 
+                                Rectangle {
+                                    height: 1
+                                    color: qgcPal.text
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: -_margins
+                                    Layout.rightMargin: -_margins
+                                }
+
                                 RowLayout {
+                                    spacing: ScreenTools.defaultFontPixelWidth
+                                    QGCCheckBox {
+                                        id:cameraCenterSwitch
+                                        text:       qsTr("相机准星")
+                                        checked:QGCCwGimbalController.showCenter
+                                        onClicked: {
+                                            QGCCwGimbalController.showCenter = checked;
+                                        }
+                                    }
+
+                                    QGCComboBox{
+                                        id:styleDrop
+                                        enabled:cameraCenterSwitch.checked
+                                        Layout.preferredWidth:_comboFieldWidth*0.5
+                                        Layout.leftMargin: _margins
+                                        Layout.rightMargin: _margins
+                                        model:  [
+                                            qsTr("+ 大"),
+                                            qsTr("+ 中"),
+                                            qsTr("+ 小"),
+                                            qsTr("x 大"),
+                                            qsTr("x 中"),
+                                            qsTr("x 小")
+                                        ]
+                                        currentIndex:QGCCwGimbalController.iconStyle
+                                        onActivated:{
+                                            QGCCwGimbalController.iconStyle = index;
+                                        }
+                                    }
+
+                                    QGCCheckBox {
+                                        enabled:cameraCenterSwitch.checked
+                                        text:       qsTr("移动按钮")
+                                        checked:QGCCwGimbalController.showMoveBtn
+                                        onClicked: {
+                                            QGCCwGimbalController.showMoveBtn = checked;
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        id: myButton
+                                        width: ScreenTools.defaultFontPixelWidth*8
+                                        height: ScreenTools.defaultFontPixelWidth*3.6
+                                        enabled:cameraCenterSwitch.checked
+//                                        property bool checked: QGCCwGimbalController.showToCenter && (QGCCwGimbalController.iconOffsetY === 0 && QGCCwGimbalController.iconOffsetX === 0) // 选中状态
+
+                                        // 默认背景色
+//                                        color: myButton.checked ? _selectedColor  : qgcPal.button
+                                         color: myButton.enabled ? qgcPal.button :  "#cdcdcd"  // (QGCCwGimbalController.showToCenter ?  _selectedColor  : qgcPal.button) :  "#cdcdcd"
+                                         border.width: 1
+
+                                        // 按钮文本
+                                       Text {
+                                           id:centTxt
+                                           text: "准星回中"
+                                           anchors.centerIn: parent
+                                           font.pointSize:ScreenTools.defaultFontPointSize
+                                           color:  qgcPal.text  //QGCCwGimbalController.showToCenter ? _selectedTextColor : qgcPal.text
+                                       }
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            onClicked:  {
+//                                               myButton.checked = !myButton.checked;
+                                                if(myButton.color == _selectedColor){
+                                                    QGCCwGimbalController.showToCenter = false;
+                                                }else{
+                                                    QGCCwGimbalController.showToCenter = true;
+                                                }
+
+                                            }
+                                            onPressed: {
+                                                myButton.color = myButton.enabled ? _selectedColor :   "#cdcdcd"
+
+                                                centTxt.color = _selectedTextColor;
+
+                                            }
+                                            onReleased: {
+                                                myButton.color = myButton.enabled ? qgcPal.button :   "#cdcdcd"
+
+                                                centTxt.color = qgcPal.text;
+                                            }
+
+                                        }
+                                    }
+
+                                }
+
+                                RowLayout {
+                                    spacing: ScreenTools.defaultFontPixelWidth
+                                    QGCLabel {
+                                        text:       qsTr("参考线")
+                                    }
+                                    QGCComboBox{
+                                        Layout.preferredWidth:_comboFieldWidth*0.5
+                                        model:  [
+                                            qsTr("None"),
+                                            qsTr("九宫格A"),
+                                            qsTr("九宫格B"),
+                                            qsTr("九宫格A+B")
+                                        ]
+                                        currentIndex:QGCCwGimbalController.showGrid
+                                        onActivated:{
+                                            QGCCwGimbalController.showGrid = index;
+                                        }
+                                    }
+                                }
+
+                                RowLayout {
+                                    visible: false
                                     spacing: ScreenTools.defaultFontPixelWidth
                                     QGCCheckBox {
                                         text:       qsTr("相机中心点")
@@ -959,7 +1082,7 @@ Rectangle {
                                 }
 
                                 QGCLabel {
-                                    text:               qsTr("V2.4")
+                                    text:               qsTr("V2.5.3")
                                     Layout.alignment:   Qt.AlignHCenter
                                 }
 
@@ -972,7 +1095,7 @@ Rectangle {
                 Item {
                     width: SwipeView.view.width
                     implicitHeight: childHeight2.implicitHeight +  _columnSpacing * 2
-                    ScrollView { //ListView {
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: childHeight2.implicitHeight
                         Rectangle{
@@ -1143,7 +1266,7 @@ Rectangle {
                            }
                        }
                     //第一种相机显示页面
-                    ScrollView {  //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: cameraItHei1.implicitHeight
                         visible: QGCCwGimbalController.showCameraSet===1
@@ -1221,7 +1344,7 @@ Rectangle {
                         }
                     }
                     //第二种相机显示页面
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: cameraItHei2.implicitHeight
                         visible: QGCCwGimbalController.showCameraSet===2
@@ -1404,7 +1527,7 @@ Rectangle {
                                     }
                                     GridLayout{
                                         columns:    2
-                                        visible: QGCCwGimbalController.cameraFps !== "none"
+                                        visible: false // QGCCwGimbalController.cameraFps !== "none"
                                         QGCLabel {
                                             Layout.preferredWidth: _labelWidth+ScreenTools.defaultFontPixelWidth/2
                                             text:               qsTr("FPS")
@@ -1556,7 +1679,7 @@ Rectangle {
                         }
                     }
                     //第三种相机显示页面
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: cameraInfo3.implicitHeight
                         visible: QGCCwGimbalController.showCameraSet===3
@@ -1576,7 +1699,6 @@ Rectangle {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 anchors.top: parent.top
                                 anchors.topMargin: _columnSpacing
-
                                 Repeater{
                                     model:QGCCwGimbalController.cameraConfs
                                     delegate: Column {
@@ -1598,15 +1720,15 @@ Rectangle {
                                                 anchors{
                                                     top:parent.top
                                                     left:parent.left
-                                                    topMargin: -ScreenTools.defaultFontPixelWidth*1.4
+                                                    topMargin: modelData.label === "dvr" ? -ScreenTools.defaultFontPixelWidth*3.2 : -ScreenTools.defaultFontPixelWidth*1.7// ( modelData.label === "dvr" ? -ScreenTools.defaultFontPixelWidth*3.2 : -ScreenTools.defaultFontPixelWidth*1.4)
                                                     leftMargin: ScreenTools.defaultFontPixelWidth*1.4
 
                                                 }
                                                 Text{
                                                     id:resTxt
-                                                    text: modelData.label
-                                                    font.pointSize:_defaultFont
+                                                    text:(modelData.label === "dvr" ? "视频存储" : modelData.label)
                                                     font.capitalization: Font.AllUppercase
+                                                    font.pointSize:_defaultFont
                                                     color: qgcPal.text
                                                     anchors.centerIn: parent
                                                 }
@@ -1623,6 +1745,7 @@ Rectangle {
                                                     RowLayout {
                                                         width: parent.width
                                                         spacing: _columnSpacing/2
+
                                                         Label {
                                                             text: modelData.chineseName + (modelData.type === "range" ? (" (" + modelData.min + "~" + modelData.max + ")") : "")
                                                             font.pointSize:_defaultFont
@@ -1630,6 +1753,7 @@ Rectangle {
                                                             Layout.leftMargin: _columnSpacing
                                                             color: qgcPal.text
                                                         }
+
                                                         Loader {
                                                             sourceComponent: {
                                                                 if (modelData.type === "array"){
@@ -1646,6 +1770,39 @@ Rectangle {
                                                             Layout.fillWidth: true
                                                             Layout.preferredHeight: _columnSpacing*1.2
                                                         }
+
+
+//                                                        Item {
+//                                                           Layout.preferredWidth: _columnSpacing * 2  // Space for both icons
+//                                                           Layout.preferredHeight: _columnSpacing
+//                                                           Layout.alignment: Qt.AlignRight
+
+//                                                           Row {
+//                                                               spacing: 2
+//                                                               anchors.right: parent.right
+
+//                                                               // Success icon
+//                                                               Image {
+//                                                                   id: successIcon
+//                                                                   width: _columnSpacing * 0.8
+//                                                                   height: width
+//                                                                   source: "qrc:/qmlimages/check.svg"
+//                                                                   visible: modelData.saveStatus === "success"  // You'll need to add this property to your model
+//                                                               }
+
+//                                                               // Failure icon
+//                                                               Image {
+//                                                                   id: failureIcon
+//                                                                   width: _columnSpacing * 0.8
+//                                                                   height: width
+//                                                                   source: "qrc:/qmlimages/x.svg"  // Replace with your failure icon path
+//                                                                   visible: modelData.saveStatus === "failed"  // You'll need to add this property to your model
+//                                                               }
+//                                                           }
+
+//                                                        }
+
+
                                                     }
                                                 }
                                             }
@@ -1712,7 +1869,7 @@ Rectangle {
                     width: SwipeView.view.width
                     implicitHeight: columnWid.implicitHeight + _columnSpacing * 2
 
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: columnWid.implicitHeight
                         Rectangle{
@@ -2340,7 +2497,7 @@ Rectangle {
                 Item {
                     width: SwipeView.view.width
                     implicitHeight:childHeight7.implicitHeight + _columnSpacing * 2
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: childHeight7.implicitHeight
                         Rectangle{
@@ -2395,7 +2552,7 @@ Rectangle {
                                         Layout.topMargin:ScreenTools.isMobile ? _columnSpacing/4 : _columnSpacing*1.8
                                         Layout.alignment: Qt.AlignHCenter
                                         Layout.preferredHeight: visible ? implicitHeight : 0 // 关键修改
-                                        visible : (QGCCwGimbalController.calibrateStatusCode === 1 || QGCCwGimbalController.calibrateStatusCode === 0) ? true : false   //
+                                        visible : (QGCCwGimbalController.calibrateStatusCode === 1) ? true : false   //  || QGCCwGimbalController.calibrateStatusCode === 0
                                         AnimatedImage{
                                             Layout.alignment: Qt.AlignHCenter
                                             source: "qrc:/qml/QGCCwGimbal/Controls/Loading.gif"
@@ -2488,7 +2645,7 @@ Rectangle {
                 Item {
                     width: SwipeView.view.width
                     implicitHeight: childHeight8.implicitHeight + _columnSpacing * 2
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: childHeight8.implicitHeight
                         Rectangle{
@@ -2750,7 +2907,7 @@ Rectangle {
                     visible: btn7.visible
                     width: SwipeView.view.width
                     implicitHeight:childHeight9.implicitHeight + _columnSpacing * 2
-                    ScrollView { //ListView { //
+                    ScrollView {
                         anchors.fill: parent
                         contentHeight: childHeight9.implicitHeight
                         Rectangle{
@@ -2996,6 +3153,7 @@ Rectangle {
                                                     QGCCwGimbalController.userConfigFun(0x08,0,0,0,0x01,0,0);
                                                 }else{
                                                     QGCCwGimbalController.userConfigFun(0x08,0,0,0,0x00,0,0);
+                                                    QGCCwGimbalController.trackBtnState = false;
                                                 }
                                             }
                                         }

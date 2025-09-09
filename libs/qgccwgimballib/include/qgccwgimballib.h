@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QUdpSocket>
 #include <QTcpSocket>
+//#include <QThread>
+#include <QEventLoop>
 #include <QNetworkAccessManager>
 #include <QUrl>
 #include <QNetworkReply>
@@ -68,12 +70,12 @@ public:
    Q_PROPERTY(int showCameraSet READ showCameraSetValue WRITE setShowCameraSet NOTIFY showValueChanged)
    Q_PROPERTY(QString inputIpPort READ inputIpPortValue WRITE setInputIpPort NOTIFY inputIpPortValueChanged)
 
-   //协议相机
    Q_PROPERTY(QVariantList cameraConfs READ cameraConfsValue NOTIFY cameraConfsChanged)
 
    Q_PROPERTY(int timeZoneVal READ timeZoneValue WRITE setTimeZone NOTIFY valueChanged)   // WRITE setTimeZone
    Q_PROPERTY(quint8 flags2 READ flags2Value NOTIFY valueChanged)
    Q_PROPERTY(quint8 flags3 READ flags3Value NOTIFY valueChanged)
+   Q_PROPERTY(quint8 ispEffect READ ispEffectValue NOTIFY valueChanged)
    Q_PROPERTY(quint8 osdState READ osdStateValue NOTIFY valueChanged)
    Q_PROPERTY(quint8 osdDataMean READ osdDataMeanValue NOTIFY valueChanged)
    Q_PROPERTY(quint8 imageInvers READ imageInversValue NOTIFY valueChanged)
@@ -118,7 +120,6 @@ public:
    Q_PROPERTY(QString  carrierRoll READ carrierRollValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  carrierPitch READ carrierPitchValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  carrierYaw READ carrierYawValueStr NOTIFY valueChanged)
-   //int16_t[18] sbus通道数值
 
    Q_PROPERTY(qint16  carrierAccN READ carrierAccNValueStr NOTIFY valueChanged)
    Q_PROPERTY(qint16  carrierAccE READ carrierAccEValueStr NOTIFY valueChanged)
@@ -126,6 +127,8 @@ public:
 
    Q_PROPERTY(qint16  cpuTemp READ cpuTempValue NOTIFY valueChanged)
    Q_PROPERTY(float  sdRemainCapacity READ sdRemainCapacityValue NOTIFY valueChanged)
+   Q_PROPERTY(quint32  recTime READ recTimeValue NOTIFY valueChanged)
+
 
    // Thermal Camera
    Q_PROPERTY(quint8  ircamFlags READ ircamFlagsValue NOTIFY valueChanged)
@@ -137,9 +140,15 @@ public:
    Q_PROPERTY(bool showCenter READ showCenterValue WRITE setShowCenterValue NOTIFY paramShowCenterChanged)
    Q_PROPERTY(QString tcpAddr READ tcpAddrValue WRITE setTcpAddrValue NOTIFY paramChanged)
    Q_PROPERTY(bool isTcp READ isTcpValue WRITE setIsTcpValue NOTIFY paramChanged)
-//   Q_PROPERTY(bool videoMode READ videoModeValue WRITE setVideoModeValue NOTIFY paramChanged)
 
-//   Q_PROPERTY(bool  isAreaTemp READ isAreaTempValue WRITE setIsAreaTempValue NOTIFY isAreaTempValueChanged)
+   Q_PROPERTY(int iconStyle READ iconStyleValue WRITE setIconStyleValue NOTIFY paramIconStyleChanged)
+   Q_PROPERTY(bool showMoveBtn READ showMoveBtnValue WRITE setShowMoveBtnValue NOTIFY paramShowMoveBtnChanged)
+   Q_PROPERTY(bool showToCenter READ showToCenterValue WRITE setToCenterValue NOTIFY paramToCenterChanged)
+   Q_PROPERTY(int showGrid READ showGridValue WRITE setShowGridValue NOTIFY paramShowGridChanged)
+
+   Q_PROPERTY(int iconOffsetX READ iconOffsetX WRITE setIconOffsetX NOTIFY iconOffsetChanged)
+   Q_PROPERTY(int iconOffsetY READ iconOffsetY WRITE setIconOffsetY NOTIFY iconOffsetChanged)
+
 
    Q_PROPERTY(bool  isPointTemp READ isPointTempValue WRITE setIsPointTempValue NOTIFY isPointTempValueChanged)
 
@@ -183,6 +192,7 @@ public:
    int timeZoneValue() const;
    quint8 flags2Value() const;
    quint8 flags3Value() const;
+   quint8 ispEffectValue() const;
    quint8 osdDataMeanValue() const;
    quint8 osdStateValue() const;
    quint8 imageInversValue() const;
@@ -234,6 +244,7 @@ public:
 
    qint16 cpuTempValue() const;
    float sdRemainCapacityValue() const;
+   quint32 recTimeValue() const;
    quint8 ircamFlagsValue() const;
 
    bool irCamAvailableValue() const;
@@ -271,9 +282,13 @@ public:
    bool showCenterValue() const;
    QString tcpAddrValue() const;
    bool isTcpValue() const;
-//   bool videoModeValue() const;
+   int iconStyleValue() const;
+   bool showMoveBtnValue() const;
+   bool showToCenterValue() const;
+   int showGridValue() const;
+   int iconOffsetX() const;
+   int iconOffsetY() const;
 
-//   bool isAreaTempValue() const;
    bool isPointTempValue() const;
    qint16 tempWarnHValue() const;
    qint16 tempWarnLValue() const;
@@ -284,6 +299,20 @@ public:
    void setShowCenterValue(bool showCenter);
    void setTcpAddrValue(QString tcpAddr);
    void setIsTcpValue(bool isTcp);
+   void setIconStyleValue(int styValue);
+   void setShowMoveBtnValue(bool isShow);
+   void setToCenterValue(bool toCenter);
+   void setShowGridValue(int showGrid);
+
+   void setIconOffsetX(int x);
+   void setIconOffsetY(int y);
+
+   void loadIconOffsets();
+   void saveIconOffsets();
+   void saveCurrentOffset();
+   void saveImmediately();
+
+
 //   void setVideoModeValue(bool videoMode);
 //   void setIsAreaTempValue(bool isAreaTemp);
    void setIsPointTempValue(bool isPointTemp);
@@ -303,12 +332,13 @@ public:
    Q_INVOKABLE void resetNoSaveData();
 
    Q_INVOKABLE void modeSwitch(quint8 modeSelect); //0x01-云台空间定向模式，0x02-俯拍模式，0x03-追踪模式(废弃，使 用框选追踪功能)，0x04-凝视模式，0x00-指向跟随模式(俯仰稳定)，其他值 默认指向跟随模式。
-   Q_INVOKABLE void ircutSwitch(void);
-   Q_INVOKABLE void lampSwitch(void);
+   Q_INVOKABLE void ircutSwitch(quint8 ircutCmd);
+   Q_INVOKABLE void lampSwitch(quint8 lampCmd);
    Q_INVOKABLE void trackObject(void);
    Q_INVOKABLE void paletteSwitch(void);
    Q_INVOKABLE void picInPicSwitch(void);
    Q_INVOKABLE void rangeSwitch(void);
+   Q_INVOKABLE void ispSwitch(quint8 ispCmd);
    Q_INVOKABLE QString formatFloat(const char* s,float val);
    Q_INVOKABLE QString formatFloat(QString format, float val);
 
@@ -319,8 +349,8 @@ public:
    Q_INVOKABLE void takePhoto(void);
    Q_INVOKABLE void takeRecording(void);
    Q_INVOKABLE void videoZoom(int zoomNum);
-   Q_INVOKABLE void toCenter(void); //回中
-   Q_INVOKABLE void calibrateFun(void); //校准
+   Q_INVOKABLE void toCenter(void);
+   Q_INVOKABLE void calibrateFun(void);
 
    Q_INVOKABLE void osdSwitch(int cmdInd);
    Q_INVOKABLE void userConfigFun(quint8 v,quint8 p1,quint8 p2,quint8 p3,quint8 p4,quint8 p5,qint8 p6);
@@ -336,8 +366,12 @@ public:
    Q_INVOKABLE void saveChangeParm(const QVariantMap &configData);
    Q_INVOKABLE void cameraIpLogin(const QString &ip);
    Q_INVOKABLE void updateCameraConfs(int configIndex, const QString &paramName, const QVariant &value);
+   Q_INVOKABLE void setCameraConfs();
    Q_INVOKABLE void saveCameraConfs();
    Q_INVOKABLE void saveResState();
+   Q_INVOKABLE void reqCameraConf();
+
+   Q_INVOKABLE void reloadOffset();
 
 
 signals:
@@ -358,6 +392,13 @@ signals:
 
    void trackBtnStateChanged(bool trackBtnState);
    void paramShowCenterChanged(bool showCenter);
+   void paramIconStyleChanged();
+   void paramShowMoveBtnChanged();
+   void paramToCenterChanged(bool toCenter);
+   void paramShowGridChanged();
+   void iconOffsetChanged();
+
+
    void paramChanged();
    void tempValueChanged();
    void isPointTempValueChanged();
@@ -374,11 +415,13 @@ public slots:
    void _calibrateTimerUpdate(void);
    void _readUdpDatagrams(void);
    void _tele2TimerUpdate(void);
+   void _tcpReconnect(void);
 
    void _readTcpDatagrams(void);
    void _tcpConnected(void);
    void _tcpDisconnected(void);
-   void _tcpErrorOccurred(QAbstractSocket::SocketError);
+   void _tcpErrorOccurred(QAbstractSocket::SocketError error);
+   void _tcpStateChanged(QAbstractSocket::SocketState state);
 
    void _handleFirstRes();
    void _handleSecondRes();

@@ -20,6 +20,8 @@ import QGroundControl.Palette           1.0
 import QGroundControl.Vehicle           1.0
 import QGroundControl.Controllers       1.0
 
+import QGCCwQml.QGCCwGimbalController 1.0
+
 Item {
     id:     root
     clip:   true
@@ -115,6 +117,59 @@ Item {
                     y:      parent.height * 0.66
                     visible: _showGrid && !QGroundControl.videoManager.fullScreen
                 }
+
+                //outer nine-square grid
+                Item {
+                   id:outGrid
+                   width:  parent.width
+                   height: parent.height
+                   visible: (QGCCwGimbalController.showGrid === 1 || QGCCwGimbalController.showGrid === 3) //&& !QGroundControl.videoManager.fullScreen
+                   Repeater {
+                          model: [
+                              { type: "vertical", pos: 0.3333},
+                              { type: "vertical", pos: 0.6667},
+                              { type: "horizontal", pos: 0.3333},
+                              { type: "horizontal", pos: 0.6667}
+                          ]
+                          delegate: Rectangle {
+                              color: Qt.rgba(1, 1, 1, 0.5)
+                              width: modelData.type === "vertical" ? 1 : parent.width
+                              height: modelData.type === "vertical" ? parent.height : 1
+                              x: modelData.type === "vertical" ? Math.floor(parent.width * modelData.pos) : 0
+                              y: modelData.type === "horizontal" ? Math.floor(parent.height * modelData.pos) : 0
+                          }
+                      }
+
+                }
+
+                // Inner nine-square grid
+                Rectangle {
+                    id: centerGridContainer
+                    x: parent.width * 0.3333
+                    y: parent.height * 0.3333
+                    width: parent.width * 0.3334
+                    height: parent.height * 0.3334
+                    border.width: QGCCwGimbalController.showGrid === 2 ? 1 : 0
+                    border.color: Qt.rgba(1,1,1,0.5)
+                    color: "transparent"
+                    visible: (QGCCwGimbalController.showGrid === 2 || QGCCwGimbalController.showGrid === 3) // && !QGroundControl.videoManager.fullScreen
+                    Repeater {
+                        model: [
+                            { type: "vertical", pos: 0.3333, color: Qt.rgba(1, 1, 1, 0.5) },
+                            { type: "vertical", pos: 0.6667, color: Qt.rgba(1, 1, 1, 0.5) },
+                            { type: "horizontal", pos: 0.3333, color: Qt.rgba(1, 1, 1, 0.5) },
+                            { type: "horizontal", pos: 0.6667, color: Qt.rgba(1, 1, 1, 0.5) }
+                        ]
+                        delegate: Rectangle {
+                            color: modelData.color
+                            width: modelData.type === "vertical" ? 1 : parent.width
+                            height: modelData.type === "vertical" ? parent.height : 1
+                            x: modelData.type === "vertical" ? Math.floor(parent.width * modelData.pos) : 0
+                            y: modelData.type === "horizontal" ? Math.floor(parent.height * modelData.pos) : 0
+                        }
+                    }
+                }
+
             }
         }
         Loader {

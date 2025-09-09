@@ -60,13 +60,17 @@ Item {
     property real   _rightPanelWidth:       ScreenTools.defaultFontPixelWidth * 30
     property var    _mapControl:            mapControl
 
+    property real _labelWidth:          ScreenTools.defaultFontPixelWidth * 7
+    property real _valueWidth:          ScreenTools.defaultFontPixelWidth * 10
+    property real _switchBtnHe:         ScreenTools.defaultFontPixelWidth*3.4
+    property real _defaultFont:         ScreenTools.defaultFontPointSize
+
     property real   _fullItemZorder:    0
     property real   _pipItemZorder:     QGroundControl.zOrderWidgets
 
     property int _dataShowLabelSize: ScreenTools.isMobile ? ScreenTools.mediumFontPointSize*0.6 : ScreenTools.mediumFontPointSize*0.8
     property int _dataShowValueSize: ScreenTools.isMobile ? ScreenTools.mediumFontPointSize*0.75 : ScreenTools.mediumFontPointSize*1.2
     property int _radiusValueSize: ScreenTools.defaultFontPixelWidth / 2
-
 
     function _calcCenterViewPort() {
         var newToolInset = Qt.rect(0, 0, width, height)
@@ -107,13 +111,18 @@ Item {
             }
 
             CwGimbalBtn {
-                iconSource: "Mode.png"
+                iconSource: lockBtn.showHighlight ? "Lock.png" : (followBtn.showHighlight ? "Follow.png" : (orthoviewBtn.showHighlight ? "Orthoview.png" : (gazeBtn.showHighlight ? "Gaze.png" : (fpvBtn.showHighlight ? "FPV.png": "Mode.png")) ))  // "Mode.png"
                 iconMarkShow: true
-                overlayColor:ScreenTools.isMobile ? "#000" : "#fff"
+                showHighlight: (lockBtn.showHighlight || followBtn.showHighlight || orthoviewBtn.showHighlight || gazeBtn.showHighlight || fpvBtn.showHighlight) ? true: false
+                overlayColor: (showHighlight || ScreenTools.isMobile)? "#000" : "#fff"
                 onBtnClicked: {
                     modeSelectRect.visible = !modeSelectRect.visible
+                    if(modeSelectRect.visible){
+                        popupBox.visible = false;
+                    }
                 }
                 Rectangle {
+                    z: QGroundControl.zOrderTopMost+1
                     id: modeSelectRect
                     anchors.top: parent.bottom
                     anchors.topMargin: ScreenTools.defaultFontPixelWidth/2
@@ -128,6 +137,7 @@ Item {
                         id: modeColumn
                         spacing:  ScreenTools.defaultFontPixelWidth * 0.5
                         CwGimbalBtn {
+                            id:lockBtn
                             iconSource: "Lock.png"
                             showHighlight: QGCCwGimbalController.modeRaw === 1 ? true: false
                             overlayColor: (QGCCwGimbalController.modeRaw === 1 || ScreenTools.isMobile)? "#000" : "#fff"
@@ -138,6 +148,7 @@ Item {
                         }
 
                         CwGimbalBtn {
+                            id:followBtn
                             iconSource: "Follow.png"
                             showHighlight: QGCCwGimbalController.modeRaw === 0 ? true: false
                             overlayColor: (QGCCwGimbalController.modeRaw === 0 || ScreenTools.isMobile)? "#000" : "#fff"
@@ -148,6 +159,7 @@ Item {
                         }
 
                         CwGimbalBtn {
+                            id:orthoviewBtn
                             iconSource: "Orthoview.png"
                             showHighlight: QGCCwGimbalController.modeRaw === 2 ? true: false
                             overlayColor: (QGCCwGimbalController.modeRaw === 2 || ScreenTools.isMobile) ? "#000" : "#fff"
@@ -159,6 +171,7 @@ Item {
                         }
 
                         CwGimbalBtn {
+                            id:gazeBtn
                             iconSource: "Gaze.png"
                             showHighlight: QGCCwGimbalController.modeRaw === 4 ? true: false
                             overlayColor: (QGCCwGimbalController.modeRaw === 4 || ScreenTools.isMobile) ? "#000" : "#fff"
@@ -169,6 +182,7 @@ Item {
                         }
 
                         CwGimbalBtn {
+                            id:fpvBtn
                             iconSource: "FPV.png"
                             showHighlight: QGCCwGimbalController.modeRaw === 5 ? true: false
                             overlayColor: (QGCCwGimbalController.modeRaw === 5 || ScreenTools.isMobile) ? "#000" : "#fff"
@@ -182,30 +196,177 @@ Item {
                 }
             }
 
+
             CwGimbalBtn {
+                id:ircutBtn
                iconSource: "IRCut.png"
-               showHighlight: QGCCwGimbalController.btnState & 0x00000200 ? true : false
-               overlayColor:(QGCCwGimbalController.btnState & 0x00000200 || ScreenTools.isMobile ) ? "#000" : "#fff"
-               visible: QGCCwGimbalController.iRCutAvailable
+               iconMarkShow: true
+               showHighlight: QGCCwGimbalController.firmwareVer ?
+                                  (QGCCwGimbalController.firmwareVer/10 < 6 ?
+                                       (((QGCCwGimbalController.btnState & 0x00000200) || (QGCCwGimbalController.btnState & 0x00000400))? true : false) :
+                                       (((QGCCwGimbalController.btnState & 0x00000200) || (QGCCwGimbalController.ispEffect === 2) || (QGCCwGimbalController.btnState & 0x00000400)) ? true : false)) :
+                                  (((QGCCwGimbalController.btnState & 0x00000200) || (QGCCwGimbalController.btnState & 0x00000400))? true : false)
+
+               overlayColor:(showHighlight || ScreenTools.isMobile ) ? "#000" : "#fff"
+               visible: QGCCwGimbalController.iRCutAvailable || (QGCCwGimbalController.devideType == "D-80N") || QGCCwGimbalController.lampAvailable
                onBtnClicked: {
-                   QGCCwGimbalController.ircutSwitch();
+                   popupBox.visible = !popupBox.visible
+                   if(popupBox.visible){
+                        modeSelectRect.visible = temperatureSelectRect.visible = false
+                   }
+
                }
             }
 
-            CwGimbalBtn {
-               iconSource: "Lamp.png"
-               showHighlight: QGCCwGimbalController.btnState & 0x00000400 ? true : false
-               overlayColor:(QGCCwGimbalController.btnState & 0x00000400 || ScreenTools.isMobile ) ? "#000" : "#fff"
-               visible: QGCCwGimbalController.lampAvailable
-               onBtnClicked: {
-                   QGCCwGimbalController.lampSwitch();
-               }
+            Popup {
+                id: popupBox
+                x: ircutBtn.x + ircutBtn.width/2 - width/2
+                y: ircutBtn.y + ircutBtn.height*1.3
+                width: _labelWidth + _valueWidth + _margins*4.8
+                height:{
+                    var h = 0;
+                    if (nightModeGrid.visible) h += _switchBtnHe;
+                    if (fullColorGrid.visible) h += _switchBtnHe + contentColumn.spacing;
+                    if (lampGrid.visible) h += _switchBtnHe + contentColumn.spacing;
+                    return h + contentColumn.padding*2;
+                } // (QGCCwGimbalController.devideType == "D-80N") ? (_switchBtnHe*3 + _margins*8) :(QGCCwGimbalController.lampAvailable ? (_switchBtnHe*2 + _margins*6) : (_switchBtnHe + _margins*3))
+                padding: 0
+                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+                visible: false
+                background: Rectangle {
+                    color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.6) : Qt.rgba(0,0,0,0.6)
+                    radius: 4
+
+                    // 正三角部分
+                    Canvas {
+                        id: triangle
+                        width: 20
+                        height: 10
+                        anchors {
+                            top: parent.top
+                            horizontalCenter: parent.horizontalCenter
+                            topMargin: -10
+                        }
+                        onPaint: {
+                            var ctx = getContext("2d")
+                            ctx.fillStyle = ScreenTools.isMobile ? Qt.rgba(1,1,1,0.6) : Qt.rgba(0,0,0,0.6)
+                            ctx.strokeStyle = "transparent"
+                            ctx.lineWidth = 0
+
+                            ctx.beginPath()
+                            ctx.moveTo(width/2, 0)
+                            ctx.lineTo(0, height)
+                            ctx.lineTo(width, height)
+                            ctx.closePath()
+
+                            ctx.fill()
+                            ctx.stroke()
+
+                        }
+                    }
+                }
+                contentItem: Column {
+                    id: contentColumn
+                    padding: _margins*1.6
+                    spacing: _margins*2
+
+                    GridLayout{
+                        id: nightModeGrid
+                        columns: 2
+                        visible:  QGCCwGimbalController.iRCutAvailable
+                        QGCLabel {
+                            Layout.preferredWidth: _labelWidth
+                            text: qsTr("夜景模式")
+                            font.pointSize:_defaultFont
+                        }
+                        Rectangle{
+                            Layout.preferredWidth:  _valueWidth
+                            height: _switchBtnHe
+                            SwitchModule{
+                                externalState:(QGCCwGimbalController.btnState & 0x00000200) ? true : false
+//                                isOn:Qt.binding(() => (QGCCwGimbalController.btnState & 0x00000200) ? true : false)
+                                onText:"开"
+                                offText:"关"
+                                isRes:true
+                                onOnOffClick:{
+                                    if(isOn){
+                                        QGCCwGimbalController.ircutSwitch(0x01);
+                                    }else{
+                                        QGCCwGimbalController.ircutSwitch(0x00);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    GridLayout{
+                         id: fullColorGrid
+                        columns: 2
+                        visible: QGCCwGimbalController.devideType == "D-80N"
+                        QGCLabel {
+                            Layout.preferredWidth: _labelWidth
+                            text: qsTr("全彩夜视")
+                            font.pointSize:_defaultFont
+                        }
+                        Rectangle{
+                            Layout.preferredWidth:  _valueWidth
+                            height: _switchBtnHe
+                            SwitchModule{
+                                externalState: (QGCCwGimbalController.ispEffect === 2) ? true : false
+                                onText:"开"
+                                offText:"关"
+                                isRes:true
+                                onOnOffClick:{
+                                    if(isOn){
+                                       QGCCwGimbalController.ispSwitch(0x02);
+                                    }else{
+                                       QGCCwGimbalController.ispSwitch(0x01);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+                    GridLayout{
+                        id: lampGrid
+                        columns: 2
+                        visible: QGCCwGimbalController.lampAvailable
+                        QGCLabel {
+                            Layout.preferredWidth: _labelWidth
+                            text: qsTr("补光")
+                            font.pointSize:_defaultFont
+                        }
+                        Rectangle{
+                            Layout.preferredWidth:  _valueWidth
+                            height: _switchBtnHe
+                            SwitchModule{
+                                externalState: (QGCCwGimbalController.btnState & 0x00000400) ? true : false
+                                onText:"开"
+                                offText:"关"
+                                isRes:true
+                                onOnOffClick:{
+                                    if(isOn){
+                                        QGCCwGimbalController.lampSwitch(0x01);
+                                    }else{
+                                        QGCCwGimbalController.lampSwitch(0x00);
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+
             }
+
 
             CwGimbalBtn {
                 id:trackBtn
                 iconSource: "Track.png"
-                visible: QGCCwGimbalController.trackAvailable
+                visible: QGCCwGimbalController.firmwareVer ? (QGCCwGimbalController.firmwareVer/10 < 6 ? QGCCwGimbalController.trackAvailable : (QGCCwGimbalController.trackAvailable && QGCCwGimbalController.recognizeSta === 1)) : QGCCwGimbalController.trackAvailable
                 showHighlight: QGCCwGimbalController.trackBtnState ? true : false
 
                 overlayColor:(showHighlight || ScreenTools.isMobile) ? "#000" : "#fff"
@@ -241,6 +402,9 @@ Item {
                 overlayColor:ScreenTools.isMobile ? "#000" : "#fff"
                 onBtnClicked: {
                     temperatureSelectRect.visible = !temperatureSelectRect.visible
+                    if(temperatureSelectRect.visible){
+                        popupBox.visible = false;
+                    }
                 }
 
                 Rectangle {
@@ -446,99 +610,152 @@ Item {
 
     Rectangle{
         id:photoVideoControlBox
-        width: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth *12 : ScreenTools.defaultFontPixelWidth * 14
-        height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth* 3.6 : ScreenTools.defaultFontPixelWidth* 5.2
+        width: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth *14 : ScreenTools.defaultFontPixelWidth * 14
+        height: ScreenTools.isMobile ? (timeRec.visible ? ScreenTools.defaultFontPixelWidth* 5 : ScreenTools.defaultFontPixelWidth* 3.8) : ScreenTools.defaultFontPixelWidth* 7.2 // 5.2
         anchors.right: parent.right
-        anchors.rightMargin:  ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth : ScreenTools.defaultFontPixelWidth * 2
+        anchors.rightMargin: ScreenTools.isMobile ? 0 : ScreenTools.defaultFontPixelWidth * 2
         anchors.bottom: infoCont.top
-        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth*0.9 : ScreenTools.defaultFontPixelWidth * 3
+        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth*0.8 : ScreenTools.defaultFontPixelWidth * 3
         z: QGroundControl.zOrderTopMost
         color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
+        MouseArea {
+            anchors.fill: parent
+            propagateComposedEvents: false
+            onClicked: {
+               console.log("Rectangle clicked");
+               // 阻止事件继续传递
+               mouse.accepted = true;
+            }
+            onPressed: mouse.accepted = true;
+            onReleased: mouse.accepted = true;
+        }
+        ColumnLayout  {
+            anchors.fill: parent
+            spacing: 0
+            anchors.topMargin: _margins/2
+            RowLayout  {
+                Layout.alignment: Qt.AlignHCenter
+                width: parent.width
+                Layout.preferredHeight: parent.height * 0.62
+                spacing: 0
+                Rectangle{
+                    Layout.preferredWidth: photoVideoControlBox.width/3
+                    Layout.fillHeight: true
+                    color: "transparent"
+//                    border.width: 1
+                    Image {
+                        id:vRecord
+                        source: (QGCCwGimbalController.btnState & 0x00000100) ? "qrc:/qml/QGCCwGimbal/Controls/VideoRecordActive.png" : "qrc:/qml/QGCCwGimbal/Controls/VideoRecord.png"
+                        sourceSize.width: ScreenTools.defaultFontPixelHeight*1.5
+                        anchors.centerIn: parent
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        cursorShape: "PointingHandCursor"
 
-        Row {
-            Rectangle{
-                width: photoVideoControlBox.width/3
-                height: photoVideoControlBox.height
-                color: "transparent"
-                Image {
-                    id:vRecord
-                    source: (QGCCwGimbalController.btnState & 0x00000100) ? "qrc:/qml/QGCCwGimbal/Controls/VideoRecordActive.png" : "qrc:/qml/QGCCwGimbal/Controls/VideoRecord.png"
-                    sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
-                    anchors.centerIn: parent
+                        onClicked: {
+                            QGCCwGimbalController.takeRecording();
+                        }
+                    }
                 }
-                MouseArea{
+
+                Rectangle{
+                    Layout.preferredWidth:  photoVideoControlBox.width/3
+                    Layout.fillHeight: true
+                    color: "transparent"
+                    Text {
+                        id:txtCont
+                        text: "REC"
+                        font.pointSize:ScreenTools.isMobile ? ScreenTools.defaultFontPointSize*1.2 : ScreenTools.defaultFontPointSize*1.4
+                        anchors.fill: parent
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        color: qgcPal.text// (QGCCwGimbalController.btnState & 0x00000100) ? "#ff0000" : qgcPal.text
+                        visible: !txtCont2.visible
+                        font.bold: ScreenTools.isMobile ? false : true
+
+                        SequentialAnimation on color {
+                            running: (QGCCwGimbalController.btnState & 0x00000100)
+                            loops: Animation.Infinite
+                            onRunningChanged: {
+                                if (!running) txtCont.color = qgcPal.text
+                            }
+                            ColorAnimation { to: "#ff0000"; duration: 600 ;easing.type: Easing.InOutQuad}
+                            ColorAnimation { to: qgcPal.text; duration: 600 ;easing.type: Easing.InOutQuad}
+                        }
+
+                    }
+
+                    Text {
+                        id:txtCont2
+                        text: "PIC"
+                        font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPointSize*1.2 : ScreenTools.defaultFontPointSize*1.4
+                        anchors.fill: parent
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        color:"#ff0000"
+                        visible: false
+                        font.bold: ScreenTools.isMobile ? false : true
+                    }
+                }
+                Rectangle{
+                    Layout.preferredWidth:  photoVideoControlBox.width/3
+                    Layout.fillHeight: true
+                    color: "transparent"
+                    Image {
+                        id:tPhoto
+                        anchors.centerIn: parent
+                        source: "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
+                        sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        cursorShape: "PointingHandCursor"
+                        onPressed: {
+                            tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhotoActive.png"
+                            txtCont2.visible = true;
+                        }
+                        onReleased: {
+                            QGCCwGimbalController.takePhoto();
+                            tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
+                            txtCont2.visible = false;
+                        }
+                    }
+                }
+
+            }
+            Rectangle{
+                id:timeRec
+                width: parent.width
+                Layout.preferredHeight: parent.height * 0.38
+                color: "transparent"
+                visible:isNaN(QGCCwGimbalController.firmwareVer) ? false :((QGCCwGimbalController.firmwareVer/10 >= 6) ? true : false)
+                Text{
+                    id:timeTxt
+                    font.pointSize:ScreenTools.isMobile ? ScreenTools.defaultFontPointSize*1.1 : ScreenTools.defaultFontPointSize*1.4
+                    horizontalAlignment: Text.AlignHCenter
+
                     anchors.fill: parent
-                    cursorShape: "PointingHandCursor"
+                    verticalAlignment: Text.AlignVCenter
 
-                    onClicked: {
-                        QGCCwGimbalController.takeRecording();
+                    color: qgcPal.text
+                    text: {
+                        if (QGCCwGimbalController.recTime <= 0) {
+                           return "00:00:00";
+                        }
+
+                        let h = Math.floor(QGCCwGimbalController.recTime / 3600)
+                        let m = Math.floor((QGCCwGimbalController.recTime % 3600) / 60)
+                        let s = QGCCwGimbalController.recTime % 60
+
+    //                    return Qt.formatTime(new Date(0, 0, 0, h, m, s), "hh:mm:ss")
+
+                        return ("00" + h).slice(-2) + ":" + ("00" + m).slice(-2) + ":" + ("00" + s).slice(-2);
+
                     }
                 }
             }
 
-            Rectangle{
-                width:  photoVideoControlBox.width/3
-                height: photoVideoControlBox.height
-                color: "transparent"
-                Text {
-                   id:txtCont
-                   text: "REC"
-                   font.pointSize:ScreenTools.isMobile ? ScreenTools.defaultFontPointSize*1.2 : ScreenTools.defaultFontPointSize*1.4
-                   anchors.fill: parent
-                   horizontalAlignment: Text.AlignHCenter
-                   verticalAlignment: Text.AlignVCenter
-                   color: qgcPal.text// (QGCCwGimbalController.btnState & 0x00000100) ? "#ff0000" : qgcPal.text
-                   visible: !txtCont2.visible
-                   font.bold: ScreenTools.isMobile ? false : true
-
-                   SequentialAnimation on color {
-                       running: (QGCCwGimbalController.btnState & 0x00000100)
-                       loops: Animation.Infinite
-                       onRunningChanged: {
-                           if (!running) txtCont.color = qgcPal.text
-                       }
-                       ColorAnimation { to: "#ff0000"; duration: 600 ;easing.type: Easing.InOutQuad}
-                       ColorAnimation { to: qgcPal.text; duration: 600 ;easing.type: Easing.InOutQuad}
-                   }
-
-                }
-
-                Text {
-                   id:txtCont2
-                   text: "PIC"
-                   font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPointSize*1.2 : ScreenTools.defaultFontPointSize*1.4
-                   anchors.fill: parent
-                   horizontalAlignment: Text.AlignHCenter
-                   verticalAlignment: Text.AlignVCenter
-                   color:"#ff0000"
-                   visible: false
-                   font.bold: ScreenTools.isMobile ? false : true
-                }
-            }
-            Rectangle{
-                width:  photoVideoControlBox.width/3
-                height: photoVideoControlBox.height
-                color: "transparent"
-                Image {
-                    id:tPhoto
-                    source: "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
-                    sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
-                    anchors.centerIn: parent
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    cursorShape: "PointingHandCursor"
-                    onPressed: {
-                        tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhotoActive.png"
-                        txtCont2.visible = true;
-                    }
-                    onReleased: {
-                        QGCCwGimbalController.takePhoto();
-                        tPhoto.source = "qrc:/qml/QGCCwGimbal/Controls/TakePhoto.png"
-                        txtCont2.visible = false;
-                    }
-                }
-            }
 
         }
     }
@@ -546,17 +763,19 @@ Item {
     //info
     Rectangle{
        id: infoCont
-       width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 13 : ScreenTools.defaultFontPixelWidth * 18.6  // 20.1
-       height:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 20.2 : ScreenTools.defaultFontPixelWidth * 36 //topTab.height + valInfo.height
+       width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 14 : ScreenTools.defaultFontPixelWidth * 18.6  // 20.1
+//       height:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 20.5 : ScreenTools.defaultFontPixelWidth * 36 //topTab.height + valInfo.height
+       implicitHeight: topTab.height + valInfo.implicitHeight
        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.6) : Qt.rgba(0,0,0,0.6)
        anchors.bottom: parent.bottom
        anchors.right: parent.right
        z:   QGroundControl.zOrderTopMost
        visible: root.visible
+
        Rectangle{
            id:topTab
            width: parent.width
-           height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*2.5 : ScreenTools.defaultFontPixelWidth*3.6
+           height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*2 : ScreenTools.defaultFontPixelWidth*3.6
            color: "#454545" // ScreenTools.isMobile ? Qt.rgba(1,1,1,0.9) : Qt.rgba(0,0,0,0.9) //
            Row{
                anchors.fill: parent
@@ -618,288 +837,306 @@ Item {
                }
            }
        }
+//       Flickable {
+//           width: parent.width
+//           height: parent.height - topTab.height
+//           contentHeight: valInfo.height
+//           clip: true
+           Rectangle{
+               id:valInfo
+               width:parent.width
+               implicitHeight: childrenRect.height
+//               {
+//                          // 计算所有子项的总高度
+//                          let totalHeight = 0
+//                          if (targetVal.visible) totalHeight += targetVal.implicitHeight
+//                          if (carrierVal.visible) totalHeight += carrierVal.implicitHeight
+//                          totalHeight += showVal.implicitHeight
+//                          return totalHeight
+//                      }
+               anchors.top: topTab.bottom
+               anchors.bottomMargin: _radiusValueSize
+               color:"transparent"
+               Grid{
+                   id:targetVal
+//                   implicitHeight: childrenRect.height + padding * 2
+                   columns: 1
+                   padding: 10
+                   visible: true
+                   spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.6) : 0
+                   Row{
 
-       Rectangle{
-          id:valInfo
-          width:parent.width
-          anchors.top: topTab.bottom
-          anchors.bottomMargin: _radiusValueSize
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "E: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:QGCCwGimbalController.longitude
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-          Grid{
-            id:targetVal
-            columns: 1
-            padding: 10
-            visible: true
-            spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.4) : 0
-            Row{
+                   Row{
+                       Layout.alignment: Qt.AlignVCenter
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "N: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: QGCCwGimbalController.latitude
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
+                   Row{
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "E: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:QGCCwGimbalController.longitude
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "ASL: "
+                           font.family:  ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-            Row{
-                Layout.alignment: Qt.AlignVCenter
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "N: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.latitude
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
-            Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:QGCCwGimbalController.altitude + "m"
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "ASL: "
-                    font.family:  ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
+               }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:QGCCwGimbalController.altitude + "m"
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+               Grid{
+                   id:carrierVal
+//                   implicitHeight: childrenRect.height + padding * 2
+                   columns: 1
+                   padding: 10
+                   visible: false
+                   spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.6) : 0
+                   Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "E: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:"888.9999999" //QGCCwGimbalController.longitude
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-          }
+                   Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "N: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: "32.0000000" // QGCCwGimbalController.latitude
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
+                   Row{
 
-          Grid{
-            id:carrierVal
-            columns: 1
-            padding: 10
-            visible: false
-            spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.4) : 0
-            Row{
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "E: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:"888.9999999" //QGCCwGimbalController.longitude
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "ASL: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-            Row{
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "N: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: "32.0000000" // QGCCwGimbalController.latitude
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
-            Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: "300.5" + "m" // QGCCwGimbalController.altitude + "m"
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "ASL: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
+               }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: "300.5" + "m" // QGCCwGimbalController.altitude + "m"
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+               Grid{
+                   id:showVal
+//                   implicitHeight: childrenRect.height + padding * 2
+                   columns: 1
+                   padding: 10
+                   anchors.top: targetVal.bottom
+                   anchors.topMargin: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.8 ): (-ScreenTools.defaultFontPixelWidth*0.8)
+                   spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.6) : 0
+                   Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "Mode: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:QGCCwGimbalController.mode
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-          }
+                   Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "EO/IR: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-          Grid{
-            id:showVal
-            columns: 1
-            padding: 10
-            anchors.top: carrierVal.bottom
-            anchors.topMargin: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.8 ): (-ScreenTools.defaultFontPixelWidth*0.8)
-            spacing: ScreenTools.isMobile ? (-ScreenTools.defaultFontPixelWidth*0.4) : 0
-            Row{
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "Mode: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:QGCCwGimbalController.mode
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:QGCCwGimbalController.formatFloat("%.1f",(QGCCwGimbalController.zoomvalue / 10)) //(QGCCwGimbalController.zoomvalue / 10).toLocaleString(Qt.locale(), 'f', 1)
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text:"X" +" / "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: QGCCwGimbalController.formatFloat("%.1f",(QGCCwGimbalController.zoomvalue2 / 10))  //((QGCCwGimbalController.zoomvalue2 / 10)+ Number.EPSILON).toFixed(1)
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text:"X"
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-            Row{
-                Text {
-                   anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "EO/IR: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
+                   Row{
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "RNG: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: QGCCwGimbalController.lazerDis + "m"
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:QGCCwGimbalController.formatFloat("%.1f",(QGCCwGimbalController.zoomvalue / 10)) //(QGCCwGimbalController.zoomvalue / 10).toLocaleString(Qt.locale(), 'f', 1)
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text:"X" +" / "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.formatFloat("%.1f",(QGCCwGimbalController.zoomvalue2 / 10))  //((QGCCwGimbalController.zoomvalue2 / 10)+ Number.EPSILON).toFixed(1)
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text:"X"
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+                   Row {
 
-            Row{
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "RNG: "
-                    font.family:    ScreenTools.normalFontFamily
-                     color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.lazerDis + "m"
-                    font.family:    ScreenTools.normalFontFamily
-                     color: qgcPal.text
-                }
-            }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "Pitch: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-            Row {
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: ((((QGCCwGimbalController.pitch)/10)+ Number.EPSILON)* 10).toFixed(1) // (QGCCwGimbalController.pitch).toFixed(1)
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
+                   Row {
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "Yaw: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "Pitch: "
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: ((((QGCCwGimbalController.yaw)/10)+ Number.EPSILON)* 10).toFixed(1) //(QGCCwGimbalController.yaw).toFixed(1)
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.pitch
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
-            Row {
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "Yaw: "
-                    font.family:    ScreenTools.normalFontFamily
-                     color: qgcPal.text
-                }
+                   Row {
+                       visible: isNaN(QGCCwGimbalController.firmwareVer) ? false :((QGCCwGimbalController.firmwareVer/10 >= 6) ? true : false)
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "CPU: "
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.yaw
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text: QGCCwGimbalController.cpuTemp < -1000 ? (0 +"℃")  : (QGCCwGimbalController.formatFloat("%.2f",(QGCCwGimbalController.cpuTemp/10)) +"℃") //(((QGCCwGimbalController.cpuTemp/10)+ Number.EPSILON).toFixed(2)  +"℃")
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
+                   Row{
+                       visible: isNaN(QGCCwGimbalController.firmwareVer) ? false :((QGCCwGimbalController.firmwareVer/10 >= 6) ? true : false)
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowValueSize
+                           text:QGCCwGimbalController.sdRemainCapacity < 0 ? 0 : QGCCwGimbalController.formatFloat("%.2f",QGCCwGimbalController.sdRemainCapacity)//(QGCCwGimbalController.sdRemainCapacity).toFixed(2)
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                       Text {
+                           anchors.verticalCenter: parent.verticalCenter
+                           font.pointSize: _dataShowLabelSize
+                           text: "GB"
+                           font.family:    ScreenTools.normalFontFamily
+                           color: qgcPal.text
+                       }
+                   }
 
-            Row {
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "CPU: "
-                    font.family:    ScreenTools.normalFontFamily
-                     color: qgcPal.text
-                }
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text: QGCCwGimbalController.cpuTemp < -1000 ? (0 +"℃")  : (QGCCwGimbalController.formatFloat("%.2f",(QGCCwGimbalController.cpuTemp/10)) +"℃") //(((QGCCwGimbalController.cpuTemp/10)+ Number.EPSILON).toFixed(2)  +"℃")
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
-            Row{
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowValueSize
-                    text:QGCCwGimbalController.sdRemainCapacity < 0 ? 0 : QGCCwGimbalController.formatFloat("%.2f",QGCCwGimbalController.sdRemainCapacity)//(QGCCwGimbalController.sdRemainCapacity).toFixed(2)
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pointSize: _dataShowLabelSize
-                    text: "GB"
-                    font.family:    ScreenTools.normalFontFamily
-                    color: qgcPal.text
-                }
-            }
-
-          }
-       }
+               }
+           }
+//       }
     }
 
 
@@ -919,6 +1156,7 @@ Item {
             root.visible = isVisibleBtn
         }
     }
+
 
     FlyViewCustomLayer {
         id:                 customOverlay
@@ -980,34 +1218,7 @@ Item {
 
     FlyViewVideo {
         id: videoControl
-    }
-    Component.onCompleted: {
-//        console.log(videoControl.width + ";" + videoControl.height)
-
-//        for (let i = 0; i < videoControl.children.length; i++) {
-//          let child = videoControl.children[i];
-//          if (child.width) {
-//              console.log("Child width:", child.width);
-//          }
-//        }
-
-//        console.log(99999)
-//        for (let j = 0; j < videoControl.children[2].children.length; j++) {
-//          let child1 = videoControl.children[2].children[j];
-//          if (child1.width) {
-//              console.log("Child width:", child1.width);
-//          }
-//        }
-
-
-//        _videoWidth = videoControl.children[2].children[1].getWidth()
-//        _videoHeight = videoControl.children[2].children[1].getHeight()
-
-//        _videoWidth = videoControl.width
-//        _videoHeight = videoControl.height
-
-//        console.log(_videoWidth  + "---;---" + _videoHeight)
-
+        _toolStripWidth:widgetLayer._toolStripWidth
     }
 
     Rectangle{

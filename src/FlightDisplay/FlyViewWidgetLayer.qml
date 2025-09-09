@@ -59,7 +59,9 @@ Item {
     property int lastState:0
     property real deadZone: circleRect.height * 1.1 // 添加死区避免中间区域误触发
 
-     property bool isVisibleBtn :  true
+    property bool isVisibleBtn :  true
+
+    property alias _toolStripWidth: toolStrip.width
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -274,8 +276,8 @@ Item {
         height: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*17.4 :ScreenTools.defaultFontPixelWidth*14.2
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.rightMargin: isVisibleBtn ? (ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 16 : ScreenTools.defaultFontPixelWidth * 22) : ( ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth : ScreenTools.defaultFontPixelWidth * 2)
-        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth * 1.6 : ScreenTools.defaultFontPixelWidth * 6
+        anchors.rightMargin: isVisibleBtn ? (ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 15 : ScreenTools.defaultFontPixelWidth * 22) : ( ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth : ScreenTools.defaultFontPixelWidth * 2)
+        anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth * 1.3 : ScreenTools.defaultFontPixelWidth * 6
         color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
         radius: ScreenTools.defaultFontPixelWidth / 2
         z:QGroundControl.zOrderTopMost

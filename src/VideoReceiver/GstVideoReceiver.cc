@@ -65,6 +65,7 @@ GstVideoReceiver::GstVideoReceiver(QObject* parent)
 
 GstVideoReceiver::~GstVideoReceiver(void)
 {
+    stop();
     _slotHandler.shutdown();
 }
 

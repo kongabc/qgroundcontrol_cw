@@ -939,6 +939,9 @@ void Vehicle::_handleStatusText(mavlink_message_t& message)
     b.resize(MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN+1);
     strncpy(b.data(), statustext.text, MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN);
     b[b.length()-1] = '\0';
+//    char b[MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN+1];
+//    strncpy(b, statustext.text, MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN);
+//    b[sizeof(b)-1] = '\0';
     messageText = QString(b);
     bool includesNullTerminator = messageText.length() < MAVLINK_MSG_STATUSTEXT_FIELD_TEXT_LEN;
 
@@ -1321,15 +1324,15 @@ QString Vehicle::vehicleUIDStr()
 {
     QString uid;
     uint8_t* pUid = (uint8_t*)(void*)&_uid;
-    uid.asprintf("%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X",
-                 pUid[0] & 0xff,
-            pUid[1] & 0xff,
-            pUid[2] & 0xff,
-            pUid[3] & 0xff,
-            pUid[4] & 0xff,
-            pUid[5] & 0xff,
-            pUid[6] & 0xff,
-            pUid[7] & 0xff);
+    uid = uid.asprintf("%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X",
+                       pUid[0] & 0xff,
+                       pUid[1] & 0xff,
+                       pUid[2] & 0xff,
+                       pUid[3] & 0xff,
+                       pUid[4] & 0xff,
+                       pUid[5] & 0xff,
+                       pUid[6] & 0xff,
+                       pUid[7] & 0xff);
     return uid;
 }
 

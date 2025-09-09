@@ -21,9 +21,11 @@ import QGCCwQml.QGCCwGimbalController 1.0
 
 Item {
     id:         _root
-    visible:    QGroundControl.videoManager.hasVideo
+    visible:  QGroundControl.videoManager.hasVideo
 
     property Item pipState: videoPipState
+
+    property real _moveBtnWidth: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 3.4 : ScreenTools.defaultFontPixelWidth * 3.6
 
     property bool   isLeftBtn: false
     property bool   isPressed: false
@@ -31,6 +33,10 @@ Item {
     property int startY: 0
     property int disX: 0
     property int disY: 0
+
+    property int offInitY: ScreenTools.isMobile ? -4 : 1
+
+    property real _toolStripWidth
 
     QGCPipState {
         id:         videoPipState
@@ -53,20 +59,14 @@ Item {
             }
         }
     }
-
-    Component.onCompleted:{
-//        console.log("QGCCwGimbalController.showCenter---",QGCCwGimbalController.showCenter);
-    }
-
     Image {
-        id: cameraCenter
-        source: "qrc:/qml/QGCCwGimbal/Controls/CameraCenter.png"
-        sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
-        anchors.centerIn: parent
-        z:QGroundControl.zOrderTopMost
-        visible:QGCCwGimbalController.showCenter && QGroundControl.videoManager.hasVideo &&  QGroundControl.videoManager.decoding
-
-    }
+         id: cameraCenter1
+         source: "qrc:/qml/QGCCwGimbal/Controls/CameraCenter.png"
+         sourceSize.width: ScreenTools.defaultFontPixelHeight*1.4
+         anchors.centerIn: parent
+         z:QGroundControl.zOrderTopMost
+         visible: false // QGCCwGimbalController.showCenter &&  QGroundControl.videoManager.decoding
+     }
 
     Timer {
         id:           videoStartDelay
@@ -84,6 +84,107 @@ Item {
         useSmallFont:   _root.pipState.state !== _root.pipState.fullState
         visible:        QGroundControl.videoManager.isGStreamer
     }
+
+    Item {
+        id: cameraCenter
+        z: QGroundControl.zOrderTopMost+1
+        visible: QGCCwGimbalController.showCenter &&  QGroundControl.videoManager.decoding
+        // 保持原来的尺寸定义
+        property var imageSizes: [
+            Qt.size(parent.width*0.5, parent.width*0.5),
+            Qt.size(parent.width*0.32, parent.width*0.32),
+            Qt.size(parent.width*0.05, parent.width*0.05),
+            Qt.size(parent.width*0.5, parent.width*0.5),
+            Qt.size(parent.width*0.32, parent.width*0.32),
+            Qt.size(parent.width*0.05, parent.width*0.05),
+        ]
+
+        width: imageSizes[QGCCwGimbalController.iconStyle].width
+        height: imageSizes[QGCCwGimbalController.iconStyle].height
+
+        // 动态计算位置
+        property real centerX: (_root.width - width) / 2
+        property real centerY: (_root.height - height) / 2
+        x: centerX + (QGCCwGimbalController ? QGCCwGimbalController.iconOffsetX : 0)
+        y: centerY + (QGCCwGimbalController ? QGCCwGimbalController.iconOffsetY : offInitY)
+
+        Connections{
+            target:QGCCwGimbalController
+            onParamToCenterChanged:{
+                if(QGCCwGimbalController.showToCenter){
+                    QGCCwGimbalController.iconOffsetX = 0;
+                    QGCCwGimbalController.iconOffsetY = offInitY;
+                }
+            }
+
+            onParamIconStyleChanged:{
+                QGCCwGimbalController.reloadOffset();
+
+                if(QGCCwGimbalController.iconOffsetX === 0 && QGCCwGimbalController.iconOffsetY ===offInitY){
+                    QGCCwGimbalController.showToCenter = true;
+                }else{
+                    QGCCwGimbalController.showToCenter = false;
+                }
+
+
+            }
+        }
+
+        // 绘制加号 (+)
+        Rectangle {
+            id: plusHorizontal
+            visible: QGCCwGimbalController.iconStyle < 3  // 前3种样式显示加号
+            width: parent.width
+            height: 1
+            color: "white"
+            anchors.centerIn: parent
+        }
+
+        Rectangle {
+            id: plusVertical
+            visible: QGCCwGimbalController.iconStyle < 3
+            width: 1
+            height: parent.height
+            color: "white"
+            anchors.centerIn: parent
+        }
+        Rectangle {
+            id: xLine1
+            visible: QGCCwGimbalController.iconStyle >= 3  // 后3种样式显示叉号
+            width: parent.width
+            height: 1
+            color: "white"
+            anchors.centerIn: parent
+            rotation: 45
+            transformOrigin: Item.Center
+
+        }
+
+        Rectangle {
+            id: xLine2
+            visible: QGCCwGimbalController.iconStyle >= 3
+            width: parent.width
+            height: 1
+            color: "white"
+            anchors.centerIn: parent
+            rotation: -45
+            transformOrigin: Item.Center
+        }
+
+        // 监听尺寸和偏移量变化
+        onWidthChanged: updatePosition()
+        onHeightChanged: updatePosition()
+
+        function updatePosition() {
+            x = Qt.binding(function() { return centerX + (QGCCwGimbalController ? QGCCwGimbalController.iconOffsetX : 0) })
+            y = Qt.binding(function() { return centerY + (QGCCwGimbalController ? QGCCwGimbalController.iconOffsetY : offInitY) })
+        }
+
+        Component.onCompleted: updatePosition()
+    }
+
+
+
     //-- UVC Video (USB Camera or Video Device)
     Loader {
         id:             cameraLoader
@@ -159,7 +260,13 @@ Item {
 
             if(mouse.button === Qt.LeftButton){
                 if((QGCCwGimbalController.trackBtnState) && QGCCwGimbalController.trackAvailable){
-                    QGCCwGimbalController.trackObject();
+
+                    if(QGCCwGimbalController.modeRaw !== 3){
+                        QGCCwGimbalController.trackObject();
+                    }
+                    else{
+                      QGCCwGimbalController.videoTrack(0,0,0,0,0x00);
+                    }
                     if((mouseX > dw) && (mouseX < rootW-dw)) {
                         let x = (mouseX-dw)*100/videoW
                         let y = mouseY*100 /videoH
@@ -245,4 +352,168 @@ Item {
         id: obstacleDistance
         showText: pipState.state === pipState.fullState
     }
+
+    Item {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth*7 : ScreenTools.defaultFontPixelWidth*14
+        anchors.leftMargin: _toolStripWidth + ScreenTools.defaultFontPixelWidth*2
+        z:QGroundControl.zOrderTopMost+2
+        visible:  cameraCenter.visible && QGCCwGimbalController.showMoveBtn && (pipState.state === pipState.fullState)
+        Rectangle {
+            id: controlPanel
+            width: ScreenTools.defaultFontPixelWidth* 13.2
+            height: ScreenTools.defaultFontPixelWidth*10.6
+            implicitWidth: ScreenTools.defaultFontPixelWidth*13
+            color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.4) : Qt.rgba(0,0,0,0.35)
+//            radius: ScreenTools.defaultFontPixelWidth / 2
+            MouseArea {
+                anchors.fill: parent
+                preventStealing: true
+                propagateComposedEvents: false
+            }
+            // 上按钮
+            Button {
+                id: upButton
+                text: "↑"
+                width: _moveBtnWidth
+                height: _moveBtnWidth
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: ScreenTools.defaultFontPixelWidth / 2
+
+                background: Rectangle {
+                   color:ScreenTools.isMobile ?  Qt.rgba(0,0,0,0.4) : Qt.rgba(1,1,1,0.6)
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: ScreenTools.isMobile ? "#fff" : "#000"
+                    font.pointSize:ScreenTools.defaultFontPointSize*1.4
+                    font.bold: true
+                    opacity: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                onClicked: {
+                    QGCCwGimbalController.iconOffsetY　-= 1 // 向上移动1像素
+                    QGCCwGimbalController.showToCenter = false;
+                }
+            }
+
+            // 左按钮
+            Button {
+                id: leftButton
+                text: "←"
+                width: _moveBtnWidth
+                height: _moveBtnWidth
+                anchors.left: parent.left
+                anchors.leftMargin: ScreenTools.defaultFontPixelWidth / 2
+                anchors.verticalCenter: parent.verticalCenter
+                background: Rectangle {
+                   color:ScreenTools.isMobile ?  Qt.rgba(0,0,0,0.4) : Qt.rgba(1,1,1,0.6)
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: ScreenTools.isMobile ? "#fff" : "#000"
+                    font.pointSize:ScreenTools.defaultFontPointSize*1.4
+                    font.bold: true
+                    opacity: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: {
+                    QGCCwGimbalController.iconOffsetX -= 1 // 向左移动1像素
+                    QGCCwGimbalController.showToCenter = false;
+                }
+            }
+
+            // 右按钮
+            Button {
+                id: rightButton
+                text: "→"
+                width: _moveBtnWidth
+                height: _moveBtnWidth
+                anchors.right: parent.right
+                anchors.rightMargin: ScreenTools.defaultFontPixelWidth / 2
+                anchors.verticalCenter: parent.verticalCenter
+                background: Rectangle {
+                   color:ScreenTools.isMobile ?  Qt.rgba(0,0,0,0.4) : Qt.rgba(1,1,1,0.6)
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: ScreenTools.isMobile ? "#fff" : "#000"
+                    font.pointSize:ScreenTools.defaultFontPointSize*1.4
+                    font.bold: true
+                    opacity: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: {
+                    QGCCwGimbalController.iconOffsetX += 1 // 向右移动1像素
+                    QGCCwGimbalController.showToCenter = false;
+                }
+            }
+
+            // 下按钮
+            Button {
+                id: downButton
+                text: "↓"
+                width: _moveBtnWidth
+                height: _moveBtnWidth
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: ScreenTools.isMobile ?  ScreenTools.defaultFontPixelWidth/2  : ScreenTools.defaultFontPixelWidth
+                background: Rectangle {
+                   color:ScreenTools.isMobile ?  Qt.rgba(0,0,0,0.4) : Qt.rgba(1,1,1,0.6)
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: ScreenTools.isMobile ? "#fff" : "#000"
+                    font.pointSize:ScreenTools.defaultFontPointSize*1.4
+                    font.bold: true
+                    opacity: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: {
+                    QGCCwGimbalController.iconOffsetY += 1 // 向下移动1像素
+                    QGCCwGimbalController.showToCenter = false;
+                }
+            }
+
+        }
+        Rectangle{
+            anchors.top: controlPanel.bottom
+            width: controlPanel.width
+            height: controlPanel.height/3
+            implicitWidth:controlPanel.implicitWidth
+//            color: controlPanel.color
+            color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.6) : Qt.rgba(0,0,0,0.6)
+//            Rectangle{
+//                width: parent.width
+//                height: 1
+//                color:qgcPal.text
+//                anchors.top: parent.top
+//                anchors.topMargin: ScreenTools.defaultFontPixelWidth/2
+//            }
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: (parent.height-height)/2  //ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth/1.8 : ScreenTools.defaultFontPixelWidth*1.1
+                text: qsTr("确定")
+                font.pointSize:ScreenTools.defaultFontPointSize
+                color: ScreenTools.isMobile ? "#000" : "#fff" // qgcPal.text
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked:{
+                    QGCCwGimbalController.showMoveBtn = false;
+                }
+            }
+
+        }
+
+    }
+
 }

@@ -13,6 +13,9 @@ Rectangle{
     property bool isOn: false
     property string onText:""
     property string offText:""
+    property bool isRes: false
+    property bool externalState: false
+    onExternalStateChanged: isOn = externalState
 
     signal onOffClick(bool isOn)
 
@@ -41,8 +44,14 @@ Rectangle{
            MouseArea {
                anchors.fill: parent
                onClicked: {
-                   _swittchModule.isOn = true
-                   onOffClick(_swittchModule.isOn)
+                   if (!_swittchModule.isOn) {
+                       if(!isRes){
+                           _swittchModule.isOn = true;
+                       }
+
+                      onOffClick(true);  // 发送"开"信号
+                  }
+
                }
            }
         }
@@ -63,8 +72,12 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    _swittchModule.isOn = false
-                    onOffClick(_swittchModule.isOn)
+                    if (_swittchModule.isOn) {
+                        if(!isRes){
+                            _swittchModule.isOn = false;
+                        }
+                           onOffClick(false);  // 发送"关"信号
+                       }
                 }
             }
         }
