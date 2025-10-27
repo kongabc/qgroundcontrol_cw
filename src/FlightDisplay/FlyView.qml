@@ -222,7 +222,7 @@ Item {
                 id: popupBox
                 x: ircutBtn.x + ircutBtn.width/2 - width/2
                 y: ircutBtn.y + ircutBtn.height*1.3
-                width: _labelWidth + _valueWidth + _margins*4.8
+                width: _labelWidth*1.2 + _valueWidth + _margins*4.8
                 height:{
                     var h = 0;
                     if (nightModeGrid.visible) h += _switchBtnHe;
@@ -275,8 +275,8 @@ Item {
                         columns: 2
                         visible:  QGCCwGimbalController.iRCutAvailable
                         QGCLabel {
-                            Layout.preferredWidth: _labelWidth
-                            text: qsTr("夜景模式")
+                            Layout.preferredWidth:  _labelWidth*1.2
+                            text: qsTr("IRCUT")
                             font.pointSize:_defaultFont
                         }
                         Rectangle{
@@ -285,8 +285,8 @@ Item {
                             SwitchModule{
                                 externalState:(QGCCwGimbalController.btnState & 0x00000200) ? true : false
 //                                isOn:Qt.binding(() => (QGCCwGimbalController.btnState & 0x00000200) ? true : false)
-                                onText:"开"
-                                offText:"关"
+                                onText:qsTr("ON")
+                                offText:qsTr("OFF")
                                 isRes:true
                                 onOnOffClick:{
                                     if(isOn){
@@ -304,8 +304,8 @@ Item {
                         columns: 2
                         visible: QGCCwGimbalController.devideType == "D-80N"
                         QGCLabel {
-                            Layout.preferredWidth: _labelWidth
-                            text: qsTr("全彩夜视")
+                            Layout.preferredWidth: _labelWidth*1.2
+                            text: qsTr("Night Scene")
                             font.pointSize:_defaultFont
                         }
                         Rectangle{
@@ -313,8 +313,8 @@ Item {
                             height: _switchBtnHe
                             SwitchModule{
                                 externalState: (QGCCwGimbalController.ispEffect === 2) ? true : false
-                                onText:"开"
-                                offText:"关"
+                                onText:qsTr("ON")
+                                offText:qsTr("OFF")
                                 isRes:true
                                 onOnOffClick:{
                                     if(isOn){
@@ -333,8 +333,8 @@ Item {
                         columns: 2
                         visible: QGCCwGimbalController.lampAvailable
                         QGCLabel {
-                            Layout.preferredWidth: _labelWidth
-                            text: qsTr("补光")
+                            Layout.preferredWidth:  _labelWidth*1.2
+                            text: qsTr("Lamp")
                             font.pointSize:_defaultFont
                         }
                         Rectangle{
@@ -342,8 +342,8 @@ Item {
                             height: _switchBtnHe
                             SwitchModule{
                                 externalState: (QGCCwGimbalController.btnState & 0x00000400) ? true : false
-                                onText:"开"
-                                offText:"关"
+                                onText:qsTr("ON")
+                                offText:qsTr("OFF")
                                 isRes:true
                                 onOnOffClick:{
                                     if(isOn){
@@ -763,7 +763,7 @@ Item {
     //info
     Rectangle{
        id: infoCont
-       width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 14 : ScreenTools.defaultFontPixelWidth * 18.6  // 20.1
+       width:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 14 : ((QGCCwGimbalController.modeRaw === 0 || QGCCwGimbalController.modeRaw === 8) ? ScreenTools.defaultFontPixelWidth * 19.8 : ScreenTools.defaultFontPixelWidth * 18.6)  // 20.1
 //       height:ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth * 20.5 : ScreenTools.defaultFontPixelWidth * 36 //topTab.height + valInfo.height
        implicitHeight: topTab.height + valInfo.implicitHeight
        color: ScreenTools.isMobile ? Qt.rgba(1,1,1,0.6) : Qt.rgba(0,0,0,0.6)
@@ -1244,7 +1244,7 @@ Item {
         border.width: ScreenTools.defaultFontPixelWidth*0.1
         border.color: Qt.rgba(1,1, 1, 0.6)
         color: Qt.rgba(0, 0, 0, 0.4)
-        visible:  false//areaTempBtn.showHighlight && QGroundControl.videoManager.hasVideo   //QGCCwGimbalController.isAreaTemp //
+        visible: false//areaTempBtn.showHighlight && QGroundControl.videoManager.hasVideo   //QGCCwGimbalController.isAreaTemp //
 
         property int _videoWidth: videoControl.children[2].children[1].getWidth()
         property int _videoHeight: videoControl.children[2].children[1].getHeight()
@@ -1284,9 +1284,9 @@ Item {
                    draggableRect.x = originalMouseAreaX;
                 }
                 if((draggableRect.x + draggableRect.width + btnBox.width) > _root.width){
-                    btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth
+                    btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth*2
                 }else{
-                    btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*8
+                    btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*9
                 }
 
                 if(draggableRect.y < 0){
@@ -1348,7 +1348,7 @@ Item {
                 }
                 onReleased: {
                     if((draggableRect.x + draggableRect.width + btnBox.width) < _root.width){  // (draggableRect._videoWidth + draggableRect._dW)
-                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*8
+                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*9
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
                 }
@@ -1404,14 +1404,14 @@ Item {
                     }
 
                     if((draggableRect.x + newWidth + btnBox.width) > _root.width){  //(draggableRect._videoWidth + draggableRect._dW)
-                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth
+                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth*2
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
 
                 }
                 onReleased: {
                     if((draggableRect.x + draggableRect.width + btnBox.width) < _root.width){ // (draggableRect._videoWidth + draggableRect._dW)
-                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*8
+                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*9
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
                 }
@@ -1469,7 +1469,7 @@ Item {
                 onReleased: {
 
                     if((draggableRect.x + draggableRect.width + btnBox.width) < _root.width){  //(draggableRect._videoWidth + draggableRect._dW)
-                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*8
+                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*9
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
                 }
@@ -1523,14 +1523,14 @@ Item {
                     }
 
                     if((draggableRect.x + newWidth + btnBox.width) > _root.width){
-                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth
+                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth*2
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
                 }
                 onReleased: {
 
                     if((draggableRect.x + draggableRect.width + btnBox.width) < _root.width){
-                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*8
+                        btnBox.anchors.rightMargin = -ScreenTools.defaultFontPixelWidth*9
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
                     }
                 }
@@ -1546,7 +1546,7 @@ Item {
             width: ScreenTools.defaultFontPixelWidth*8
             height: ScreenTools.defaultFontPixelWidth*10
             anchors.right:topRightRect.right
-            anchors.rightMargin:-ScreenTools.defaultFontPixelWidth*8
+            anchors.rightMargin:-ScreenTools.defaultFontPixelWidth*9
             anchors.top: topRightRect.bottom
             anchors.topMargin: ScreenTools.defaultFontPixelWidth*1.2
             color: "transparent"
@@ -1555,8 +1555,8 @@ Item {
                 spacing: ScreenTools.defaultFontPixelWidth*1.2
 
                 Button {
-                    text: "全区域"
-                    width: btnBox.width
+                    text: qsTr("Entire Area")
+                    width: ScreenTools.defaultFontPixelWidth*9
                     height: ScreenTools.defaultFontPixelWidth * 3
                     font.pointSize:ScreenTools.defaultFontPointSize
                     font.family:ScreenTools.normalFontFamily
@@ -1571,14 +1571,14 @@ Item {
                         draggableRect.y = 0
 
                         _circlePointMargin = -ScreenTools.defaultFontPixelWidth*0.7
-                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth
+                        btnBox.anchors.rightMargin = ScreenTools.defaultFontPixelWidth*2
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*2.4
 
                     }
                 }
                 Button {
-                    text: "开启测温"
-                    width: btnBox.width
+                    text:qsTr ("Start Temp")
+                    width: ScreenTools.defaultFontPixelWidth*9
                     height: ScreenTools.defaultFontPixelWidth * 3
                     font.pointSize:ScreenTools.defaultFontPointSize
                     font.family:ScreenTools.normalFontFamily
@@ -1610,8 +1610,8 @@ Item {
                     }
                 }
                 Button {
-                    text: "取消编辑"
-                    width: btnBox.width
+                    text: qsTr("Cancel")
+                    width: ScreenTools.defaultFontPixelWidth*9
                     height: ScreenTools.defaultFontPixelWidth * 3
                     font.pointSize:ScreenTools.defaultFontPointSize
                     font.family:ScreenTools.normalFontFamily
@@ -1624,7 +1624,7 @@ Item {
                         draggableRect.width = draggableRect.height = ScreenTools.defaultFontPixelWidth*20
                         draggableRect.x = (videoControl.width-ScreenTools.defaultFontPixelWidth*20)/2
                         draggableRect.y = (videoControl.height-ScreenTools.defaultFontPixelWidth*20)/2
-                        btnBox.anchors.rightMargin=-ScreenTools.defaultFontPixelWidth*8
+                        btnBox.anchors.rightMargin=-ScreenTools.defaultFontPixelWidth*9
                         btnBox.anchors.topMargin = ScreenTools.defaultFontPixelWidth*1.2
 
 //                        if(!(QGCCwGimbalController.ircamFlags & 0x40)){   //如果点击开启测温，需要等待2秒按钮返回

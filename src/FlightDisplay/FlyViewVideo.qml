@@ -501,7 +501,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
                 anchors.topMargin: (parent.height-height)/2  //ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth/1.8 : ScreenTools.defaultFontPixelWidth*1.1
-                text: qsTr("确定")
+                text: qsTr("OK")
                 font.pointSize:ScreenTools.defaultFontPointSize
                 color: ScreenTools.isMobile ? "#000" : "#fff" // qgcPal.text
             }

@@ -27,6 +27,9 @@
 
 #include <gst/gst.h>
 
+//new add 2025/9/26
+#include <gst/rtsp/gstrtsptransport.h>
+
 Q_DECLARE_LOGGING_CATEGORY(VideoReceiverLog)
 
 class Worker : public QThread
@@ -120,7 +123,7 @@ protected:
     bool _needDispatch(void);
     void _dispatchSignal(std::function<void()> emitter);
 
-    void ffmpegStreaming(void);
+//    void ffmpegStreaming(void);
 
 
     static gboolean _onBusMessage(GstBus* bus, GstMessage* message, gpointer user_data);
@@ -128,7 +131,7 @@ protected:
     static void _wrapWithGhostPad(GstElement* element, GstPad* pad, gpointer data);
     static void _linkPad(GstElement* element, GstPad* pad, gpointer data);
     static gboolean _padProbe(GstElement* element, GstPad* pad, gpointer user_data);
-    static gboolean _filterParserCaps(GstElement* bin, GstPad* pad, GstElement* element, GstQuery* query, gpointer data);
+//    static gboolean _filterParserCaps(GstElement* bin, GstPad* pad, GstElement* element, GstQuery* query, gpointer data);
     static GstPadProbeReturn _teeProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);
     static GstPadProbeReturn _videoSinkProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);
     static GstPadProbeReturn _eosProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data);

@@ -66,9 +66,9 @@ Rectangle {
     property real _rowCol1:_rowWidths*0.2
     property real _rowCol2:_rowWidths*0.8
 
-    property real _colW1:ScreenTools.isMobile ? _rowCol2*0.2 : _rowCol2*0.3
+    property real _colW1:ScreenTools.isMobile ? _rowCol2*0.2 : _rowCol2*0.28
     property real _colW2:_rowCol2*0.1
-    property real _colW3:_rowCol2*0.1
+    property real _colW3:_rowCol2*0.12
     property real _colW4:_rowCol2*0.5
 
     property real _switchBtnHe:ScreenTools.defaultFontPixelWidth*3.4
@@ -93,7 +93,7 @@ Rectangle {
         id:scrollTopCont
         clip:               true
         anchors.fill:       parent
-        anchors.margins:    ScreenTools.defaultFontPixelWidth
+        anchors.margins: ScreenTools.isMobile ? ScreenTools.defaultFontPixelWidth/5 : ScreenTools.defaultFontPixelWidth
         contentHeight:      tabColumn.height
         contentWidth:       tabColumn.width
         flickableDirection: Flickable.VerticalFlick
@@ -129,8 +129,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn1
-                    text:ScreenTools.isMobile ? "常规" : "常规设置"
+                    text:qsTr("General") //ScreenTools.isMobile ? qsTr("General") : qsTr("General Setting")
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     height: tabBarBtn.height
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
@@ -147,8 +148,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn2
-                    text:ScreenTools.isMobile ? "网络" : "网络设置"
+                    text:qsTr("Net") //ScreenTools.isMobile ? "Net" : "Net Setting"
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     height: tabBarBtn.height
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
@@ -164,8 +166,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn3
-                    text: "相机"
+                    text:qsTr("Camera")
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     height: tabBarBtn.height
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
@@ -181,8 +184,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn4
-                    text: ScreenTools.isMobile ? "S.BUS" :"S.BUS设置"
+                    text:qsTr("S.BUS")//ScreenTools.isMobile ? "S.BUS" :"S.BUS设置"
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     height: tabBarBtn.height
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
@@ -198,9 +202,10 @@ Rectangle {
                 }
                 TabButton {
                     id: btn5
-                    text: "校准"
+                    text:qsTr("Calib")
                     height: tabBarBtn.height
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
                         color: btn5.checked ? _selectedColor : _unselectedColor
@@ -215,8 +220,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn6
-                    text: ScreenTools.isMobile ? "载机" :"载机数据"
+                    text:qsTr("Vehicle") // ScreenTools.isMobile ? "载机" :"载机数据"
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     height: tabBarBtn.height
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle {
@@ -232,8 +238,9 @@ Rectangle {
                 }
                 TabButton {
                     id: btn7
-                    text: ScreenTools.isMobile ? "高级" :"高级设置"
+                    text:qsTr("Advance")// ScreenTools.isMobile ? "高级" :"高级设置"
                     font.pointSize: _defaultFont
+                    font.family:    ScreenTools.normalFontFamily
                     visible: QGCCwGimbalController.firmwareVer ? ((QGCCwGimbalController.firmwareVer/10) >= 5 ? true : false) : false
                     height: tabBarBtn.height
 //                    width: visible ?  btn5.width : 0
@@ -319,22 +326,24 @@ Rectangle {
                                 RowLayout{
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("设备型号:")
+                                        text: qsTr("Model:")
                                     }
                                     Text{
-                                        text: QGCCwGimbalController.devideType ? QGCCwGimbalController.devideType : "未知"
+                                        text: QGCCwGimbalController.devideType ? QGCCwGimbalController.devideType : qsTr("Unknown")
                                         font.pointSize:_defaultFont*1.2
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color: qgcPal.text
                                     }
                                 }
                                 RowLayout{
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("GCU版本:")
+                                        text: qsTr("GCU:")
                                     }
                                     Text{
-                                        text: isNaN(QGCCwGimbalController.firmwareVer) ? "未知" : QGCCwGimbalController.firmwareVer/10
+                                        text: isNaN(QGCCwGimbalController.firmwareVer) ? qsTr("Unknown") : QGCCwGimbalController.firmwareVer/10
                                         font.pointSize:_defaultFont*1.2
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color: qgcPal.text
                                     }
                                     Item{
@@ -342,11 +351,12 @@ Rectangle {
                                     }
                                     QGCLabel {
                                         width: _labelWidth
-                                        text: qsTr("云台版本:")
+                                        text: qsTr("Gimbal:")
                                     }
                                     Text{
-                                        text: isNaN(QGCCwGimbalController.hardwareVer) ? "未知" : QGCCwGimbalController.hardwareVer/10
+                                        text: isNaN(QGCCwGimbalController.hardwareVer) ? qsTr("Unknown") : QGCCwGimbalController.hardwareVer/10
                                         font.pointSize:_defaultFont*1.2
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color: qgcPal.text
                                     }
 
@@ -375,7 +385,7 @@ Rectangle {
 
                                     QGCRadioButton {
                                         id:videoMode1
-                                        text: qsTr("模式1")
+                                        text: qsTr("Mode1")
                                         checked:QGroundControl.videoManager.videoMode
                                         onClicked: {
                                             if(QGroundControl.videoManager.videoMode){
@@ -390,7 +400,7 @@ Rectangle {
 
                                     QGCRadioButton {
                                         id:videoMode2
-                                        text:  qsTr("模式2")
+                                        text:  qsTr("Mode2")
                                         checked:!QGroundControl.videoManager.videoMode
                                         onClicked:  {
                                             if(!QGroundControl.videoManager.videoMode){
@@ -590,7 +600,7 @@ Rectangle {
                                     spacing: ScreenTools.defaultFontPixelWidth
                                     QGCCheckBox {
                                         id:cameraCenterSwitch
-                                        text:       qsTr("相机准星")
+                                        text:       qsTr("Crosshair")
                                         checked:QGCCwGimbalController.showCenter
                                         onClicked: {
                                             QGCCwGimbalController.showCenter = checked;
@@ -604,12 +614,12 @@ Rectangle {
                                         Layout.leftMargin: _margins
                                         Layout.rightMargin: _margins
                                         model:  [
-                                            qsTr("+ 大"),
-                                            qsTr("+ 中"),
-                                            qsTr("+ 小"),
-                                            qsTr("x 大"),
-                                            qsTr("x 中"),
-                                            qsTr("x 小")
+                                            qsTr("+ Large"),
+                                            qsTr("+ Medium"),
+                                            qsTr("+ Small"),
+                                            qsTr("x Large"),
+                                            qsTr("x Medium"),
+                                            qsTr("x Small")
                                         ]
                                         currentIndex:QGCCwGimbalController.iconStyle
                                         onActivated:{
@@ -619,7 +629,7 @@ Rectangle {
 
                                     QGCCheckBox {
                                         enabled:cameraCenterSwitch.checked
-                                        text:       qsTr("移动按钮")
+                                        text:       qsTr("Move Button")
                                         checked:QGCCwGimbalController.showMoveBtn
                                         onClicked: {
                                             QGCCwGimbalController.showMoveBtn = checked;
@@ -641,9 +651,10 @@ Rectangle {
                                         // 按钮文本
                                        Text {
                                            id:centTxt
-                                           text: "准星回中"
+                                           text:qsTr("To Center")
                                            anchors.centerIn: parent
                                            font.pointSize:ScreenTools.defaultFontPointSize
+                                           font.family:    ScreenTools.normalFontFamily;
                                            color:  qgcPal.text  //QGCCwGimbalController.showToCenter ? _selectedTextColor : qgcPal.text
                                        }
                                         MouseArea {
@@ -677,15 +688,15 @@ Rectangle {
                                 RowLayout {
                                     spacing: ScreenTools.defaultFontPixelWidth
                                     QGCLabel {
-                                        text:       qsTr("参考线")
+                                        text:       qsTr("Reference Line")
                                     }
                                     QGCComboBox{
-                                        Layout.preferredWidth:_comboFieldWidth*0.5
+                                        Layout.preferredWidth:_comboFieldWidth*0.8
                                         model:  [
                                             qsTr("None"),
-                                            qsTr("九宫格A"),
-                                            qsTr("九宫格B"),
-                                            qsTr("九宫格A+B")
+                                            qsTr("Nine-square Grid A"),
+                                            qsTr("Nine-square Grid B"),
+                                            qsTr("Nine-square Grid A+B")
                                         ]
                                         currentIndex:QGCCwGimbalController.showGrid
                                         onActivated:{
@@ -698,7 +709,7 @@ Rectangle {
                                     visible: false
                                     spacing: ScreenTools.defaultFontPixelWidth
                                     QGCCheckBox {
-                                        text:       qsTr("相机中心点")
+                                        text:       qsTr("Camera Center")
                                         checked:QGCCwGimbalController.showCenter
                                         onClicked: {
                                             QGCCwGimbalController.showCenter = checked;
@@ -716,7 +727,7 @@ Rectangle {
                                 //温度报警
                                 RowLayout{
                                     Text{
-                                        text:  qsTr("温度报警")
+                                        text:  qsTr("Temp Alert")
                                         font.pointSize:ScreenTools.mediumFontPointSize*0.8
                                         color: qgcPal.text
                                         font.family:    ScreenTools.normalFontFamily
@@ -819,7 +830,7 @@ Rectangle {
                                 ColumnLayout{
                                     RowLayout{
                                         Text{
-                                            text:  qsTr("等温线")
+                                            text:  qsTr("Isotherm")
                                             font.pointSize:ScreenTools.mediumFontPointSize*0.8
                                             color: qgcPal.text
                                             font.family:    ScreenTools.normalFontFamily
@@ -1080,9 +1091,14 @@ Rectangle {
                                     Layout.leftMargin: -_margins
                                     Layout.rightMargin: -_margins
                                 }
-
                                 QGCLabel {
-                                    text:               qsTr("V2.5.3")
+                                    linkColor:          qgcPal.text
+                                    text:"<a href=\"https://www.allxianfei.com\">https://www.allxianfei.com (PC)</a>"
+                                    onLinkActivated:    Qt.openUrlExternally(link)
+                                    Layout.alignment:   Qt.AlignHCenter
+                                }
+                                QGCLabel {
+                                    text:               qsTr("V2.5.5")
                                     Layout.alignment:   Qt.AlignHCenter
                                 }
 
@@ -1116,7 +1132,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp1.baseline
-                                        text: QGCCwGimbalController.firmwareVer/10 >= 6 ?qsTr("IP地址") : qsTr("控制器IP地址")   //GCU版本号大于等于6，改为
+                                        text: QGCCwGimbalController.firmwareVer/10 >= 6 ?qsTr("IP") : qsTr("Controller IP")   //GCU版本号大于等于6，改为
                                     }
                                     QGCTextField {
                                         id:     ipInp1
@@ -1134,7 +1150,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp2.baseline
-                                        text:               qsTr("默认网关")
+                                        text:               qsTr("Gateway IP")
                                     }
                                     QGCTextField {
                                         id:     ipInp2
@@ -1153,7 +1169,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp3.baseline
-                                        text:               qsTr("子网掩码")
+                                        text:               qsTr("Subnet Mask")
                                     }
                                     QGCTextField {
                                         id:     ipInp3
@@ -1172,7 +1188,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp4.baseline
-                                        text:               qsTr("远端IP地址")
+                                        text:               qsTr("Remote IP")
                                     }
                                     QGCTextField {
                                         id:     ipInp4
@@ -1191,7 +1207,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   ipInp5.baseline
-                                        text:               qsTr("相机IP地址")
+                                        text:               qsTr("Camera IP")
                                     }
                                     QGCTextField {
                                         id:     ipInp5
@@ -1213,7 +1229,7 @@ Rectangle {
                                 spacing:ScreenTools.defaultFontPixelWidth*3
                                 Column {
                                     QGCButton {
-                                        text:               qsTr("恢复默认")
+                                        text:               qsTr("Reset")
                                         font.family: {
                                                if (Qt.locale().name.startsWith("zh")) {
                                                    return ScreenTools.isMobile ?
@@ -1241,7 +1257,7 @@ Rectangle {
                                             return true
                                         }
                                         enabled:testEnabled()
-                                        text:               qsTr("保存")
+                                        text:               qsTr("Save")
                                         onClicked:  {
                                             console.log("保存成功")
                                             QGCCwGimbalController.sendSaveParameters();
@@ -1270,6 +1286,7 @@ Rectangle {
                         anchors.fill: parent
                         contentHeight: cameraItHei1.implicitHeight
                         visible: QGCCwGimbalController.showCameraSet===1
+                        clip: true
                         Rectangle{
 //                            visible: QGCCwGimbalController.showCameraSet===1
                             id:cameraItHei1
@@ -1279,7 +1296,7 @@ Rectangle {
                             color: qgcPal.windowShade
                             anchors.horizontalCenter: parent.horizontalCenter // 水平居中
                             Text {
-                                text: qsTr("登入相机")
+                                text: qsTr("LOGIN")
                                 font.pointSize:_defaultFont*1.2
                                 anchors{
                                     left: parent.left
@@ -1301,7 +1318,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   loginIpInp.baseline
-                                        text:               qsTr("相机IP地址")
+                                        text:               qsTr("Camera IP")
                                     }
                                     QGCTextField {
                                         id:     loginIpInp
@@ -1316,11 +1333,29 @@ Rectangle {
                                 }
 
                                 Row{
+                                    visible:!ScreenTools.isMobile
                                     Text {
                                         id: name
-                                        text: qsTr("*登录失败，请检查网络并填写正确的相机IP地址")
+                                        text: qsTr("*Login failed, Please check the network and fill in the correct camera IP address")
+                                        font.family:ScreenTools.normalFontFamily
                                         color:"red"
                                     }
+                                }
+                                Column {
+                                    visible:ScreenTools.isMobile
+                                    Text {
+                                        id: name2
+                                        text: qsTr("*Login failed, Please check the network")
+                                        font.family:ScreenTools.normalFontFamily
+                                        color:"red"
+                                    }
+                                    Text {
+                                        id: name3
+                                        text: qsTr("and fill in the correct camera IP address")
+                                        font.family:ScreenTools.normalFontFamily
+                                        color:"red"
+                                    }
+
                                 }
                             }
 
@@ -1335,7 +1370,7 @@ Rectangle {
                                         return true
                                     }
                                     enabled:testEnabled()
-                                    text:               qsTr("登入")
+                                    text:               qsTr("LOGIN")
                                     onClicked:  {
                                         QGCCwGimbalController.cameraIpLogin(loginIpInp.text);
                                     }
@@ -1367,7 +1402,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   camIpInp1.baseline
-                                        text:               qsTr("相机IP地址")
+                                        text:               qsTr("Camera IP")
                                     }
                                     QGCTextField {
                                         id:     camIpInp1
@@ -1386,7 +1421,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   camIpInp2.baseline
-                                        text:               qsTr("默认网关")
+                                        text:               qsTr("Gateway IP")
                                     }
                                     QGCTextField {
                                         id:     camIpInp2
@@ -1405,7 +1440,7 @@ Rectangle {
                                     QGCLabel {
                                         width:              _labelWidth
                                         anchors.baseline:   camIpInp3.baseline
-                                        text:               qsTr("子网掩码")
+                                        text:               qsTr("Subnet Mask")
                                     }
                                     QGCTextField {
                                         id:     camIpInp3
@@ -1448,8 +1483,9 @@ Rectangle {
                                     }
                                     Text{
                                         id:rtspTxt
-                                        text: "RTSP"
+                                        text:"RTSP"
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color: qgcPal.text
                                         anchors.centerIn: parent
                                     }
@@ -1466,7 +1502,7 @@ Rectangle {
                                         QGCLabel {
                                             width:              _labelWidth + _columnSpacing
                                             anchors.baseline:   ratInp.baseline
-                                            text:               qsTr("码率(b/s) (500~6000)")
+                                            text:               qsTr("Bitrate(b/s) (500~6000)")
                                         }
                                         QGCTextField {
                                             id:     ratInp
@@ -1505,7 +1541,7 @@ Rectangle {
                                         columns:    2
                                         QGCLabel {
                                             Layout.preferredWidth: _labelWidth+ScreenTools.defaultFontPixelWidth/2
-                                            text:               qsTr("分辨率")
+                                            text:               qsTr("Resolution")
                                         }
                                         QGCComboBox{
                                             id:resolVal
@@ -1555,7 +1591,7 @@ Rectangle {
                                             Layout.preferredWidth:videoDrop.visible ? _labelWidth/2 : (_labelWidth+ScreenTools.defaultFontPixelWidth/2)
                                             //                                        width:              _labelWidth / 2
                                             //                                        anchors.baseline:   codeDrop.baseline
-                                            text:               qsTr("编码格式")
+                                            text:               qsTr("Encode")
                                         }
                                         QGCComboBox{
                                             id:codeDrop
@@ -1577,9 +1613,9 @@ Rectangle {
                                         QGCLabel {
                                             visible: videoDrop.visible
                                             Layout.alignment: Qt.AlignLeft
-                                            Layout.leftMargin: _labelWidth/5
-                                            Layout.preferredWidth: _labelWidth/2
-                                            text:               qsTr("视频质量")
+                                            Layout.leftMargin: _labelWidth/4
+                                            Layout.preferredWidth: _labelWidth/1.7
+                                            text:               qsTr("Video Quality")
                                         }
                                         QGCComboBox{
                                             visible: QGCCwGimbalController.cameraVQuality !== -1
@@ -1619,7 +1655,7 @@ Rectangle {
                                         return true
                                     }
                                     enabled:testEnabled()
-                                    text:               qsTr("保存")
+                                    text:               qsTr("Save")
                                     onClicked:  {    //第二种相机
 //                                        console.log(testEnabled())
 //                                        console.log(validateIPaddress(camIpInp1.text))
@@ -1658,15 +1694,17 @@ Rectangle {
                                     id: contentCol
                                     anchors.centerIn: parent
                                     spacing: _columnSpacing  // 子元素间距
-
+                                    width: parent.width
                                     Text {
-                                        text: qsTr("设置成功")
+                                        text: qsTr("Setting Successful")
                                         color: qgcPal.text
+                                        font.family:    ScreenTools.normalFontFamily;
+                                        anchors.horizontalCenter: parent.horizontalCenter
                                         font.pointSize: ScreenTools.defaultFontPointSize*1.2
                                     }
                                     QGCButton{
-                                        text: qsTr("确定")
-
+                                        text: qsTr("OK")
+                                        anchors.horizontalCenter: parent.horizontalCenter
                                         onClicked:{
                                             QGCCwGimbalController.saveState = false;
                                         }
@@ -1726,9 +1764,10 @@ Rectangle {
                                                 }
                                                 Text{
                                                     id:resTxt
-                                                    text:(modelData.label === "dvr" ? "视频存储" : modelData.label)
+                                                    text:(modelData.label === "dvr" ? "Video Storage" : modelData.label)
                                                     font.capitalization: Font.AllUppercase
                                                     font.pointSize:_defaultFont
+                                                    font.family:    ScreenTools.normalFontFamily;
                                                     color: qgcPal.text
                                                     anchors.centerIn: parent
                                                 }
@@ -1823,7 +1862,7 @@ Rectangle {
                                 }
                                 QGCButton {
                                     id:saveConfBtnEnable
-                                    text:               qsTr("保存")
+                                    text:               qsTr("Save")
                                     onClicked:  {
                                         QGCCwGimbalController.saveCameraConfs();
                                     }
@@ -1844,15 +1883,17 @@ Rectangle {
                                 Column {
                                     anchors.centerIn: parent
                                     spacing: _columnSpacing  // 子元素间距
-
+                                    width: parent.width
                                     Text {
-                                        text: qsTr("设置成功")
+                                        text: qsTr("Setting Successful")
                                         color: qgcPal.text
+                                        font.family:    ScreenTools.normalFontFamily;
+                                        anchors.horizontalCenter: parent.horizontalCenter
                                         font.pointSize: ScreenTools.defaultFontPointSize*1.2
                                     }
                                     QGCButton{
-                                        text: qsTr("确定")
-
+                                        text: qsTr("OK")
+                                        anchors.horizontalCenter: parent.horizontalCenter
                                         onClicked:{
                                             QGCCwGimbalController.saveState = false;
                                         }
@@ -1893,7 +1934,7 @@ Rectangle {
                                     Layout.preferredWidth:_rowCol1 //_root.columnWidths[0]
                                     Layout.preferredHeight: _tableHeight
                                     color: _rowColor
-                                    Text { text: "功能"; font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily;anchors.centerIn: parent;color: qgcPal.text }
+                                    Text { text: qsTr("Function"); font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily;anchors.centerIn: parent;color: qgcPal.text }
                                 }
                                 GridLayout{
                                     id:setChildWidth
@@ -1908,21 +1949,21 @@ Rectangle {
                                         Layout.preferredWidth: _colW1 //_root.columnWidths[1]
                                         Layout.preferredHeight: _tableHeight
                                         color: _rowColor
-                                        Text { text: "通道"; font.pointSize:_defaultFont ;anchors.centerIn: parent;color: qgcPal.text }
+                                        Text { text: qsTr("Channel"); font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily;anchors.centerIn: parent;color: qgcPal.text }
                                     }
                                     Rectangle {
                                         Layout.fillWidth: true
                                         Layout.preferredWidth: _colW2 //_root.columnWidths[2]
                                         Layout.preferredHeight: _tableHeight
                                         color: _rowColor
-                                        Text { text: "反向";font.pointSize:_defaultFont ; anchors.centerIn: parent;color: qgcPal.text }
+                                        Text { text: qsTr("Rev");font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily; anchors.centerIn: parent;color: qgcPal.text }
                                     }
                                     Rectangle {
                                         Layout.fillWidth: true
                                         Layout.preferredWidth: _colW3 // _root.columnWidths[3]
                                         Layout.preferredHeight: _tableHeight
                                         color: _rowColor
-                                        Text { text: "通道值";font.pointSize:_defaultFont ; anchors.centerIn: parent ;color: qgcPal.text}
+                                        Text { text: qsTr("Val");font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily; anchors.centerIn: parent ;color: qgcPal.text}
                                     }
                                     Rectangle {
                                         Layout.fillWidth: true
@@ -1930,7 +1971,7 @@ Rectangle {
                                         Layout.preferredHeight: _tableHeight
 
                                         color: _rowColor
-                                        Text { text: "定义";font.pointSize:_defaultFont ; anchors.centerIn: parent ;color: qgcPal.text}
+                                        Text { text: qsTr("Definition");font.pointSize:_defaultFont ;font.family:    ScreenTools.normalFontFamily; anchors.centerIn: parent ;color: qgcPal.text}
                                     }
                                 }
                             }
@@ -1954,7 +1995,7 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("模式")
+                                        text:qsTr("Mode")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         //                                    font.pointSize:_dataShowValueSize
@@ -1975,9 +2016,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[0] === 255 ?  0 : QGCCwGimbalController.sbusMap[0]+1
                                     channelVal:QGCCwGimbalController.sbusData[0] === 0 ? "" : QGCCwGimbalController.sbusData[0]
                                     isChecked:QGCCwGimbalController.getSbusChecked(0)
-                                    txtFir:"跟随"
-                                    txtSec:"锁定"
-                                    txtThi:"Mavlink"
+                                    txtFir:qsTr("Follow")
+                                    txtSec:qsTr("Lock")
+                                    txtThi:qsTr("Mavlink")
                                     onDropCheckedChange:{
                                         if(checkIndex === 0) {
                                             //                                        QGCCwGimbalController.sbusMap[0] = 255;
@@ -2006,9 +2047,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[10] === 255 ?  0 : QGCCwGimbalController.sbusMap[10]+1
                                     channelVal:QGCCwGimbalController.sbusData[10] === 0 ? "" : QGCCwGimbalController.sbusData[10]
                                     isChecked:QGCCwGimbalController.getSbusChecked(10)
-                                    txtFir:"俯拍"
-                                    txtSec:"锁定"
-                                    txtThi:"凝视"
+                                    txtFir:qsTr("Downward")
+                                    txtSec:qsTr("Lock")
+                                    txtThi:qsTr("Gaze")
                                     onDropCheckedChange:{
                                         if(checkIndex === 0) {
                                             QGCCwGimbalController.setSbusMapValue(10, 255)
@@ -2036,9 +2077,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[11] === 255 ?  0 : QGCCwGimbalController.sbusMap[11]+1
                                     channelVal:QGCCwGimbalController.sbusData[11] === 0 ? "" : QGCCwGimbalController.sbusData[11]
                                     isChecked:QGCCwGimbalController.getSbusChecked(11)
-                                    txtFir:"空"
+                                    txtFir:qsTr("None")
                                     //                                txtSec:"空"
-                                    txtThi:"回中"
+                                    txtThi:qsTr("Reset")
                                     onDropCheckedChange:{
 
                                         if(checkIndex === 0) {
@@ -2062,7 +2103,7 @@ Rectangle {
                                     color: _rowColor
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("跟踪")
+                                        text:qsTr("Track")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2080,9 +2121,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[3] === 255 ?  0 : QGCCwGimbalController.sbusMap[3]+1
                                     channelVal:QGCCwGimbalController.sbusData[3] === 0 ? "" : QGCCwGimbalController.sbusData[3]
                                     isChecked:QGCCwGimbalController.getSbusChecked(3)
-                                    txtFir:"退出"
+                                    txtFir:qsTr("Exit")
                                     //                                txtSec:""
-                                    txtThi:"跟踪"
+                                    txtThi:qsTr("Track")
                                     onDropCheckedChange:{
 
                                         if(checkIndex === 0) {
@@ -2105,7 +2146,7 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("俯仰")
+                                        text:qsTr("Pitch")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2148,7 +2189,7 @@ Rectangle {
                                     color: _rowColor
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("偏航")
+                                        text:qsTr("Yaw")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2191,7 +2232,7 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("变倍")
+                                        text:qsTr("Zoom")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2209,9 +2250,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[4] === 255 ?  0 : QGCCwGimbalController.sbusMap[4]+1
                                     channelVal: QGCCwGimbalController.sbusData[4] === 0 ? "" : QGCCwGimbalController.sbusData[4]
                                     isChecked:QGCCwGimbalController.getSbusChecked(4)
-                                    txtFir:"缩小"
-                                    txtSec:"停止"
-                                    txtThi:"放大"
+                                    txtFir:qsTr("Zoom Out")
+                                    txtSec:qsTr("Stop")
+                                    txtThi:qsTr("Zoom In")
                                     onDropCheckedChange:{
                                         //                                    if(checkIndex === 0) {
                                         //                                        QGCCwGimbalController.sbusMap[6] = 255;
@@ -2239,7 +2280,7 @@ Rectangle {
                                     color: _rowColor
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("拍照录像")
+                                        text:qsTr("Pic&Rec")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2257,9 +2298,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[6] === 255 ?  0 : QGCCwGimbalController.sbusMap[6]+1
                                     channelVal:QGCCwGimbalController.sbusData[6] === 0 ? "" : QGCCwGimbalController.sbusData[6]
                                     isChecked:QGCCwGimbalController.getSbusChecked(6)
-                                    txtFir:"录像"
-                                    txtSec:"空"
-                                    txtThi:"拍照"
+                                    txtFir:qsTr("Video")
+                                    txtSec:qsTr("None")
+                                    txtThi:qsTr("Photo")
                                     onDropCheckedChange:{
                                         //                                    if(checkIndex === 0) {
                                         //                                        QGCCwGimbalController.sbusMap[7] = 255;
@@ -2286,7 +2327,7 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("画面切换")
+                                        text:qsTr("VideoSwitch")
                                         font.pointSize:_defaultFont
                                         font.family: {
                                                if (Qt.locale().name.startsWith("zh")) {
@@ -2311,9 +2352,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[7] === 255 ?  0 : QGCCwGimbalController.sbusMap[7]+1
                                     channelVal:QGCCwGimbalController.sbusData[7] === 0 ? "" : QGCCwGimbalController.sbusData[7]
                                     isChecked:QGCCwGimbalController.getSbusChecked(7)
-                                    txtFir:"调色"
-                                    txtSec:"空"
-                                    txtThi:"画中画"
+                                    txtFir:qsTr("Palette")
+                                    txtSec:qsTr("None")
+                                    txtThi:qsTr("PIP")
                                     onDropCheckedChange:{
 
                                         if(checkIndex === 0) {
@@ -2336,7 +2377,7 @@ Rectangle {
                                     color: _rowColor
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("夜视")
+                                        text:qsTr("IRCUT")
                                         font.pointSize:_defaultFont
                                         font.family:    ScreenTools.normalFontFamily
                                         color:qgcPal.text
@@ -2354,9 +2395,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[9] === 255 ?  0 : QGCCwGimbalController.sbusMap[9]+1
                                     channelVal:QGCCwGimbalController.sbusData[9] === 0 ? "" : QGCCwGimbalController.sbusData[9]
                                     isChecked:QGCCwGimbalController.getSbusChecked(9)
-                                    txtFir:"关"
+                                    txtFir:qsTr("Off")
                                     //                                txtSec:"空"
-                                    txtThi:"开"
+                                    txtThi:qsTr("On")
                                     onDropCheckedChange:{
                                         if(checkIndex === 0) {
                                             QGCCwGimbalController.setSbusMapValue(9, 255)
@@ -2378,7 +2419,7 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("补光")
+                                        text:qsTr("Lamp")
                                         font.family:    ScreenTools.normalFontFamily
                                         font.pointSize:_defaultFont
                                         color:qgcPal.text
@@ -2396,9 +2437,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[8] === 255 ?  0 : QGCCwGimbalController.sbusMap[8]+1
                                     channelVal:QGCCwGimbalController.sbusData[8] === 0 ? "" : QGCCwGimbalController.sbusData[8]
                                     isChecked:QGCCwGimbalController.getSbusChecked(8)
-                                    txtFir:"关"
+                                    txtFir:qsTr("Off")
                                     //                                txtSec:"空"
-                                    txtThi:"开"
+                                    txtThi:qsTr("On")
                                     onDropCheckedChange:{
                                         if(checkIndex === 0) {
                                             QGCCwGimbalController.setSbusMapValue(8, 255)
@@ -2420,7 +2461,7 @@ Rectangle {
                                     color: _rowColor
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:qsTr("测距")
+                                        text:qsTr("Range")
                                         font.family:    ScreenTools.normalFontFamily
                                         font.pointSize:_defaultFont
                                         color:qgcPal.text
@@ -2438,9 +2479,9 @@ Rectangle {
                                     dropCheckedIndex:QGCCwGimbalController.sbusMap[12] === 255 ?  0 : QGCCwGimbalController.sbusMap[12]+1
                                     channelVal:QGCCwGimbalController.sbusData[12] === 0 ? "" : QGCCwGimbalController.sbusData[12]
                                     isChecked:QGCCwGimbalController.getSbusChecked(12)
-                                    txtFir:"关"
+                                    txtFir:qsTr("Off")
                                     //                                txtSec:"空"
-                                    txtThi:"开"
+                                    txtThi:qsTr("On")
                                     onDropCheckedChange:{
                                         if(checkIndex === 0) {
                                             QGCCwGimbalController.setSbusMapValue(12, 255)
@@ -2464,7 +2505,7 @@ Rectangle {
                                 spacing:ScreenTools.defaultFontPixelWidth*3
                                 Column {
                                     QGCButton {
-                                        text:               qsTr("恢复默认")
+                                        text:               qsTr("Reset")
                                         font.family: {
                                                if (Qt.locale().name.startsWith("zh")) {
                                                    return ScreenTools.isMobile ?
@@ -2482,7 +2523,7 @@ Rectangle {
                                 Column{
                                     QGCButton {
 
-                                        text:               qsTr("保存")
+                                        text:               qsTr("Save")
                                         onClicked:  {
                                             console.log("保存成功")
                                             QGCCwGimbalController.sendSaveParameters();
@@ -2500,13 +2541,12 @@ Rectangle {
                     ScrollView {
                         anchors.fill: parent
                         contentHeight: childHeight7.implicitHeight
+                        clip: true
                         Rectangle{
                             id:childHeight7
                             width: _tabBoxWid
-//                            height: parent.height
                             implicitHeight: Math.max((childrenRect.height  +  _columnSpacing * 2),_root.height)
                             color: qgcPal.windowShade
-//                            anchors.centerIn: parent
                             anchors.horizontalCenter: parent.horizontalCenter
                             Rectangle{
                                 anchors.top: parent.top
@@ -2536,16 +2576,49 @@ Rectangle {
                                         }
                                     }
                                     RowLayout{
+                                        visible:!ScreenTools.isMobile
                                         Layout.alignment: Qt.AlignHCenter
-                                        Layout.preferredHeight: textItem.implicitHeight // 固定高度
+                                        Layout.preferredHeight: textItem.implicitHeight > 0 ? textItem.implicitHeight : 10
                                         Text {
                                             id:textItem
                                             font.pointSize:_defaultFont
                                             font.family:ScreenTools.normalFontFamily
                                             color: qgcPal.text
-                                            text: qsTr("校准前请确保吊舱处于静止状态 (无需回中) 直至校准完成")
-
+                                            text: qsTr("Before calibration,please ensure that the pod is stationary (no need to return to center) until the calibration is completed")
                                         }
+                                    }
+                                    RowLayout {
+                                        visible:ScreenTools.isMobile
+                                        Layout.alignment: Qt.AlignHCenter
+                                        Layout.preferredHeight: columnContainer.implicitHeight // 固定高度
+                                        Layout.preferredWidth: _tabBoxWid*0.8
+                                        ColumnLayout  {
+                                            id: columnContainer
+                                            width: parent.width
+                                            Text {
+                                                id:textItem2
+                                                Layout.fillWidth: true
+                                                Layout.alignment: Qt.AlignHCenter
+                                                horizontalAlignment: Text.AlignHCenter
+                                                font.pointSize:_defaultFont
+                                                font.family:ScreenTools.normalFontFamily
+                                                color: qgcPal.text
+                                                text: qsTr("Before calibration,please ensure that the pod is stationary")
+                                                wrapMode: Text.WordWrap
+                                            }
+                                            Text {
+                                                id:textItem3
+                                                Layout.fillWidth: true
+                                                Layout.alignment: Qt.AlignHCenter
+                                                horizontalAlignment: Text.AlignHCenter
+                                                font.pointSize:_defaultFont
+                                                font.family:ScreenTools.normalFontFamily
+                                                color: qgcPal.text
+                                                text: qsTr("(no need to return to center) until the calibration is completed")
+                                                wrapMode: Text.WordWrap
+                                            }
+                                        }
+
                                     }
                                     RowLayout{
                                         id:visLoading
@@ -2613,7 +2686,7 @@ Rectangle {
                                             font.pointSize:ScreenTools.defaultFontPointSize*1.2
                                             font.family:ScreenTools.normalFontFamily
                                             color: qgcPal.text //QGCCwGimbalController.calibrateStatusCode === 2 ? "#009fff" : (QGCCwGimbalController.calibrateStatusCode === 3 ? "red" : "#000")
-                                            text: (QGCCwGimbalController.calibrateStatusCode === 2) ? qsTr("校准成功") : (QGCCwGimbalController.calibrateStatusCode === 3 ? qsTr("校准失败") :( visLoading.visible ? qsTr("正在校准...") : ""))
+                                            text: (QGCCwGimbalController.calibrateStatusCode === 2) ? qsTr("Calibration Successful") : (QGCCwGimbalController.calibrateStatusCode === 3 ? qsTr("Calibration Failed") :( visLoading.visible ? qsTr("Calibrating...") : ""))
                                         }
                                         //                                        }
                                     }
@@ -2625,7 +2698,7 @@ Rectangle {
                                         QGCButton {
                                             id:calibrateButton
                                             enabled:!visLoading.visible
-                                            text:               qsTr("校准")
+                                            text:               qsTr("Calib")
                                             //                                            Layout.alignment:   Qt.AlignHCenter
                                             onClicked:  {
                                                QGCCwGimbalController.calibrateFun();
@@ -2668,6 +2741,7 @@ Rectangle {
                                         anchors.centerIn: parent;
                                         text:qsTr("GNSS")
                                         font.pointSize:_defaultFont
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color:qgcPal.text
                                     }
                                 }
@@ -2677,8 +2751,9 @@ Rectangle {
                                     color: qgcPal.windowShade
                                     Text{
                                         anchors.centerIn: parent;
-                                        text:QGCCwGimbalController.gpsState === 0 ? qsTr("未定位") : (QGCCwGimbalController.gpsState === 1 ? qsTr("已定位") : qsTr("未知"))
+                                        text:QGCCwGimbalController.gpsState === 0 ? qsTr("UNFIXED") : (QGCCwGimbalController.gpsState === 1 ? qsTr("FIXED") : qsTr("Unknown"))
                                         font.pointSize:_dataShowValueSize
+                                        font.family:    ScreenTools.normalFontFamily;
                                         color:qgcPal.text
                                     }
                                 }
@@ -2689,8 +2764,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("滚转")
+                                            text:qsTr("Roll")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2700,8 +2776,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("俯仰")
+                                            text:qsTr("Pitch")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2711,8 +2788,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("偏航")
+                                            text:qsTr("Yaw")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2762,6 +2840,7 @@ Rectangle {
                                             anchors.centerIn: parent;
                                             text:qsTr("Acc_N")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2773,6 +2852,7 @@ Rectangle {
                                             anchors.centerIn: parent;
                                             text:qsTr("Acc_E")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2784,6 +2864,7 @@ Rectangle {
                                             anchors.centerIn: parent;
                                             text:qsTr("Acc_U")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2831,8 +2912,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("相机滚转角")
+                                            text:qsTr("Camera Roll")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2842,8 +2924,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("相机俯仰角")
+                                            text:qsTr("Camera Pitch")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2853,8 +2936,9 @@ Rectangle {
                                         color: _rowColor
                                         Text{
                                             anchors.centerIn: parent;
-                                            text:qsTr("相机指向角")
+                                            text:qsTr("Camera Yaw")
                                             font.pointSize:_defaultFont
+                                            font.family:    ScreenTools.normalFontFamily;
                                             color:qgcPal.text
                                         }
                                     }
@@ -2937,8 +3021,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn: (QGCCwGimbalController.osdState === 1) ? true : false
-                                            onText:"开启"
-                                            offText:"关闭"
+                                            onText:qsTr("OPEN")
+                                            offText:qsTr("OFF")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.osdSwitch(1);
@@ -2956,7 +3040,7 @@ Rectangle {
                                     visible: QGCCwGimbalController.timeZoneAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("OSD时区")
+                                        text: qsTr("OSD Time Zone")
                                         font.pointSize:_defaultFont
                                     }
                                     QGCComboBox{
@@ -3032,7 +3116,7 @@ Rectangle {
                                     visible: QGCCwGimbalController.osdDataAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("OSD坐标")
+                                        text: qsTr("OSD Coordinate")
                                         font.pointSize:_defaultFont
                                     }
                                     Rectangle{
@@ -3040,8 +3124,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn:(QGCCwGimbalController.osdDataMean === 1) ? true : false
-                                            onText:"目标"
-                                            offText:"载机"
+                                            onText:qsTr("Target")
+                                            offText:qsTr("Carrier")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.userConfigFun(0x04,0,0,0x01,0,0,0);
@@ -3058,7 +3142,7 @@ Rectangle {
                                     visible: false// 现在默认自动倒置  QGCCwGimbalController.imageInversAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("图像倒置")
+                                        text: qsTr("Image Reverse")
                                         font.pointSize:_defaultFont
                                     }
                                     Rectangle{
@@ -3066,8 +3150,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn:(QGCCwGimbalController.imageInvers === 1) ? false : true
-                                            onText:"自动"
-                                            offText:"关闭"
+                                            onText:qsTr("AUTO")
+                                            offText:qsTr("OFF")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.userConfigFun(0x02,0,0x00,0,0,0,0);
@@ -3084,7 +3168,7 @@ Rectangle {
                                     visible: false //QGCCwGimbalController.trackZoomAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("目标自适应变焦")
+                                        text: qsTr("Target Adaptive Zoom")
                                         font.pointSize:_defaultFont
                                     }
                                     Rectangle{
@@ -3092,8 +3176,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn:(QGCCwGimbalController.trackZoomSta === 1) ? true : false
-                                            onText:"开启"
-                                            offText:"关闭"
+                                            onText:qsTr("OPEN")
+                                            offText:qsTr("OFF")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.userConfigFun(0x10,0,0,0,0,0x01,0);
@@ -3111,7 +3195,7 @@ Rectangle {
                                     visible: false //QGCCwGimbalController.autoTrackAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("自动跟踪")
+                                        text: qsTr("Tracking on Detecting")
                                         font.pointSize:_defaultFont
                                     }
                                     Rectangle{
@@ -3119,8 +3203,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn:(QGCCwGimbalController.tracSta === 1) ? false : true
-                                            onText:"开启"
-                                            offText:"关闭"
+                                            onText:qsTr("OPEN")
+                                            offText:qsTr("OFF")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.userConfigFun(0x01,0x00,0,0,0,0,0);
@@ -3138,7 +3222,7 @@ Rectangle {
                                     visible: QGCCwGimbalController.recognizeAvailable
                                     QGCLabel {
                                         Layout.preferredWidth:              _labelWidth
-                                        text: qsTr("目标识别")
+                                        text: qsTr("Target Detection")
                                         font.pointSize:_defaultFont
                                     }
                                     Rectangle{
@@ -3146,8 +3230,8 @@ Rectangle {
                                         height: _switchBtnHe
                                         SwitchModule{
                                             isOn:(QGCCwGimbalController.recognizeSta === 1) ? true : false
-                                            onText:"开启"
-                                            offText:"关闭"
+                                            onText:qsTr("OPEN")
+                                            offText:qsTr("OFF")
                                             onOnOffClick:{
                                                 if(isOn){
                                                     QGCCwGimbalController.userConfigFun(0x08,0,0,0,0x01,0,0);

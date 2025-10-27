@@ -151,7 +151,7 @@ Rectangle {
 
                         Text{
                             id:  innerText1
-                            text: packUpBtn.checked ?  "展开" : "收起"
+                            text: packUpBtn.checked ?  qsTr("Show") : qsTr("Hide")
                             color: ScreenTools.isMobile ? (packUpBtn.checked ? "#fff" : "#000") :  (packUpBtn.checked ? "#000" : "#fff")
                             font.pointSize: ScreenTools.isMobile ? ScreenTools.defaultFontPointSize/1.6 : ScreenTools.defaultFontPointSize*0.8
                             anchors.horizontalCenter:   parent.horizontalCenter

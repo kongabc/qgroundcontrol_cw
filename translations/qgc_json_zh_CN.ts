@@ -149,7 +149,7 @@
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMAirframeComponentSummary.qml" line="36"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>
@@ -441,58 +441,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="770"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="779"/>
         <source>Unable to change altitude, vehicle altitude not known.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="775"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="784"/>
         <source>Unable to pause vehicle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="838"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="847"/>
         <source>Vehicle does not support guided takeoff</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="844"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="853"/>
         <source>Unable to takeoff, vehicle position not known.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="854"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="863"/>
         <source>Unable to takeoff: Vehicle failed to change to Guided mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="859"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="868"/>
         <source>Unable to takeoff: Vehicle failed to arm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="877"/>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="897"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="886"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="906"/>
         <source>Unable to start mission: Vehicle failed to change to Auto mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="885"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="894"/>
         <source>Unable to start mission: Vehicle failed to change to Guided mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="890"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="899"/>
         <source>Unable to start mission: Vehicle failed to arm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="975"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="984"/>
         <source>Follow failed: Home position not set.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="985"/>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="994"/>
         <source>Follow failed: Ground station cannot provide required position information.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -605,7 +605,7 @@
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMFlightModesComponentController.cc" line="38"/>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">关</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMFlightModesComponentController.cc" line="38"/>
@@ -792,7 +792,7 @@
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMHeliComponent.qml" line="85"/>
         <source>Function</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">功能</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMHeliComponent.qml" line="86"/>
@@ -1782,7 +1782,7 @@
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSafetyComponentSummary.qml" line="132"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSafetyComponentSummary.qml" line="137"/>
@@ -2242,7 +2242,7 @@ Click Ok to start calibration.</source>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponent.qml" line="842"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponent.qml" line="916"/>
@@ -2294,13 +2294,13 @@ Click Ok to start calibration.</source>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="285"/>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="528"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="544"/>
         <source>Successfully completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="288"/>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="532"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="548"/>
         <source>Failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2340,37 +2340,42 @@ Click Ok to start calibration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="580"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="541"/>
+        <source>In progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="597"/>
         <source>Compass %1 calibration complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="582"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="599"/>
         <source>Compass %1 calibration below quality threshold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="601"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="618"/>
         <source>All compasses calibrated successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="602"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="619"/>
         <source>YOU MUST REBOOT YOUR VEHICLE NOW FOR NEW SETTINGS TO TAKE AFFECT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="605"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="622"/>
         <source>Compass calibration failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="606"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="623"/>
         <source>YOU MUST REBOOT YOUR VEHICLE NOW AND RETRY COMPASS CALIBRATION PRIOR TO FLIGHT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="610"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMSensorsComponentController.cc" line="627"/>
         <source>Continue rotating...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2473,7 +2478,7 @@ Click Ok to start calibration.</source>
         <location filename="../src/AutoPilotPlugins/APM/APMSubFrameComponentSummary.qml" line="50"/>
         <location filename="../src/AutoPilotPlugins/APM/APMSubFrameComponentSummary.qml" line="55"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMSubFrameComponentSummary.qml" line="54"/>
@@ -2610,7 +2615,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMTuningComponentCopter.qml" line="358"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">None</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/APM/APMTuningComponentCopter.qml" line="358"/>
@@ -2931,7 +2936,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponent.qml" line="50"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">恢复默认</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponent.qml" line="114"/>
@@ -2999,7 +3004,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponentSummary.qml" line="31"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponentSummary.qml" line="36"/>
@@ -3009,7 +3014,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponentSummary.qml" line="37"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/AirframeComponentSummary.qml" line="41"/>
@@ -3022,7 +3027,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="67"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">常规</translation>
     </message>
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="84"/>
@@ -3215,7 +3220,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="485"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="499"/>
@@ -3230,7 +3235,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="546"/>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">测距</translation>
     </message>
     <message>
         <location filename="../src/Airmap/AirmapSettings.qml" line="555"/>
@@ -3363,7 +3368,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/AirspaceManagement/AirspaceAdvisoryProvider.cc" line="44"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>
@@ -3398,7 +3403,7 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/Airmap/AirspaceControl.qml" line="326"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">None</translation>
     </message>
     <message>
         <location filename="../src/Airmap/AirspaceControl.qml" line="372"/>
@@ -3618,12 +3623,12 @@ Please place your vehicle in water, click the button, and wait. Note that the th
     <message>
         <location filename="../src/Settings/AppSettings.cc" line="34"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">录像</translation>
     </message>
     <message>
         <location filename="../src/Settings/AppSettings.cc" line="35"/>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">拍照</translation>
     </message>
     <message>
         <location filename="../src/Settings/AppSettings.cc" line="36"/>
@@ -3853,7 +3858,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/ui/toolbar/BatteryIndicator.qml" line="175"/>
         <source>Function</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">功能</translation>
     </message>
 </context>
 <context>
@@ -3910,7 +3915,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/ui/preferences/BluetoothSettings.qml" line="73"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">停止</translation>
     </message>
 </context>
 <context>
@@ -4311,56 +4316,721 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>CameraSettings</name>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="133"/>
-        <source>GCU IP地址</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="132"/>
+        <source>General</source>
+        <translation>常规</translation>
     </message>
     <message>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="151"/>
-        <source>默认网关</source>
+        <source>Net</source>
+        <translation>网络</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="169"/>
+        <source>Camera</source>
+        <translation>相机</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="187"/>
+        <source>S.BUS</source>
+        <translation>S.BUS</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="205"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2701"/>
+        <source>Calib</source>
+        <translation>校准</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="223"/>
+        <source>Vehicle</source>
+        <translation>载机</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="241"/>
+        <source>Advance</source>
+        <translation>高级</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="329"/>
+        <source>Model:</source>
+        <translation>设备型号:</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="341"/>
+        <source>GCU:</source>
+        <translation>GCU版本:</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="332"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="344"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="357"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2754"/>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="354"/>
+        <source>Gimbal:</source>
+        <translation>云台版本:</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="383"/>
+        <source>Video Settings</source>
+        <translation>视频设置</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="388"/>
+        <source>Mode1</source>
+        <translation>模式1</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="403"/>
+        <source>Mode2</source>
+        <translation>模式2</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="428"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="479"/>
+        <source>Source</source>
+        <translation>Source</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="435"/>
+        <source>Video Stream</source>
+        <translation>Video Stream</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="447"/>
+        <source>STREAM URL</source>
+        <translation>STREAM URL</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="492"/>
+        <source>UDP Port</source>
+        <translation>UDP 端口</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="503"/>
+        <source>RTSP URL</source>
+        <translation>RTSP URL</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="513"/>
+        <source>TCP URL</source>
+        <translation>TCP URL</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="523"/>
+        <source>Aspect Ratio</source>
+        <translation>长宽比</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="534"/>
+        <source>File Format</source>
+        <translation>File Format</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="545"/>
+        <source>Max Storage Usage</source>
+        <translation>最大存储使用量</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="556"/>
+        <source>Video decode priority</source>
+        <translation>Video decode priority</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="569"/>
+        <source>Disable When Disarmed</source>
+        <translation>解锁后禁用</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="576"/>
+        <source>Low Latency Mode</source>
+        <translation>低延迟模式</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="583"/>
+        <source>Auto-Delete Saved Recordings</source>
+        <translation>Auto-Delete Saved Recordings</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="603"/>
+        <source>Crosshair</source>
+        <translation>相机准星</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="617"/>
+        <source>+ Large</source>
+        <translation>+ 大</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="618"/>
+        <source>+ Medium</source>
+        <translation>+ 中</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="619"/>
+        <source>+ Small</source>
+        <translation>+ 小</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="620"/>
+        <source>x Large</source>
+        <translation>x 大</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="621"/>
+        <source>x Medium</source>
+        <translation>x 中</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="622"/>
+        <source>x Small</source>
+        <translation>x 小</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="632"/>
+        <source>Move Button</source>
+        <translation>移动按钮</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="654"/>
+        <source>To Center</source>
+        <translation>准星回中</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="691"/>
+        <source>Reference Line</source>
+        <translation>参考线</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="696"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2080"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2302"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2356"/>
+        <source>None</source>
+        <translation>None</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="697"/>
+        <source>Nine-square Grid A</source>
+        <translation>九宫格A</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="698"/>
+        <source>Nine-square Grid B</source>
+        <translation>九宫格B</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="699"/>
+        <source>Nine-square Grid A+B</source>
+        <translation>九宫格A+B</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="712"/>
+        <source>Camera Center</source>
+        <translation>相机中心点</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="730"/>
+        <source>Temp Alert</source>
+        <translation>温度报警</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="738"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="840"/>
+        <source>H:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="170"/>
-        <source>子网掩码</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="782"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="883"/>
+        <source>L:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="188"/>
-        <source>远端IP地址</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="833"/>
+        <source>Isotherm</source>
+        <translation>等温线</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1002"/>
+        <source>UDP/TCP :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="208"/>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="278"/>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="336"/>
-        <source>相机IP地址</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1021"/>
+        <source>UDP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="230"/>
-        <source>恢复默认</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1033"/>
+        <source>TCP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="238"/>
-        <source>保存</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1101"/>
+        <source>V2.5.5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="259"/>
-        <source>登入相机</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1135"/>
+        <source>IP</source>
+        <translation>IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1135"/>
+        <source>Controller IP</source>
+        <translation>控制器IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1153"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1424"/>
+        <source>Gateway IP</source>
+        <translation>默认网关</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1172"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1443"/>
+        <source>Subnet Mask</source>
+        <translation>子网掩码</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1191"/>
+        <source>Remote IP</source>
+        <translation>远端IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1210"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1321"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1405"/>
+        <source>Camera IP</source>
+        <translation>相机IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1232"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2082"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2508"/>
+        <source>Reset</source>
+        <translation>恢复默认</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1260"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1658"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1865"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2526"/>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1299"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1373"/>
+        <source>LOGIN</source>
+        <translation>登入相机</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1348"/>
+        <source>*Login failed, Please check the network</source>
+        <translation>*登录失败，请检查网络</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1354"/>
+        <source>and fill in the correct camera IP address</source>
+        <translation>并填写正确的相机IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1339"/>
+        <source>*Login failed, Please check the network and fill in the correct camera IP address</source>
+        <translation>*登录失败，请检查网络并填写正确的相机IP地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1505"/>
+        <source>Bitrate(b/s) (500~6000)</source>
+        <translation>码率(b/s) (500~6000)</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1544"/>
+        <source>Resolution</source>
+        <translation>分辨率</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1550"/>
+        <source>720P</source>
+        <translation type="unfinished">720P</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1551"/>
+        <source>1080P</source>
+        <translation type="unfinished">1080P</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1569"/>
+        <source>FPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="295"/>
-        <source>*登录失败，请检查网络并填写正确的相机IP地址</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1575"/>
+        <source>30</source>
+        <translation type="unfinished">30</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1576"/>
+        <source>60</source>
+        <translation type="unfinished">60</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1594"/>
+        <source>Encode</source>
+        <translation>编码格式</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1600"/>
+        <source>h.264</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="309"/>
-        <source>登入</source>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1601"/>
+        <source>h.265</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1618"/>
+        <source>Video Quality</source>
+        <translation>视频质量</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1625"/>
+        <source>high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1626"/>
+        <source>medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1627"/>
+        <source>low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1699"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1888"/>
+        <source>Setting Successful</source>
+        <translation>设置成功</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1706"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1895"/>
+        <source>OK</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1937"/>
+        <source>Function</source>
+        <translation>功能</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1952"/>
+        <source>Channel</source>
+        <translation>通道</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1959"/>
+        <source>Rev</source>
+        <translation>反向</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1966"/>
+        <source>Val</source>
+        <translation>通道值</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1974"/>
+        <source>Definition</source>
+        <translation>定义</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="1998"/>
+        <source>Mode</source>
+        <translation>模式</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2019"/>
+        <source>Follow</source>
+        <translation>跟随</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2020"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2051"/>
+        <source>Lock</source>
+        <translation>锁定</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2021"/>
+        <source>Mavlink</source>
+        <translation>Mavlink</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2050"/>
+        <source>Downward</source>
+        <translation>俯拍</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2052"/>
+        <source>Gaze</source>
+        <translation>凝视</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2106"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2126"/>
+        <source>Track</source>
+        <translation>跟踪</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2124"/>
+        <source>Exit</source>
+        <translation>退出</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2149"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2779"/>
+        <source>Pitch</source>
+        <translation>俯仰</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2192"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2791"/>
+        <source>Yaw</source>
+        <translation>偏航</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2235"/>
+        <source>Zoom</source>
+        <translation>变倍</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2253"/>
+        <source>Zoom Out</source>
+        <translation>缩小</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2254"/>
+        <source>Stop</source>
+        <translation>停止</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2255"/>
+        <source>Zoom In</source>
+        <translation>放大</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2283"/>
+        <source>Pic&amp;Rec</source>
+        <translation>拍照录像</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2301"/>
+        <source>Video</source>
+        <translation>录像</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2303"/>
+        <source>Photo</source>
+        <translation>拍照</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2330"/>
+        <source>VideoSwitch</source>
+        <translation>画面切换</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2355"/>
+        <source>Palette</source>
+        <translation>调色</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2357"/>
+        <source>PIP</source>
+        <translation>画中画</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2380"/>
+        <source>IRCUT</source>
+        <translation>夜视</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2398"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2440"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2482"/>
+        <source>Off</source>
+        <translation>关</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2400"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2442"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2484"/>
+        <source>On</source>
+        <translation>开</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2422"/>
+        <source>Lamp</source>
+        <translation>补光</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2464"/>
+        <source>Range</source>
+        <translation>测距</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2587"/>
+        <source>Before calibration,please ensure that the pod is stationary (no need to return to center) until the calibration is completed</source>
+        <translation>校准前请确保吊舱处于静止状态 (无需回中) 直至校准完成</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2606"/>
+        <source>Before calibration,please ensure that the pod is stationary</source>
+        <translation>校准前请确保吊舱处于静止状态</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2617"/>
+        <source>(no need to return to center) until the calibration is completed</source>
+        <translation>(无需回中) 直至校准完成</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2689"/>
+        <source>Calibration Successful</source>
+        <translation>校准成功</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2689"/>
+        <source>Calibration Failed</source>
+        <translation>校准失败</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2689"/>
+        <source>Calibrating...</source>
+        <translation>正在校准...</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2742"/>
+        <source>GNSS</source>
+        <translation>GNSS</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2754"/>
+        <source>UNFIXED</source>
+        <translation>未定位</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2754"/>
+        <source>FIXED</source>
+        <translation>已定位</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2767"/>
+        <source>Roll</source>
+        <translation>滚转</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2841"/>
+        <source>Acc_N</source>
+        <translation>Acc_N</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2853"/>
+        <source>Acc_E</source>
+        <translation>Acc_E</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2865"/>
+        <source>Acc_U</source>
+        <translation>Acc_U</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2915"/>
+        <source>Camera Roll</source>
+        <translation>相机滚转角</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2927"/>
+        <source>Camera Pitch</source>
+        <translation>相机俯仰角</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2939"/>
+        <source>Camera Yaw</source>
+        <translation>相机指向角</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3016"/>
+        <source>OSD</source>
+        <translation>OSD</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3024"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3179"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3206"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3233"/>
+        <source>OPEN</source>
+        <translation>开启</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3025"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3154"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3180"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3207"/>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3234"/>
+        <source>OFF</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3043"/>
+        <source>OSD Time Zone</source>
+        <translation>OSD时区</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3119"/>
+        <source>OSD Coordinate</source>
+        <translation>OSD坐标</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3127"/>
+        <source>Target</source>
+        <translation>目标</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3128"/>
+        <source>Carrier</source>
+        <translation>载机</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3145"/>
+        <source>Image Reverse</source>
+        <translation>图像倒置</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3153"/>
+        <source>AUTO</source>
+        <translation>自动</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3171"/>
+        <source>Target Adaptive Zoom</source>
+        <translation>目标自适应变焦</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3198"/>
+        <source>Tracking on Detecting</source>
+        <translation>识别即跟踪</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="3225"/>
+        <source>Target Detection</source>
+        <translation>目标识别</translation>
     </message>
 </context>
 <context>
@@ -4398,7 +5068,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/FlightMap/Widgets/CenterMapDropButton.qml" line="222"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
         <location filename="../src/FlightMap/Widgets/CenterMapDropButton.qml" line="234"/>
@@ -4431,7 +5101,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/FlightMap/Widgets/CenterMapDropPanel.qml" line="64"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
         <location filename="../src/FlightMap/Widgets/CenterMapDropPanel.qml" line="75"/>
@@ -5193,22 +5863,22 @@ Click Ok to start the auto-tuning process.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FactSystem/Fact.cc" line="365"/>
+        <location filename="../src/FactSystem/Fact.cc" line="366"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FactSystem/Fact.cc" line="365"/>
+        <location filename="../src/FactSystem/Fact.cc" line="366"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FactSystem/Fact.cc" line="778"/>
+        <location filename="../src/FactSystem/Fact.cc" line="779"/>
         <source>Change of parameter %1 requires a Vehicle reboot to take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FactSystem/Fact.cc" line="780"/>
+        <location filename="../src/FactSystem/Fact.cc" line="781"/>
         <source>Change of &apos;%1&apos; value requires restart of %2 to take effect.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5330,7 +6000,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/comm/QGCMAVLink.cc" line="79"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>
@@ -6400,12 +7070,12 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>FlightDisplayViewVideo</name>
     <message>
-        <location filename="../src/FlightDisplay/FlightDisplayViewVideo.qml" line="47"/>
+        <location filename="../src/FlightDisplay/FlightDisplayViewVideo.qml" line="49"/>
         <source>WAITING FOR VIDEO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightDisplay/FlightDisplayViewVideo.qml" line="47"/>
+        <location filename="../src/FlightDisplay/FlightDisplayViewVideo.qml" line="49"/>
         <source>VIDEO DISABLED</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6494,14 +7164,58 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>FlyView</name>
     <message>
-        <location filename="../src/FlightDisplay/FlyView.qml" line="705"/>
-        <source>Target</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="279"/>
+        <source>IRCUT</source>
+        <translation>黑白夜视</translation>
     </message>
     <message>
-        <location filename="../src/FlightDisplay/FlyView.qml" line="732"/>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="288"/>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="316"/>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="345"/>
+        <source>ON</source>
+        <translation>开</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="289"/>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="317"/>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="346"/>
+        <source>OFF</source>
+        <translation>关</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="308"/>
+        <source>Night Scene</source>
+        <translation>夜景模式</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="337"/>
+        <source>Lamp</source>
+        <translation>补光</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="787"/>
+        <source>Target</source>
+        <translation>Target</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="815"/>
         <source>Carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrier</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="1558"/>
+        <source>Entire Area</source>
+        <translation>全区域</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="1580"/>
+        <source>Start Temp</source>
+        <translation>开启测温</translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyView.qml" line="1613"/>
+        <source>Cancel</source>
+        <translation>取消编辑</translation>
     </message>
 </context>
 <context>
@@ -6629,20 +7343,25 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>FlyViewVideo</name>
     <message>
-        <location filename="../src/FlightDisplay/FlyViewVideo.qml" line="96"/>
+        <location filename="../src/FlightDisplay/FlyViewVideo.qml" line="197"/>
         <source>Double-click to exit full screen</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyViewVideo.qml" line="504"/>
+        <source>OK</source>
+        <translation>确定</translation>
     </message>
 </context>
 <context>
     <name>FlyViewWidgetLayer</name>
     <message>
-        <location filename="../src/FlightDisplay/FlyViewWidgetLayer.qml" line="98"/>
+        <location filename="../src/FlightDisplay/FlyViewWidgetLayer.qml" line="103"/>
         <source>Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightDisplay/FlyViewWidgetLayer.qml" line="104"/>
+        <location filename="../src/FlightDisplay/FlyViewWidgetLayer.qml" line="109"/>
         <source>Multi-Vehicle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6744,26 +7463,6 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>GeneralSettings</name>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="108"/>
-        <source>×</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="178"/>
-        <source>校准成功</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="178"/>
-        <source>校准失败</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="178"/>
-        <source>正在校准...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/ui/preferences/GeneralSettings.qml" line="204"/>
         <source>Fly View</source>
         <translation type="unfinished"></translation>
@@ -6839,412 +7538,326 @@ Click Ok to start the auto-tuning process.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="358"/>
-        <source>Video Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="363"/>
-        <source>模式1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="381"/>
-        <source>模式2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="413"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="477"/>
-        <source>Source</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="421"/>
-        <source>Video Stream</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="442"/>
-        <source>STREAM URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="490"/>
-        <source>UDP Port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="501"/>
-        <source>RTSP URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="511"/>
-        <source>TCP URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="521"/>
-        <source>Aspect Ratio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="532"/>
-        <source>File Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="543"/>
-        <source>Max Storage Usage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="554"/>
-        <source>Video decode priority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="567"/>
-        <source>Disable When Disarmed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="574"/>
-        <source>Low Latency Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="581"/>
-        <source>Auto-Delete Saved Recordings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="593"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="601"/>
         <source>相机设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="613"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="622"/>
         <source>相机中心点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="624"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="633"/>
         <source>温度报警</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="632"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="734"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="641"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="743"/>
         <source>H:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="676"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="777"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="685"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="786"/>
         <source>L:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="727"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="736"/>
         <source>等温线</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="893"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="935"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="903"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="946"/>
         <source>校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="926"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="937"/>
         <source>校准前请确保吊舱处于静止状态 (无需回中) 直至校准完成</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="976"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="965"/>
         <source>UDP/TCP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="997"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="987"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>UDP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1009"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="999"/>
         <source>TCP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1066"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1056"/>
         <source>Plan View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1088"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1078"/>
         <source>Default Mission Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1094"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1084"/>
         <source>VTOL TransitionDistance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1102"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1092"/>
         <source>Use MAV_CMD_CONDITION_GATE for pattern generation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1107"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1097"/>
         <source>Missions Do Not Require Takeoff Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1117"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1107"/>
         <source>Units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1137"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1127"/>
         <source>Horizontal Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1137"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1127"/>
         <source>Vertical Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1137"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1127"/>
         <source>Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1137"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1127"/>
         <source>Speed</source>
         <translation type="unfinished">速度</translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1137"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1127"/>
         <source>Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1154"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1144"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1178"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1168"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1189"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1179"/>
         <source>Color Scheme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1200"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1190"/>
         <source>Map Provider</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1220"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1210"/>
         <source>Map Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1239"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1229"/>
         <source>Stream GCS Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1249"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1239"/>
         <source>UI Scaling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1314"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1304"/>
         <source>Use Vehicle Pairing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1321"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1311"/>
         <source>Mute all audio output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1328"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1318"/>
         <source>Check for Internet connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1336"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1326"/>
         <source>Clear all settings on next start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1346"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1336"/>
         <source>Clear Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1347"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1337"/>
         <source>All saved settings will be reset the next time you start %1. Is this really what you want?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1371"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1361"/>
         <source>Application Load/Save Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1375"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1365"/>
         <source>&lt;not set&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1378"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1782"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1804"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1368"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1772"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1794"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1382"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1372"/>
         <source>Choose the location to save/load files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1395"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1385"/>
         <source>Telemetry Logs from Vehicle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1413"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1403"/>
         <source>Save log after each flight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1421"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1411"/>
         <source>Save logs even if vehicle was not armed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1429"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1419"/>
         <source>Save CSV log of telemetry data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1441"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1431"/>
         <source>AutoConnect to the following devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>Pixhawk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>SiK Radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>PX4 Flow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>LibrePilot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1557"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1547"/>
         <source>RTK GPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1472"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1462"/>
         <source>Zero-Conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1491"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1481"/>
         <source>NMEA GPS Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1522"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1512"/>
         <source>NMEA GPS Baudrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1542"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1532"/>
         <source>NMEA stream UDP port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1580"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1570"/>
         <source>Perform Survey-In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1614"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1604"/>
         <source>Use Specified Base Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1675"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1665"/>
         <source>Save Current Base Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1691"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1681"/>
         <source>ADSB Server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1709"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1699"/>
         <source>Note: These setting are not meant for use with an ADSB transponder which is situated on the vehicle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1754"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1744"/>
         <source>Brand Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1773"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1763"/>
         <source>Indoor Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1786"/>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1808"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1776"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1798"/>
         <source>Choose custom brand image file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1795"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1785"/>
         <source>Outdoor Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1816"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1806"/>
         <source>Reset Default Brand Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1839"/>
-        <source>V2.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7253,7 +7866,7 @@ Click Ok to start the auto-tuning process.
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1849"/>
+        <location filename="../src/ui/preferences/GeneralSettings.qml" line="1821"/>
         <source>%1 Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7317,7 +7930,7 @@ Click Ok to start the auto-tuning process.
         <location filename="../src/PlanView/GeoFenceEditor.qml" line="151"/>
         <location filename="../src/PlanView/GeoFenceEditor.qml" line="226"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">None</translation>
     </message>
     <message>
         <location filename="../src/PlanView/GeoFenceEditor.qml" line="162"/>
@@ -7851,7 +8464,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/QmlControls/InstrumentValueData.cc" line="21"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">None</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/InstrumentValueData.cc" line="22"/>
@@ -7909,7 +8522,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/QmlControls/InstrumentValueEditDialog.qml" line="164"/>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">测距</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/InstrumentValueEditDialog.qml" line="246"/>
@@ -8087,7 +8700,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/VehicleSetup/JoystickConfig.qml" line="69"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">常规</translation>
     </message>
     <message>
         <location filename="../src/VehicleSetup/JoystickConfig.qml" line="72"/>
@@ -8227,7 +8840,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/VehicleSetup/JoystickConfigCalibration.qml" line="175"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/VehicleSetup/JoystickConfigCalibration.qml" line="187"/>
@@ -8556,12 +9169,12 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/ui/preferences/LinkSettings.qml" line="262"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">确定</translation>
     </message>
     <message>
         <location filename="../src/ui/preferences/LinkSettings.qml" line="282"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
 </context>
 <context>
@@ -8703,7 +9316,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/AnalyzeView/LogDownloadPage.qml" line="189"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
 </context>
 <context>
@@ -9179,62 +9792,62 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>MainRootWindow</name>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="159"/>
-        <location filename="../src/ui/MainRootWindow.qml" line="396"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="161"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="398"/>
         <source>Analyze Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="163"/>
-        <location filename="../src/ui/MainRootWindow.qml" line="381"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="165"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="383"/>
         <source>Vehicle Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="167"/>
-        <location filename="../src/ui/MainRootWindow.qml" line="412"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="169"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="414"/>
         <source>Application Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="273"/>
-        <location filename="../src/ui/MainRootWindow.qml" line="290"/>
-        <location filename="../src/ui/MainRootWindow.qml" line="309"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="275"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="292"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="311"/>
         <source>%1 close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="274"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="276"/>
         <source>You have a mission edit in progress which has not been saved/sent. If you close you will lose changes. Are you sure you want to close?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="291"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="293"/>
         <source>You have pending parameter updates to a vehicle. If you close you will lose changes. Are you sure you want to close?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="310"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="312"/>
         <source>There are still active connections to vehicles. Are you sure you want to exit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="362"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="364"/>
         <source>Select Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="431"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="433"/>
         <source>%1 Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="464"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="466"/>
         <source>Advanced Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/MainRootWindow.qml" line="532"/>
+        <location filename="../src/ui/MainRootWindow.qml" line="534"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10949,7 +11562,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/ui/preferences/MavlinkSettings.qml" line="822"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/ui/preferences/MavlinkSettings.qml" line="831"/>
@@ -10975,7 +11588,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/Microhard/MicrohardSettings.qml" line="63"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">常规</translation>
     </message>
     <message>
         <location filename="../src/Microhard/MicrohardSettings.qml" line="80"/>
@@ -11220,7 +11833,7 @@ Click Ok to start the auto-tuning process.
     <message>
         <location filename="../src/PlanView/MissionSettingsEditor.qml" line="43"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
         <location filename="../src/PlanView/MissionSettingsEditor.qml" line="68"/>
@@ -11657,7 +12270,7 @@ Do you wish to proceed?</source>
     <message>
         <location filename="../src/ui/toolbar/MultiVehicleSelector.qml" line="49"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
 </context>
 <context>
@@ -11835,7 +12448,7 @@ Is this really what you want?</source>
         <location filename="../src/QtLocationPlugin/QMLControl/OfflineMap.qml" line="1159"/>
         <location filename="../src/QtLocationPlugin/QMLControl/OfflineMap.qml" line="1313"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/QtLocationPlugin/QMLControl/OfflineMap.qml" line="650"/>
@@ -11996,7 +12609,7 @@ Is this really what you want?</source>
     <message>
         <location filename="../src/FirstRunPromptDialogs/OfflineVehicleFirstRunPrompt.qml" line="68"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
 </context>
 <context>
@@ -12044,7 +12657,7 @@ Is this really what you want?</source>
     <message>
         <location filename="../src/QmlControls/PIDTuning.qml" line="350"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">停止</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/PIDTuning.qml" line="350"/>
@@ -13117,7 +13730,7 @@ Is this really what you want?</source>
     <message>
         <location filename="../src/QmlControls/ParameterDiffDialog.qml" line="90"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/ParameterDiffDialog.qml" line="93"/>
@@ -13355,137 +13968,137 @@ Note that this will also completely reset everything, including UAVCAN nodes, al
 <context>
     <name>PhotoVideoControl</name>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="250"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="268"/>
         <source>Video Grab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="254"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="272"/>
         <source>Camera Trigger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="316"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="334"/>
         <source>Free Space: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="322"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="340"/>
         <source>Battery: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="333"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="351"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="348"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="366"/>
         <source>Camera</source>
         <translation type="unfinished">相机</translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="354"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="372"/>
         <source>Video Stream</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Video Stream</translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="360"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="378"/>
         <source>Thermal View Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="366"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="384"/>
         <source>Blend Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="381"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="399"/>
         <source>Photo Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="387"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="405"/>
         <source>Photo Interval (seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="393"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="411"/>
         <source>Video Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="399"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="417"/>
         <source>Video Screen Fit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="405"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="423"/>
         <source>Reset Camera Defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="411"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="429"/>
         <source>Storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="438"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="456"/>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">关</translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="438"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="456"/>
         <source>Blend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="438"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="456"/>
         <source>Full</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="438"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="456"/>
         <source>Picture In Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="512"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="530"/>
         <source>Single</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="512"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="530"/>
         <source>Time Lapse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="550"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="568"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">恢复默认</translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="555"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="573"/>
         <source>Reset Camera to Factory Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="556"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="574"/>
         <source>Confirm resetting all settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="568"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="586"/>
         <source>Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="573"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="591"/>
         <source>Format Camera Storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="574"/>
+        <location filename="../src/FlightMap/Widgets/PhotoVideoControl.qml" line="592"/>
         <source>Confirm erasing all files?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13885,14 +14498,14 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/PlanView/PlanView.qml" line="231"/>
         <location filename="../src/PlanView/PlanView.qml" line="236"/>
-        <location filename="../src/PlanView/PlanView.qml" line="1152"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1150"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存</translation>
     </message>
     <message>
         <location filename="../src/PlanView/PlanView.qml" line="231"/>
         <location filename="../src/PlanView/PlanView.qml" line="236"/>
-        <location filename="../src/PlanView/PlanView.qml" line="1204"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1202"/>
         <source>Upload</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13949,7 +14562,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     </message>
     <message>
         <location filename="../src/PlanView/PlanView.qml" line="619"/>
-        <location filename="../src/PlanView/PlanView.qml" line="787"/>
+        <location filename="../src/PlanView/PlanView.qml" line="785"/>
         <source>Plan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13969,153 +14582,153 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
         <translation type="unfinished">起飞</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="664"/>
+        <location filename="../src/PlanView/PlanView.qml" line="662"/>
         <source>Rally Point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="664"/>
+        <location filename="../src/PlanView/PlanView.qml" line="662"/>
         <source>Waypoint</source>
         <translation type="unfinished">航点</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="671"/>
+        <location filename="../src/PlanView/PlanView.qml" line="669"/>
         <source>Cancel ROI</source>
         <translation type="unfinished">取消 ROI</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="671"/>
+        <location filename="../src/PlanView/PlanView.qml" line="669"/>
         <source>ROI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="687"/>
+        <location filename="../src/PlanView/PlanView.qml" line="685"/>
         <source>Pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="700"/>
+        <location filename="../src/PlanView/PlanView.qml" line="698"/>
         <source>Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="700"/>
+        <location filename="../src/PlanView/PlanView.qml" line="698"/>
         <source>Land</source>
         <translation type="unfinished">降落</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="710"/>
+        <location filename="../src/PlanView/PlanView.qml" line="708"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="819"/>
+        <location filename="../src/PlanView/PlanView.qml" line="817"/>
         <source>Mission</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="822"/>
+        <location filename="../src/PlanView/PlanView.qml" line="820"/>
         <source>Fence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="826"/>
+        <location filename="../src/PlanView/PlanView.qml" line="824"/>
         <source>Rally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="944"/>
+        <location filename="../src/PlanView/PlanView.qml" line="942"/>
         <source>You have unsaved/unsent changes. Loading from the Vehicle will lose these changes. Are you sure you want to load from the Vehicle?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="956"/>
+        <location filename="../src/PlanView/PlanView.qml" line="954"/>
         <source>You have unsaved/unsent changes. Loading from a file will lose these changes. Are you sure you want to load from a file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="969"/>
+        <location filename="../src/PlanView/PlanView.qml" line="967"/>
         <source>Are you sure you want to remove current plan and create a new plan? </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="980"/>
+        <location filename="../src/PlanView/PlanView.qml" line="978"/>
         <source>Are you sure you want to remove all mission items and clear the mission from the vehicle?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1006"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1004"/>
         <source>Create complex pattern:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1031"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1029"/>
         <source>Mission overwrite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1031"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1029"/>
         <source>GeoFence overwrite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1031"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1029"/>
         <source>Rally Points overwrite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1038"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1036"/>
         <source>You have unsaved changes. You should upload to your vehicle, or save to a file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1039"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1037"/>
         <source>You have unsaved changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1046"/>
-        <location filename="../src/PlanView/PlanView.qml" line="1098"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1044"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1096"/>
         <source>Create Plan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1117"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1115"/>
         <source>Storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1138"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1136"/>
         <source>Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1166"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1164"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1178"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1176"/>
         <source>Save Mission Waypoints As KML...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1183"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1181"/>
         <source>KML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1195"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1193"/>
         <source>Vehicle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">载机</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1215"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1213"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/PlanView.qml" line="1230"/>
+        <location filename="../src/PlanView/PlanView.qml" line="1228"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14251,7 +14864,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
         <location filename="../src/AutoPilotPlugins/PX4/PowerComponent.qml" line="255"/>
         <location filename="../src/AutoPilotPlugins/PX4/PowerComponent.qml" line="270"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Source</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/PowerComponent.qml" line="292"/>
@@ -14678,7 +15291,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/api/QGCCorePlugin.cc" line="137"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">常规</translation>
     </message>
     <message>
         <location filename="../src/api/QGCCorePlugin.cc" line="141"/>
@@ -15021,7 +15634,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="103"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="106"/>
@@ -15051,7 +15664,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="124"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">恢复默认</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="127"/>
@@ -15066,7 +15679,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="136"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCPopupDialogContainer.qml" line="139"/>
@@ -15113,7 +15726,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="40"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="43"/>
@@ -15143,7 +15756,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">恢复默认</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="64"/>
@@ -15158,7 +15771,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="73"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/QmlControls/QGCViewDialogContainer.qml" line="76"/>
@@ -15300,7 +15913,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/comm/QGCSerialPortInfo.cc" line="274"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/comm/QGCSerialPortInfo.cc" line="278"/>
@@ -15665,7 +16278,7 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
     <message>
         <location filename="../src/AutoPilotPlugins/Common/RadioComponent.qml" line="338"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/Common/RadioComponent.qml" line="345"/>
@@ -16528,7 +17141,7 @@ ROTATION_NONE indicates component points in direction of flight.</source>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/SensorsSetup.qml" line="478"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消编辑</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/PX4/SensorsSetup.qml" line="487"/>
@@ -16642,7 +17255,7 @@ ROTATION_NONE indicates component points in direction of flight.</source>
     <message>
         <location filename="../src/ui/preferences/SerialSettings.qml" line="122"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">None</translation>
     </message>
     <message>
         <location filename="../src/ui/preferences/SerialSettings.qml" line="122"/>
@@ -16792,82 +17405,82 @@ ROTATION_NONE indicates component points in direction of flight.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="66"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="65"/>
         <source>Provides advanced access to all commands/parameters. Be very careful!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="77"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="76"/>
         <source>Move &apos;%1&apos; %2 to the %3 location. %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="78"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="77"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="79"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="78"/>
         <source>Transition Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="79"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="78"/>
         <source>Takeoff</source>
         <translation type="unfinished">起飞</translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="80"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="79"/>
         <source>desired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="80"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="79"/>
         <source>climbout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="81"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="80"/>
         <source>Ensure distance from launch to transition direction is far enough to complete transition.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="88"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="87"/>
         <source>Ensure clear of obstacles and into the wind.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="95"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="94"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="106"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="105"/>
         <source>Click in map to set planned Takeoff location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="107"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="106"/>
         <source>Click in map to set planned Launch location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="130"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="129"/>
         <source>Altitude below specifies the approximate altitude of the ground. Normally 0 for landing back at original launch location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="158"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="157"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="184"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="183"/>
         <source>Actual AMSL alt sent: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PlanView/SimpleItemEditor.qml" line="244"/>
+        <location filename="../src/PlanView/SimpleItemEditor.qml" line="243"/>
         <source>Flight Speed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17243,7 +17856,7 @@ ROTATION_NONE indicates component points in direction of flight.</source>
     <message>
         <location filename="../src/AutoPilotPlugins/Common/SyslinkComponent.qml" line="61"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">通道</translation>
     </message>
     <message>
         <location filename="../src/AutoPilotPlugins/Common/SyslinkComponent.qml" line="86"/>
@@ -17351,7 +17964,7 @@ ROTATION_NONE indicates component points in direction of flight.</source>
     <message>
         <location filename="../src/Taisync/TaisyncSettings.qml" line="71"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">常规</translation>
     </message>
     <message>
         <location filename="../src/Taisync/TaisyncSettings.qml" line="88"/>
@@ -17433,7 +18046,7 @@ ROTATION_NONE indicates component points in direction of flight.</source>
     <message>
         <location filename="../src/Taisync/TaisyncSettings.qml" line="275"/>
         <source>Video Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">视频设置</translation>
     </message>
     <message>
         <location filename="../src/Taisync/TaisyncSettings.qml" line="297"/>
@@ -17604,6 +18217,19 @@ Confirm change?</source>
         <location filename="../src/PlanView/TerrainStatus.qml" line="45"/>
         <source>Height AMSL (%1)</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolStrip</name>
+    <message>
+        <location filename="../src/QmlControls/ToolStrip.qml" line="154"/>
+        <source>Show</source>
+        <translation>展开</translation>
+    </message>
+    <message>
+        <location filename="../src/QmlControls/ToolStrip.qml" line="154"/>
+        <source>Hide</source>
+        <translation>收起</translation>
     </message>
 </context>
 <context>
@@ -18413,7 +19039,7 @@ Confirm change?</source>
     <message>
         <location filename="../src/Vehicle/Vehicle.cc" line="585"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
     <message>
         <location filename="../src/Vehicle/Vehicle.cc" line="882"/>
@@ -18709,7 +19335,7 @@ Confirm change?</source>
     <message>
         <location filename="../src/comm/QGCMAVLink.cc" line="163"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>

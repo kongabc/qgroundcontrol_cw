@@ -23,6 +23,8 @@
 
 #include <QProcess>
 
+
+
 QGC_LOGGING_CATEGORY(VideoReceiverLog, "VideoReceiverLog")
 
 //-----------------------------------------------------------------------------
@@ -686,57 +688,57 @@ GstVideoReceiver::_handleEOS(void)
     }
 }
 
-gboolean
-GstVideoReceiver::_filterParserCaps(GstElement* bin, GstPad* pad, GstElement* element, GstQuery* query, gpointer data)
-{
-    Q_UNUSED(bin)
-    Q_UNUSED(pad)
-    Q_UNUSED(element)
-    Q_UNUSED(data)
+//gboolean
+//GstVideoReceiver::_filterParserCaps(GstElement* bin, GstPad* pad, GstElement* element, GstQuery* query, gpointer data)
+//{
+//    Q_UNUSED(bin)
+//    Q_UNUSED(pad)
+//    Q_UNUSED(element)
+//    Q_UNUSED(data)
 
-    if (GST_QUERY_TYPE(query) != GST_QUERY_CAPS) {
-        return FALSE;
-    }
+//    if (GST_QUERY_TYPE(query) != GST_QUERY_CAPS) {
+//        return FALSE;
+//    }
 
-    GstCaps* srcCaps;
+//    GstCaps* srcCaps;
 
-    gst_query_parse_caps(query, &srcCaps);
+//    gst_query_parse_caps(query, &srcCaps);
 
-    if (srcCaps == nullptr || gst_caps_is_any(srcCaps)) {
-        return FALSE;
-    }
+//    if (srcCaps == nullptr || gst_caps_is_any(srcCaps)) {
+//        return FALSE;
+//    }
 
-    GstCaps* sinkCaps = nullptr;
+//    GstCaps* sinkCaps = nullptr;
 
-    GstCaps* filter;
+//    GstCaps* filter;
 
-    if ((filter = gst_caps_from_string("video/x-h264")) != nullptr) {
-        if (gst_caps_can_intersect(srcCaps, filter)) {
-            sinkCaps = gst_caps_from_string("video/x-h264,stream-format=avc");
-        }
+//    if ((filter = gst_caps_from_string("video/x-h264")) != nullptr) {
+//        if (gst_caps_can_intersect(srcCaps, filter)) {
+//            sinkCaps = gst_caps_from_string("video/x-h264,stream-format=avc");
+//        }
 
-        gst_caps_unref(filter);
-        filter = nullptr;
-    } else if ((filter = gst_caps_from_string("video/x-h265")) != nullptr) {
-        if (gst_caps_can_intersect(srcCaps, filter)) {
-            sinkCaps = gst_caps_from_string("video/x-h265,stream-format=hvc1");
-        }
+//        gst_caps_unref(filter);
+//        filter = nullptr;
+//    } else if ((filter = gst_caps_from_string("video/x-h265")) != nullptr) {
+//        if (gst_caps_can_intersect(srcCaps, filter)) {
+//            sinkCaps = gst_caps_from_string("video/x-h265,stream-format=hvc1");
+//        }
 
-        gst_caps_unref(filter);
-        filter = nullptr;
-    }
+//        gst_caps_unref(filter);
+//        filter = nullptr;
+//    }
 
-    if (sinkCaps == nullptr) {
-        return FALSE;
-    }
+//    if (sinkCaps == nullptr) {
+//        return FALSE;
+//    }
 
-    gst_query_set_caps_result(query, sinkCaps);
+//    gst_query_set_caps_result(query, sinkCaps);
 
-    gst_caps_unref(sinkCaps);
-    sinkCaps = nullptr;
+//    gst_caps_unref(sinkCaps);
+//    sinkCaps = nullptr;
 
-    return TRUE;
-}
+//    return TRUE;
+//}
 
 GstElement*
 GstVideoReceiver::_makeSource(const QString& uri)
@@ -770,6 +772,8 @@ GstVideoReceiver::_makeSource(const QString& uri)
         } else if (isRtsp) {
             if ((source = gst_element_factory_make("rtspsrc", "source")) != nullptr) {
                 g_object_set(static_cast<gpointer>(source), "location", qPrintable(uri), "latency", 17, "udp-reconnect", 1, "timeout", _udpReconnect_us, NULL);
+                //GST_RTSP_LOWER_TRANS_TCP | GST_RTSP_LOWER_TRANS_UDP
+//                 g_object_set(static_cast<gpointer>(source), "location", qPrintable(uri),"protocols",GST_RTSP_LOWER_TRANS_TCP,"latency", 17,"timeout", _udpReconnect_us, NULL);
             }
         } else if(isUdp264 || isUdp265 || isUdpMPEGTS || isTaisync) {
             if ((source = gst_element_factory_make("udpsrc", "source")) != nullptr) {
@@ -814,25 +818,7 @@ GstVideoReceiver::_makeSource(const QString& uri)
             break;
         }
 
-
-        //new add
-//        if ((rtph264 = gst_element_factory_make("rtph264depay", "rtph264")) == nullptr) {
-//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('rtph264depay') failed";
-//            break;
-//        }
-//        if ((avdec_h264 = gst_element_factory_make("avdec_h264", "avdec_h264")) == nullptr) {
-//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('avdec_h264') failed";
-//            break;
-//        }
-//        if ((autovideosink = gst_element_factory_make("autovideosink", "autovideosink")) == nullptr) {
-//            qCCritical(VideoReceiverLog) << "gst_element_factory_make('autovideosink') failed";
-//            break;
-//        }
-//        g_signal_connect(rtph264, "pad-added", G_CALLBACK(_newPadCB), _tee);
-//        g_signal_connect(avdec_h264, "pad-added", G_CALLBACK(_newPadCB), _tee);
-//        g_signal_connect(autovideosink, "pad-added", G_CALLBACK(_newPadCB), _tee);
-
-        g_signal_connect(parser, "autoplug-query", G_CALLBACK(_filterParserCaps), nullptr);
+//        g_signal_connect(parser, "autoplug-query", G_CALLBACK(_filterParserCaps), nullptr);
 
         gst_bin_add_many(GST_BIN(bin), source, parser,nullptr);  //,rtph264,avdec_h264, autovideosink
 
@@ -1356,10 +1342,6 @@ GstVideoReceiver::_dispatchSignal(std::function<void()> emitter)
     _signalDepth -= 1;
 }
 
-void GstVideoReceiver::ffmpegStreaming()
-{
-}
-
 gboolean
 GstVideoReceiver::_onBusMessage(GstBus* bus, GstMessage* msg, gpointer data)
 {
@@ -1482,71 +1464,71 @@ GstVideoReceiver::_linkPad(GstElement* element, GstPad* pad, gpointer data)
 {
     gchar* name;
 
-//    if ((name = gst_pad_get_name(pad)) != nullptr) {
-//        if(gst_element_link_pads(element, name, GST_ELEMENT(data), "sink") == false) {
-//            qCCritical(VideoReceiverLog) << "gst_element_link_pads() failed";
-//        }
-
-//        g_free(name);
-//        name = nullptr;
-//    } else {
-//        qCCritical(VideoReceiverLog) << "gst_pad_get_name() failed";
-//    }
-
-
-    //new add
-    GstElement* dst = GST_ELEMENT(data);
-    GstPad* sinkpad = nullptr;
-    GstCaps* padcaps = nullptr;
-    GstStructure *padstruct = nullptr;
-    const gchar *padtype = nullptr;
-    const gchar *mediatype = nullptr;
-    qCDebug(VideoReceiverLog) << "Source: New source pad. Trying to link";
-
-    if (dst == nullptr) {
-        qCCritical(VideoReceiverLog) << "_linkPad: dst = NULL?";
-        return;
-    }
-    if ((sinkpad = gst_element_get_static_pad(dst, "sink")) == nullptr) {
-        qCCritical(VideoReceiverLog) << "_linkPad: No sink pad found at destination element";
-        return;
-    }
-    if (gst_pad_is_linked(sinkpad)) {
-        qCCritical(VideoReceiverLog) << "_linkPad: Sinkpad at destination is already linked. Not linking.";
-        goto exit;
-    }
-    /* Check that the new pad has video*/
-    padcaps = gst_pad_get_current_caps (pad);
-    padstruct = gst_caps_get_structure (padcaps, 0);
-    padtype = gst_structure_get_name (padstruct);
-    if (g_str_has_prefix (padtype, "application/x-rtp")) { /* rtspsrc */
-        if ((mediatype = gst_structure_get_string(padstruct, "media")) == nullptr) {
-            qCDebug(VideoReceiverLog) << "_linkPad: Cannot find media type in caps of rtp source. Ignoring.";
-            goto exit;
-        }
-        if (!g_str_has_prefix (mediatype, "video")) {
-            qCDebug(VideoReceiverLog) << "_linkPad: rtp source pad does have media type video. Ignoring. Type found: " << mediatype;
-            goto exit;
-        }
-    } else if (!g_str_has_prefix (padtype, "video")) { /* MPEG/TS tsdemux */
-        qCDebug(VideoReceiverLog) << "Source pad type does not provide video. Ignoring. Type found: " << padtype;
-        goto exit;
-    }
-
     if ((name = gst_pad_get_name(pad)) != nullptr) {
-        if(GST_PAD_LINK_FAILED(gst_pad_link(pad, sinkpad))) {
-            qCCritical(VideoReceiverLog) << "gst_pad_link() failed";
+        if(gst_element_link_pads(element, name, GST_ELEMENT(data), "sink") == false) {
+            qCCritical(VideoReceiverLog) << "gst_element_link_pads() failed";
         }
+
         g_free(name);
         name = nullptr;
     } else {
         qCCritical(VideoReceiverLog) << "gst_pad_get_name() failed";
     }
 
-exit:
-    if (padcaps != nullptr)
-        gst_caps_unref(padcaps);
-    gst_object_unref(sinkpad);
+
+    //new add
+//    GstElement* dst = GST_ELEMENT(data);
+//    GstPad* sinkpad = nullptr;
+//    GstCaps* padcaps = nullptr;
+//    GstStructure *padstruct = nullptr;
+//    const gchar *padtype = nullptr;
+//    const gchar *mediatype = nullptr;
+//    qCDebug(VideoReceiverLog) << "Source: New source pad. Trying to link";
+
+//    if (dst == nullptr) {
+//        qCCritical(VideoReceiverLog) << "_linkPad: dst = NULL?";
+//        return;
+//    }
+//    if ((sinkpad = gst_element_get_static_pad(dst, "sink")) == nullptr) {
+//        qCCritical(VideoReceiverLog) << "_linkPad: No sink pad found at destination element";
+//        return;
+//    }
+//    if (gst_pad_is_linked(sinkpad)) {
+//        qCCritical(VideoReceiverLog) << "_linkPad: Sinkpad at destination is already linked. Not linking.";
+//        goto exit;
+//    }
+//    // Check that the new pad has video
+//    padcaps = gst_pad_get_current_caps (pad);
+//    padstruct = gst_caps_get_structure (padcaps, 0);
+//    padtype = gst_structure_get_name (padstruct);
+//    if (g_str_has_prefix (padtype, "application/x-rtp")) { /* rtspsrc */
+//        if ((mediatype = gst_structure_get_string(padstruct, "media")) == nullptr) {
+//            qCDebug(VideoReceiverLog) << "_linkPad: Cannot find media type in caps of rtp source. Ignoring.";
+//            goto exit;
+//        }
+//        if (!g_str_has_prefix (mediatype, "video")) {
+//            qCDebug(VideoReceiverLog) << "_linkPad: rtp source pad does have media type video. Ignoring. Type found: " << mediatype;
+//            goto exit;
+//        }
+//    } else if (!g_str_has_prefix (padtype, "video")) { /* MPEG/TS tsdemux */
+//        qCDebug(VideoReceiverLog) << "Source pad type does not provide video. Ignoring. Type found: " << padtype;
+//        goto exit;
+//    }
+
+//    if ((name = gst_pad_get_name(pad)) != nullptr) {
+//        if(GST_PAD_LINK_FAILED(gst_pad_link(pad, sinkpad))) {
+//            qCCritical(VideoReceiverLog) << "gst_pad_link() failed";
+//        }
+//        g_free(name);
+//        name = nullptr;
+//    } else {
+//        qCCritical(VideoReceiverLog) << "gst_pad_get_name() failed";
+//    }
+
+//exit:
+//    if (padcaps != nullptr)
+//        gst_caps_unref(padcaps);
+//    gst_object_unref(sinkpad);
 
 
 }

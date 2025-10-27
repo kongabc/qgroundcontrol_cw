@@ -88,6 +88,7 @@ Rectangle{
         Text {
             Layout.preferredWidth: columnWidth3
             Layout.preferredHeight: rectHeight
+            Layout.alignment: Qt.AlignCenter
             text: parseInt(_tableModule.channelVal/6.7) //_tableModule.channelVal
             font.pointSize: _defaultFont
             font.family: {
@@ -99,8 +100,9 @@ Rectangle{
                    return "Open Sans"
             }
             color: qgcPal.text
-            leftPadding: columnWidth3/5
+//            leftPadding: columnWidth3/5
             verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter  // 水平居中
         }
         Rectangle{
             id:prossBox
