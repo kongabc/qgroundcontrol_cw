@@ -31,6 +31,7 @@ public:
    QGCCwGimbalLib(QObject* parent);
    ~QGCCwGimbalLib();
 
+//   static QGCCwGimbalLib* instance();
 
    Q_PROPERTY(bool remoteValid READ remoteValidValue NOTIFY remoteValidChanged)
 
@@ -113,6 +114,8 @@ public:
    Q_PROPERTY(QString  latitude READ latitudeValueStr NOTIFY valueChanged)
    Q_PROPERTY(QString  altitude READ altitudeValueStr NOTIFY valueChanged)
 
+//   Q_PROPERTY(QVariantList coordinates READ coordinatesValue NOTIFY coordinatesChanged)
+
    Q_PROPERTY(quint16  zoomvalue READ zoomvalueValue NOTIFY valueChanged)
    Q_PROPERTY(quint16  zoomvalue2 READ zoomvalue2Value NOTIFY valueChanged)
 
@@ -159,6 +162,9 @@ public:
    Q_PROPERTY(qint16  isothermL READ isothermLValue WRITE setIsothermLValue NOTIFY tempValueChanged)
 
    Q_PROPERTY(bool saveState READ saveStateValue WRITE setSaveStateValue NOTIFY saveStateChanged)
+
+
+
 
    QString devideTypeValue() const;
    quint16 firmwareVerValue() const;
@@ -230,8 +236,12 @@ public:
    QString longitudeValueStr() const;
    QString latitudeValueStr() const;
    QString altitudeValueStr() const;
+
+//   QVariantList coordinatesValue() const;
+
    quint16 zoomvalueValue() const;
    quint16 zoomvalue2Value() const;
+
 
    quint8 gpsStateValue() const;
    QString carrierRollValueStr() const;
@@ -373,6 +383,9 @@ public:
 
    Q_INVOKABLE void reloadOffset();
 
+//   Q_INVOKABLE void addCoordinate(double latitude, double longitude, double altitude = 0.0, const QString &info = "");
+
+
 
 signals:
    void receiveValueChanged();
@@ -387,6 +400,9 @@ signals:
    void cameraValueChanged();
    void inputIpPortValueChanged();
    void showValueChanged();
+
+//   void coordinatesChanged();
+//   void newCoordinateReceived(double latitude, double longitude, double altitude, const QString &source = "gimbal");
 
    void cameraConfsChanged();
 
@@ -474,6 +490,9 @@ private:
 
    QGCCwGimbalLibPrivate* dataPtr;
 
+//   static QGCCwGimbalLib* s_instance;
+
 };
+
 
 #endif // QGCCWGIMBALLIB_H

@@ -208,7 +208,7 @@ Item {
                                   (((QGCCwGimbalController.btnState & 0x00000200) || (QGCCwGimbalController.btnState & 0x00000400))? true : false)
 
                overlayColor:(showHighlight || ScreenTools.isMobile ) ? "#000" : "#fff"
-               visible: QGCCwGimbalController.iRCutAvailable || (QGCCwGimbalController.devideType == "D-80N") || QGCCwGimbalController.lampAvailable
+               visible: QGCCwGimbalController.iRCutAvailable || (QGCCwGimbalController.devideType == "D-80N") || QGCCwGimbalController.devideType == "D-90N" || QGCCwGimbalController.lampAvailable
                onBtnClicked: {
                    popupBox.visible = !popupBox.visible
                    if(popupBox.visible){
@@ -302,7 +302,7 @@ Item {
                     GridLayout{
                          id: fullColorGrid
                         columns: 2
-                        visible: QGCCwGimbalController.devideType == "D-80N"
+                        visible: QGCCwGimbalController.devideType == "D-80N" ||  QGCCwGimbalController.devideType == "D-90N"
                         QGCLabel {
                             Layout.preferredWidth: _labelWidth*1.2
                             text: qsTr("Night Scene")

@@ -2079,7 +2079,7 @@ Rectangle {
                                     isChecked:QGCCwGimbalController.getSbusChecked(11)
                                     txtFir:qsTr("None")
                                     //                                txtSec:"空"
-                                    txtThi:qsTr("Reset")
+                                    txtThi:qsTr("Reset ")
                                     onDropCheckedChange:{
 
                                         if(checkIndex === 0) {

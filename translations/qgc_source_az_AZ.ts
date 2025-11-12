@@ -4813,6 +4813,11 @@ Click Ok to start the auto-tuning process.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2082"/>
+        <source>Reset </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2106"/>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2126"/>
         <source>Track</source>
@@ -5200,7 +5205,6 @@ Click Ok to start the auto-tuning process.
     </message>
     <message>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="1232"/>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="2082"/>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2508"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
@@ -18109,249 +18113,249 @@ Dəyişikliyi təsdiq edirsiniz?</translation>
         <translation> ... </translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2200"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2203"/>
         <source>Mission transfer failed. Error: %1</source>
         <translation>Missiya köçürüldü. Xəta:%1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2206"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2209"/>
         <source>GeoFence transfer failed. Error: %1</source>
         <translation>GeoFence transferi uğursuz oldu. Xəta:%1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2212"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2215"/>
         <source>Rally Point transfer failed. Error: %1</source>
         <translation>Rally Point transferi alınmadı. Xəta:%1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1447"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1450"/>
         <source>battery %1 level low</source>
         <translation type="unfinished">battery %1 level low</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1453"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1456"/>
         <source>battery %1 level is critical</source>
         <translation type="unfinished">battery %1 level is critical</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1459"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1462"/>
         <source>battery %1 level emergency</source>
         <translation type="unfinished">battery %1 level emergency</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1465"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1468"/>
         <source>battery %1 failed</source>
         <translation type="unfinished">battery %1 failed</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1471"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1474"/>
         <source>battery %1 unhealthy</source>
         <translation type="unfinished">battery %1 unhealthy</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1483"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1486"/>
         <source>warning</source>
         <translation type="unfinished">warning</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2423"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2426"/>
         <source>Generic micro air vehicle</source>
         <translation>Ümumi mikro hava aparatı</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2424"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2427"/>
         <source>Fixed wing aircraft</source>
         <translation>Sabit qanadlı təyyarə</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2425"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2428"/>
         <source>Quadrotor</source>
         <translation>Quadrotor</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2426"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2429"/>
         <source>Coaxial helicopter</source>
         <translation>Koaksial vertolyot</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2427"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2430"/>
         <source>Normal helicopter with tail rotor.</source>
         <translation>Quyruq rotorlu normal vertolyot.</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2428"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2431"/>
         <source>Ground installation</source>
         <translation>Yerüstü quraşdırma</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2429"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2432"/>
         <source>Operator control unit / ground control station</source>
         <translation>Operator idarəetmə bloku / yer nəzarət stansiyası</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2430"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2433"/>
         <source>Airship, controlled</source>
         <translation>Hava gəmisi, idarə olunur</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2431"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2434"/>
         <source>Free balloon, uncontrolled</source>
         <translation>Azad şar, nəzarətsiz</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2432"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2435"/>
         <source>Rocket</source>
         <translation>Raket</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2433"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2436"/>
         <source>Ground rover</source>
         <translation>Yer roveri</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2434"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2437"/>
         <source>Surface vessel, boat, ship</source>
         <translation>Səth gəmisi, qayıq, gəmi</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2435"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2438"/>
         <source>Submarine</source>
         <translation>Sualtı qayıq</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2436"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2439"/>
         <source>Hexarotor</source>
         <translation>Heksarotor</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2437"/>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2438"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2440"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2441"/>
         <source>Octorotor</source>
         <translation>Oktarotor</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2439"/>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2440"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2442"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2443"/>
         <source>Flapping wing</source>
         <translation>Qanad çalan</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2441"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2444"/>
         <source>Onboard companion controller</source>
         <translation>Bort kompanion kontroller</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2442"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2445"/>
         <source>Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter</source>
         <translation>Əlavə olaraq şaquli işləmə zamanı nəzarət səthlərindən istifadə edən iki rotorlu VTOL. Tailitter</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2443"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2446"/>
         <source>Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter</source>
         <translation>Şaquli əməliyyatda V şəkilli dörd konfiquradan istifadə edərək dörd rotorlu VTOL. Tailitter</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2444"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2447"/>
         <source>Tiltrotor VTOL</source>
         <translation>Tiltrotor VTOL</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2445"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2448"/>
         <source>VTOL reserved 2</source>
         <translation>VTOL qorunur 2</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2446"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2449"/>
         <source>VTOL reserved 3</source>
         <translation>VTOL qorunur 3</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2447"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2450"/>
         <source>VTOL reserved 4</source>
         <translation>VTOL qorunur 4</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2448"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2451"/>
         <source>VTOL reserved 5</source>
         <translation>VTOL qorunur 5</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2449"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2452"/>
         <source>Onboard gimbal</source>
         <translation>Bort gimbal</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2450"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2453"/>
         <source>Onboard ADSB peripheral</source>
         <translation>Bortda ADSB periferik</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2459"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2462"/>
         <source>Vehicle %1 </source>
         <translation type="unfinished">Vehicle %1 </translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3269"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3272"/>
         <source>Vehicle reboot failed.</source>
         <translation type="unfinished">Vehicle reboot failed.</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2467"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2470"/>
         <source>%1 %2 flight mode</source>
         <translation>%1 %2 uçuş rejimi</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2473"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2476"/>
         <source>armed</source>
         <translation>xodlandı</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2473"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2476"/>
         <source>disarmed</source>
         <translation>söndürüldü</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Unable to send command: %1.</source>
         <translation type="unfinished">Unable to send command: %1.</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Internal error - MAV_COMP_ID_ALL not supported</source>
         <translation type="unfinished">Internal error - MAV_COMP_ID_ALL not supported</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Waiting on previous response to same command.</source>
         <translation type="unfinished">Waiting on previous response to same command.</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2931"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2934"/>
         <source>Vehicle did not respond to command: %1</source>
         <translation>Aparat əmrə cavab vermədi:%1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3042"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3045"/>
         <source>Bootloader flash succeeded</source>
         <translation>Yükləmə flaş müvəffəq oldu</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3057"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3060"/>
         <source>%1 command temporarily rejected</source>
         <translation>%1 əmri müvəqqəti olaraq rədd edildi</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3060"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3063"/>
         <source>%1 command denied</source>
         <translation>%1 əmr rədd edildi</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3063"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3066"/>
         <source>%1 command not supported</source>
         <translation>%1 əmri dəstəklənmir</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3066"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3069"/>
         <source>%1 command failed</source>
         <translation>%1 əmri alınmadı</translation>
     </message>

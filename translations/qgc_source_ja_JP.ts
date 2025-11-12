@@ -4805,6 +4805,11 @@ Click Ok to start the auto-tuning process.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ui/preferences/CameraSettings.qml" line="2082"/>
+        <source>Reset </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2106"/>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2126"/>
         <source>Track</source>
@@ -5192,7 +5197,6 @@ Click Ok to start the auto-tuning process.
     </message>
     <message>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="1232"/>
-        <location filename="../src/ui/preferences/CameraSettings.qml" line="2082"/>
         <location filename="../src/ui/preferences/CameraSettings.qml" line="2508"/>
         <source>Reset</source>
         <translation type="unfinished">リセット</translation>
@@ -18096,249 +18100,249 @@ Confirm change?</source>
         <translation> ... </translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2200"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2203"/>
         <source>Mission transfer failed. Error: %1</source>
         <translation>ミッション転送に失敗しました。エラー: %1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2206"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2209"/>
         <source>GeoFence transfer failed. Error: %1</source>
         <translation>ジオフェンスの転送に失敗しました。エラー: %1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2212"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2215"/>
         <source>Rally Point transfer failed. Error: %1</source>
         <translation>ポイントの転送に失敗しました。エラー: %1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1447"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1450"/>
         <source>battery %1 level low</source>
         <translation>バッテリー %1 残量低下</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1453"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1456"/>
         <source>battery %1 level is critical</source>
         <translation>バッテリー %1 重大レベル</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1459"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1462"/>
         <source>battery %1 level emergency</source>
         <translation>バッテリー %1 レベル緊急事態</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1465"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1468"/>
         <source>battery %1 failed</source>
         <translation>バッテリー %1 が故障です</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1471"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1474"/>
         <source>battery %1 unhealthy</source>
         <translation>バッテリー %1 が不安定です</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="1483"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="1486"/>
         <source>warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2423"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2426"/>
         <source>Generic micro air vehicle</source>
         <translation>汎用マイクロ飛行機</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2424"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2427"/>
         <source>Fixed wing aircraft</source>
         <translation>固定翼機</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2425"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2428"/>
         <source>Quadrotor</source>
         <translation>クワッドコプター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2426"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2429"/>
         <source>Coaxial helicopter</source>
         <translation>同軸型ヘリコプター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2427"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2430"/>
         <source>Normal helicopter with tail rotor.</source>
         <translation>テールローター通常型ヘリコプター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2428"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2431"/>
         <source>Ground installation</source>
         <translation>地上へ設置</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2429"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2432"/>
         <source>Operator control unit / ground control station</source>
         <translation>オペレータコントロールユニット / グランドコントロールステーション</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2430"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2433"/>
         <source>Airship, controlled</source>
         <translation>飛行船が制御されました</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2431"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2434"/>
         <source>Free balloon, uncontrolled</source>
         <translation>非固定である気球は、制御不能です</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2432"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2435"/>
         <source>Rocket</source>
         <translation>ロケット</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2433"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2436"/>
         <source>Ground rover</source>
         <translation>グランドローバー</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2434"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2437"/>
         <source>Surface vessel, boat, ship</source>
         <translation>水上艦,、ボート、船舶</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2435"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2438"/>
         <source>Submarine</source>
         <translation>サブマリン</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2436"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2439"/>
         <source>Hexarotor</source>
         <translation>ヘキサコプター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2437"/>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2438"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2440"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2441"/>
         <source>Octorotor</source>
         <translation>オクトコプター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2439"/>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2440"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2442"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2443"/>
         <source>Flapping wing</source>
         <translation>羽ばたく機体</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2441"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2444"/>
         <source>Onboard companion controller</source>
         <translation>オンボードコンパニオンコントローラ</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2442"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2445"/>
         <source>Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter</source>
         <translation>垂直離陸ができるコントロールサーフェスを使用したバイコプターVTOL, テールシッター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2443"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2446"/>
         <source>Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter</source>
         <translation>垂直離陸ができるV字型クアッド構成のクアッドコプターVTOL, テールシッター</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2444"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2447"/>
         <source>Tiltrotor VTOL</source>
         <translation>チルトローター VTOL</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2445"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2448"/>
         <source>VTOL reserved 2</source>
         <translation>VTOL 予約 2</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2446"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2449"/>
         <source>VTOL reserved 3</source>
         <translation>VTOL 予約 3</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2447"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2450"/>
         <source>VTOL reserved 4</source>
         <translation>VTOL 予約 4</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2448"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2451"/>
         <source>VTOL reserved 5</source>
         <translation>VTOL 予約 5</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2449"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2452"/>
         <source>Onboard gimbal</source>
         <translation>搭載のジンバル</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2450"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2453"/>
         <source>Onboard ADSB peripheral</source>
         <translation>オンボードADSB 周辺機器</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2459"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2462"/>
         <source>Vehicle %1 </source>
         <translation>機体 %1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3269"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3272"/>
         <source>Vehicle reboot failed.</source>
         <translation>機体の再起動に失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2467"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2470"/>
         <source>%1 %2 flight mode</source>
         <translation>%1 %2 飛行モード</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2473"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2476"/>
         <source>armed</source>
         <translation>アームしました</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2473"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2476"/>
         <source>disarmed</source>
         <translation>ディスアームしました</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Unable to send command: %1.</source>
         <translation>コマンドを送信できません: %1.</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Internal error - MAV_COMP_ID_ALL not supported</source>
         <translation>内部エラー - MAV_COMP_ID_ALLはサポートされていません</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2880"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2883"/>
         <source>Waiting on previous response to same command.</source>
         <translation>同一コマンドに対する前の応答を待機しています。</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="2931"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="2934"/>
         <source>Vehicle did not respond to command: %1</source>
         <translation>機体がコマンドに応答しませんでした: %1</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3042"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3045"/>
         <source>Bootloader flash succeeded</source>
         <translation>ブートローダーの書き込みに成功しました</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3057"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3060"/>
         <source>%1 command temporarily rejected</source>
         <translation>%1 コマンドは一時的に拒否されました</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3060"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3063"/>
         <source>%1 command denied</source>
         <translation>%1 コマンドが使用できません</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3063"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3066"/>
         <source>%1 command not supported</source>
         <translation>%1 コマンドはサポートされていません</translation>
     </message>
     <message>
-        <location filename="../src/Vehicle/Vehicle.cc" line="3066"/>
+        <location filename="../src/Vehicle/Vehicle.cc" line="3069"/>
         <source>%1 command failed</source>
         <translation>%1 コマンドに失敗しました</translation>
     </message>
